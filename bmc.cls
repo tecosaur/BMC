@@ -247,10 +247,10 @@
 
 \ifbool{optionNotes}{
 	\setlength{\rightmargin}{1cm}
-	\RequirePackage[a4paper, ignoreheadfoot, includemp, left=\leftmargin, right=1cm, top=2cm, bottom=3.5cm, headsep=1cm, marginparwidth=5cm, marginparsep=5mm ]{geometry}
+	\RequirePackage[a4paper, ignoreheadfoot, includemp, left=\leftmargin, right=\rightmargin, top=2cm, bottom=3.5cm, headsep=1cm, marginparwidth=4cm, marginparsep=5mm ]{geometry}
 }{
 	\setlength{\rightmargin}{2.7cm}
-	\RequirePackage[a4paper, ignoreheadfoot, left=\leftmargin, right=2.7cm, top=2cm, bottom=3.5cm, headsep=1cm, marginparwidth=0cm, marginparsep=0mm ]{geometry}
+	\RequirePackage[a4paper, ignoreheadfoot, left=\leftmargin, right=\rightmargin, top=2cm, bottom=3.5cm, headsep=1cm, marginparwidth=0cm, marginparsep=0mm ]{geometry}
 }
 
 \setlength{\skip\footins}{1cm}
@@ -769,9 +769,14 @@
 %		ToC
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% \renewcommand{\contentsname}{\ifbool{optionSolid}{\color{primary}}{\color{pageColour}}Contents}
-% \renewcommand*{\contentsname}{\hypertarget{TOC}{Table of Contents}}
+\ifboolexpr{bool {optionSolid} and not bool {optionArticle}}{
+	\renewcommand{\contentsname}{}
+}{
+	\renewcommand{\contentsname}{Contents}
+}
+
 \pretocmd{\tableofcontents}{\hypertarget{contents}{}}{}{}
+
 \newenvironment{tocChapterText}{
 	\def\FrameCommand{
 		\ifbool{optionNotes}{
