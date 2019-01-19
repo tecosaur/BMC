@@ -22,7 +22,7 @@
 %
 % This work has the LPPL maintenance status `maintained'.
 %
-% The Current Maintainer of this work is M. Y. Name.
+% The Current Maintainer of this work is tecosaur
 %
 % This work consists of the files bmc.cls and modifications made to infoBulle.sty and marginInfoBulle.sty
 
