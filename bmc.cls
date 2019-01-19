@@ -201,7 +201,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % \RequirePackage{etex}
-\RequirePackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,factor=1100,stretch=15,shrink=15]{microtype}
+\RequirePackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true]{microtype} % ,factor=1100,stretch=15,shrink=15
 \microtypecontext{spacing=nonfrench}
 \RequirePackage{calc}
 \RequirePackage[usenames,dvipsnames,svgnames,table]{xcolor}
