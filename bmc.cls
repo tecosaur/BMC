@@ -949,6 +949,7 @@
 %		Links
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \RequirePackage{hyperref}
+\RequirePackage{hyperxmp}
 \hypersetup{
 	pdftoolbar=false,
 	pdfmenubar=true,
@@ -957,7 +958,7 @@
 	pdftitle={\@title},
 	pdfauthor={\@author},
 	pdfsubject={\@subtitle},
-	pdfcreator=LaTeX,
+	pdfcreator=pdfLaTeX,
 	% pdfkeywords={{a}{b}},
 	colorlinks=true,
 	linkcolor=hrefColor,
