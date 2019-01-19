@@ -464,12 +464,12 @@
 	\usepackage{mathtools}
 	\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
 	\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
-	\newcommand{\R}{\mathbb{R}}
-	\newcommand{\N}{\mathbb{N}}
-	\newcommand{\Z}{\mathbb{Z}}
-	\newcommand{\C}{\mathbb{C}}
-	\newcommand{\dd}{\mathrm{d}}
-	\newcommand{\Lap}{\mathcal{L}}
+	\newcommand{\R}[1][]{\ensuremath{\mathbb{R}^{#1}}}
+	\newcommand{\N}[1][]{\ensuremath{\mathbb{N}^{#1}}}
+	\newcommand{\Z}[1][]{\ensuremath{\mathbb{Z}^{#1}}}
+	\newcommand{\C}[1][]{\ensuremath{\mathbb{C}^{#1}}}
+	\newcommand{\dd}[1][]{\ensuremath{\mathrm{d}^{#1}}}
+	\newcommand{\Lap}{\ensuremath{\mathcal{L}}}
 }{}
 \ifbool{optionMathSerif}{
 	\renewcommand{\familydefault}{\rmdefault}
