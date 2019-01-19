@@ -393,6 +393,40 @@
 % \definecolor{LightBlue}{HTML}{2d98da}
 % Need to find better name(s) for other ligher blue shades
 
+% % Another Colour Theme
+% % --------------------
+% % source: https://flatuicolors.com/palette/de
+
+% % Shades
+% \definecolor{Cream}{HTML}{FFFCCF}
+% \definecolor{LightGrey}{HTML}{a5b1c2}
+% \definecolor{Grey}{HTML}{778ca3}
+% \definecolor{DarkGrey}{HTML}{4b6584}
+% \definecolor{Black}{HTML}{231F20}
+% % Primary Colours
+% \definecolor{Red}{HTML}{e74c3c}
+% \definecolor{LightRed}{HTML}{fc5c65}
+
+% \definecolor{Yellow}{HTML}{f1c40f}
+% \definecolor{LightYellow}{HTML}{fed330}
+
+% \definecolor{Blue}{HTML}{2980b9}
+% \definecolor{LightBlue}{HTML}{3498db}
+% % Secondary Colours
+% \definecolor{Green}{HTML}{27ae60}
+% \definecolor{LightGreen}{HTML}{2ecc71}
+
+% \definecolor{Orange}{HTML}{e67e22}
+% \definecolor{LightOrange}{HTML}{f39c12}
+
+% \definecolor{Purple}{HTML}{8e44ad}
+% \definecolor{LightPurple}{HTML}{9b59b6}
+% % Tertiary+ Colours
+% % \definecolor{Brown}{HTML}{}
+% \definecolor{Cyan}{HTML}{16a085}
+% \definecolor{LightCyan}{HTML}{1abc9c}
+
+
 % redefine info bulle colours
 
 \colorlet{informationColor}{primaryVarient}
