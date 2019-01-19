@@ -455,6 +455,8 @@
 % Math Font & Setup
 % =================
 
+% \setlength{\mathLetterPadding}{1mm}
+
 \ifboolexpr{bool {optionMathSerif} or bool {optionMathSans} or bool {optionMathMono}}{
 	\RequirePackage{amsmath,amssymb}
 	\RequirePackage{fourier}
@@ -480,14 +482,59 @@
 	% \MTsetmathskips{\@tempa}{0.5mu}{0.5mu}}
 	%
 
-	\MTsetmathskips{f}{4.5mu}{0.5mu}
-	\MTsetmathskips{g}{2.5mu}{0.5mu}
-	\MTsetmathskips{j}{4mu}{0.5mu}
-	\MTsetmathskips{p}{2.5mu}{0mu}
-	\MTsetmathskips{s}{1mu}{0.5mu}
-	\MTsetmathskips{x}{1.5mu}{0.5mu}
-	\MTsetmathskips{y}{3.5mu}{0.5mu}
-	\MTsetmathskips{z}{1.5mu}{0.5mu}
+	\MTsetmathskips{a}{-1.2mu}{+0.5mu}
+	\MTsetmathskips{b}{-1.5mu}{+0.5mu}
+	\MTsetmathskips{c}{-1.5mu}{+0.7mu}
+	\MTsetmathskips{d}{-1.3mu}{+0.7mu}
+	\MTsetmathskips{e}{-1.5mu}{+0.7mu}
+	\MTsetmathskips{f}{+1.4mu}{+0.7mu}
+	\MTsetmathskips{g}{-0.5mu}{+0.6mu}
+	\MTsetmathskips{h}{-1.5mu}{+0.0mu}
+	\MTsetmathskips{i}{-1.5mu}{+0.8mu}
+	\MTsetmathskips{j}{+1.2mu}{+0.8mu}
+	\MTsetmathskips{k}{-1.5mu}{+0.5mu}
+	\MTsetmathskips{l}{-1.8mu}{+0.8mu}
+	\MTsetmathskips{m}{-1.4mu}{+0.0mu}
+	\MTsetmathskips{n}{-1.4mu}{+0.0mu}
+	\MTsetmathskips{o}{-1.2mu}{+0.3mu}
+	\MTsetmathskips{p}{-0.8mu}{+0.5mu}
+	\MTsetmathskips{q}{-1.2mu}{+0.3mu}
+	\MTsetmathskips{r}{-1.8mu}{+0.8mu}
+	\MTsetmathskips{s}{-0.9mu}{+0.5mu}
+	\MTsetmathskips{t}{-2.0mu}{+0.5mu}
+	\MTsetmathskips{u}{-2.1mu}{+0.3mu}
+	\MTsetmathskips{v}{-2.1mu}{+0.8mu}
+	\MTsetmathskips{w}{-2.0mu}{+0.8mu}
+	\MTsetmathskips{x}{-0.5mu}{+0.7mu}
+	\MTsetmathskips{y}{+0.2mu}{+0.8mu}
+	\MTsetmathskips{z}{-0.6mu}{+0.3mu}
+
+	\MTsetmathskips{A}{+0.4mu}{+0.4mu}
+	\MTsetmathskips{B}{-0.4mu}{+0.7mu}
+	\MTsetmathskips{C}{-1.8mu}{+0.5mu}
+	\MTsetmathskips{D}{-0.5mu}{+0.7mu}
+	\MTsetmathskips{E}{-0.4mu}{+0.6mu}
+	\MTsetmathskips{F}{-0.4mu}{+0.6mu}
+	\MTsetmathskips{G}{-2.0mu}{+0.6mu}
+	\MTsetmathskips{H}{-0.4mu}{+0.7mu}
+	\MTsetmathskips{I}{-0.4mu}{+0.7mu}
+	\MTsetmathskips{J}{+0.8mu}{+0.7mu}
+	\MTsetmathskips{K}{-0.5mu}{+0.7mu}
+	\MTsetmathskips{L}{-0.5mu}{+0.6mu}
+	\MTsetmathskips{M}{-0.4mu}{+0.7mu}
+	\MTsetmathskips{N}{-0.4mu}{+0.7mu}
+	\MTsetmathskips{O}{-2.0mu}{+0.7mu}
+	\MTsetmathskips{P}{-0.7mu}{+0.7mu}
+	\MTsetmathskips{Q}{-1.9mu}{+0.7mu}
+	\MTsetmathskips{R}{-0.8mu}{+0.7mu}
+	\MTsetmathskips{S}{-1.2mu}{+0.7mu}
+	\MTsetmathskips{T}{-2.3mu}{+0.7mu}
+	\MTsetmathskips{U}{-2.8mu}{+0.7mu}
+	\MTsetmathskips{V}{-2.3mu}{+0.7mu}
+	\MTsetmathskips{W}{-2.3mu}{+0.7mu}
+	\MTsetmathskips{X}{+0.0mu}{+0.7mu}
+	\MTsetmathskips{Y}{-2.0mu}{+0.7mu}
+	\MTsetmathskips{Z}{+0.0mu}{+0.7mu}
 }{}
 \ifbool{optionMathSans}{
 	\renewcommand{\familydefault}{\sfdefault}
@@ -498,12 +545,32 @@
 	% \MTsetmathskips{\@tempa}{0.5mu}{0.5mu}}
 	%
 
-	\MTsetmathskips{f}{2.5mu}{0.5mu}
-	\MTsetmathskips{g}{1.5mu}{0.5mu}
-	\MTsetmathskips{j}{2.5mu}{0.5mu}
-	\MTsetmathskips{p}{1.5mu}{0mu}
-	\MTsetmathskips{y}{1.5mu}{0.5mu}
-	\MTsetmathskips{z}{1mu}{0.5mu}
+	\MTsetmathskips{a}{-1.0mu}{-1.0mu}
+	\MTsetmathskips{b}{-0.7mu}{-1.0mu}
+	\MTsetmathskips{c}{-1.0mu}{-0.2mu}
+	\MTsetmathskips{d}{-1.0mu}{+0.0mu}
+	\MTsetmathskips{e}{-1.0mu}{-0.4mu}
+	\MTsetmathskips{f}{+1.6mu}{+0.0mu}
+	\MTsetmathskips{g}{+0.3mu}{+0.0mu}
+	\MTsetmathskips{h}{-0.6mu}{-1.1mu}
+	\MTsetmathskips{i}{-1.0mu}{+0.0mu}
+	\MTsetmathskips{j}{+1.9mu}{+0.0mu}
+	\MTsetmathskips{k}{-0.7mu}{-0.1mu}
+	\MTsetmathskips{l}{-1.0mu}{+0.0mu}
+	\MTsetmathskips{m}{-0.7mu}{-1.1mu}
+	\MTsetmathskips{n}{-0.7mu}{-1.1mu}
+	\MTsetmathskips{o}{-0.8mu}{-0.9mu}
+	\MTsetmathskips{p}{+0.2mu}{-1.0mu}
+	\MTsetmathskips{q}{-1.0mu}{-0.7mu}
+	\MTsetmathskips{r}{-0.7mu}{+0.0mu}
+	\MTsetmathskips{s}{-0.2mu}{-0.7mu}
+	\MTsetmathskips{t}{-1.2mu}{+0.0mu}
+	\MTsetmathskips{u}{-1.2mu}{-0.7mu}
+	\MTsetmathskips{v}{-1.3mu}{+0.0mu}
+	\MTsetmathskips{w}{-1.5mu}{+0.0mu}
+	\MTsetmathskips{x}{+0.7mu}{+0.0mu}
+	\MTsetmathskips{y}{+0.5mu}{+0.0mu}
+	\MTsetmathskips{z}{+0.1mu}{+0.0mu}
 }{}
 \ifbool{optionMathMono}{
 	\renewcommand{\familydefault}{\ttdefault}
