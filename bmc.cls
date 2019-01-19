@@ -271,7 +271,7 @@
 		% framesep=2mm,
 		baselinestretch=1.2,
 		fontsize=\footnotesize,
-		highlightcolor=pageColour!95!textColour!80!primary,
+		highlightcolor=page!95!text!80!primary,
 		linenos,
 		breakanywhere=true,
 		breakautoindent=true,
@@ -290,9 +290,9 @@
 	\BeforeBeginEnvironment{minted}{
 		\begin{tcolorbox}[
 			enhanced,
-			overlay={\fill[pageColour!90!textColour] (frame.south west) rectangle ([xshift=2.5em]frame.north west);},
-			colback=pageColour!95!textColour,
-			colframe=pageColour!95!textColour, % make frame colour same as background
+			overlay={\fill[page!90!text] (frame.south west) rectangle ([xshift=2.5em]frame.north west);},
+			colback=page!95!text,
+			colframe=page!95!text, % make frame colour same as background
 			breakable,% Allow page breaks
 			arc=0pt,outer arc=0pt,sharp corners, % sharp corners
 			boxsep=0pt,left=0pt,right=0pt,top=0pt,bottom=0pt % no margin/paddding
@@ -303,22 +303,22 @@
 	\ifbool{optionDark}{
 		\setminted{
 			style=monokai,
-			breaksymbol=\color{pageColour!80!textColour}\tiny\ensuremath{\hookrightarrow},
-			breakanywheresymbolpre=\,\footnotesize\ensuremath{_{\color{pageColour!80!textColour}\rfloor}},
-			breakbeforesymbolpre=\,\footnotesize\ensuremath{_{\color{pageColour!80!textColour}\rfloor}},
-			breakaftersymbolpre=\,\footnotesize\ensuremath{_{\color{pageColour!80!textColour}\rfloor}},
+			breaksymbol=\color{page!80!text}\tiny\ensuremath{\hookrightarrow},
+			breakanywheresymbolpre=\,\footnotesize\ensuremath{_{\color{page!80!text}\rfloor}},
+			breakbeforesymbolpre=\,\footnotesize\ensuremath{_{\color{page!80!text}\rfloor}},
+			breakaftersymbolpre=\,\footnotesize\ensuremath{_{\color{page!80!text}\rfloor}},
 		}
 	}{
 		\setminted{
 			style=autumn,
-			breaksymbol=\color{pageColour!60!textColour}\tiny\ensuremath{\hookrightarrow},
-			breakanywheresymbolpre=\,\footnotesize\ensuremath{_{\color{pageColour!60!textColour}\rfloor}},
-			breakbeforesymbolpre=\,\footnotesize\ensuremath{_{\color{pageColour!60!textColour}\rfloor}},
-			breakaftersymbolpre=\,\footnotesize\ensuremath{_{\color{pageColour!60!textColour}\rfloor}},
+			breaksymbol=\color{page!60!text}\tiny\ensuremath{\hookrightarrow},
+			breakanywheresymbolpre=\,\footnotesize\ensuremath{_{\color{page!60!text}\rfloor}},
+			breakbeforesymbolpre=\,\footnotesize\ensuremath{_{\color{page!60!text}\rfloor}},
+			breakaftersymbolpre=\,\footnotesize\ensuremath{_{\color{page!60!text}\rfloor}},
 		}
 	}
 
-	\renewcommand\theFancyVerbLine{\color{textColour!60!pageColour}\arabic{FancyVerbLine}}
+	\renewcommand\theFancyVerbLine{\color{text!60!page}\arabic{FancyVerbLine}}
 }{}
 
 % % Set Image Max Dimentions
@@ -340,11 +340,11 @@
 % ====================
 
 \ifbool{optionDark}{
-	\definecolor{pageColour}{HTML}{222222} % dark grey
-	\definecolor{textColour}{HTML}{FCFCFC} % white
+	\definecolor{page}{HTML}{222222} % dark grey
+	\definecolor{text}{HTML}{FCFCFC} % white
 }{
-	\definecolor{pageColour}{HTML}{FFFFFF} % white
-	\definecolor{textColour}{HTML}{000000} % black
+	\definecolor{page}{HTML}{FFFFFF} % white
+	\definecolor{text}{HTML}{000000} % black
 }
 
 \definecolor{primary}{HTML}{019875} % emerald
@@ -430,10 +430,10 @@
 % redefine info bulle colours
 
 \colorlet{informationColor}{primaryVarient}
-\colorlet{infoBulleBackground}{pageColour!80!textColour}
-\colorlet{infoBulleText}{textColour}
-\colorlet{marginInfoBulleBackground}{pageColour}
-\colorlet{marginInfoBulleText}{textColour}
+\colorlet{infoBulleBackground}{page!80!text}
+\colorlet{infoBulleText}{text}
+\colorlet{marginInfoBulleBackground}{page}
+\colorlet{marginInfoBulleText}{text}
 
 % set link colour
 \ifbool{optionDark}{
@@ -593,7 +593,7 @@
 	\ifbool{optionSolid}{
 		\pagecolor{primary}
 	}{
-		\pagecolor{pageColour}
+		\pagecolor{page}
 	}
 
 	\begin{titlepage}
@@ -601,7 +601,7 @@
 
 		\ifbool{optionSolid}{
 			\ifbool{optionDark}{
-				\color{pageColour}
+				\color{page}
 			}{
 				\color{contrastColour}
 			}
@@ -616,7 +616,7 @@
 			% \ifbool{optionSolid}{
 			% 	\color{alternativePrimary}
 			% }{
-					\color{primary!70!contrastColour}
+					\color{primary!60!contrastColour}
 			% }
 			% \expandafter\fauxsc\expandafter{\@titlehead}
 			\@titlehead
@@ -663,12 +663,12 @@
 	\end{titlepage}
 
 	\newpage
-	\pagecolor{pageColour}
+	\pagecolor{page}
 }
 
 
-\color{textColour}
-\pagecolor{pageColour}
+\color{text}
+\pagecolor{page}
 
 % Other Titling
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -686,7 +686,7 @@
 	{
 		\begin{minipage}[t]{8.2cm-\leftmargin}
 			\mbox{}\\
-			\null\hfill\fontsize{6.5cm}{1ex}\selectfont{\ifbool{optionSolid}{\color{pageColour}}{\color{primary}}\thechapter}
+			\null\hfill\fontsize{6.5cm}{1ex}\selectfont{\ifbool{optionSolid}{\color{page}}{\color{primary}}\thechapter}
 		\end{minipage}
 		\hspace*{-5mm}
 		\begin{minipage}[t]{\paperwidth-7cm-\leftmargin}
@@ -716,8 +716,8 @@
 \addtokomafont{section}{\Huge\color{primary}\fontfamily{\headingsFont}\selectfont}
 \addtokomafont{subsection}{\huge\color{primary}\fontfamily{\headingsFont}\selectfont}
 \addtokomafont{subsubsection}{\LARGE\color{primary}\fontfamily{\headingsFont}\selectfont}
-\addtokomafont{paragraph}{\color{primary!70!textColour}\fontfamily{\headingsFont}\selectfont}
-\addtokomafont{subparagraph}{\color{primary!70!textColour}\fontfamily{\headingsFont}\selectfont}
+\addtokomafont{paragraph}{\color{primary!70!text}\fontfamily{\headingsFont}\selectfont}
+\addtokomafont{subparagraph}{\color{primary!70!text}\fontfamily{\headingsFont}\selectfont}
 
 \renewcommand{\sectionformat}{
     \bfseries\itshape\thesection\enspace
@@ -786,7 +786,7 @@
 
 \newcommand{\fancytoc}{
 	% \titleBackground
-	{\hypersetup{linkcolor=textColour}
+	{\hypersetup{linkcolor=text}
 		\setcounter{tocdepth}{0}
 		\begingroup
 			\let\clearpage\relax
@@ -841,7 +841,7 @@
 		\hspace*{9.6mm} {\huge{Summary}}
 		\vspace*{2mm}
 		\startcontents[chapters]
-		\hypersetup{linkcolor=textColour}
+		\hypersetup{linkcolor=text}
 		\begin{spacing}{1}
 			\printcontents[chapters]{p}{1}{\setcounter{tocdepth}{1}}
 		\end{spacing}
@@ -952,7 +952,7 @@
     topmargin,
     addheight=\headheight,
     contents={%
-		\ifbool{optionSolid}{\color{primary}}{\color{pageColour}}
+		\ifbool{optionSolid}{\color{primary}}{\color{page}}
         \rule{\layerwidth}{\layerheight}%
     }%
 ]{my.head.background}
