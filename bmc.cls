@@ -430,7 +430,7 @@
 % redefine info bulle colours
 
 \colorlet{informationColor}{primaryVarient}
-\colorlet{infoBulleBackground}{page!80!text}
+\colorlet{infoBulleBackground}{page!85!text}
 \colorlet{infoBulleText}{text}
 \colorlet{marginInfoBulleBackground}{page}
 \colorlet{marginInfoBulleText}{text}
@@ -685,14 +685,14 @@
 			% }{
 					\color{primary!60!contrastColour}
 			% }
-			% \expandafter\fauxsc\expandafter{\@titlehead}
-			\@titlehead
+			\expandafter\fauxsc\expandafter{\@titlehead}
+			% \@titlehead
 		\end{center}
 
 		\vspace*{3.5cm}
 
-		\fontsize{2cm}{2em}\selectfont
-		\textbf{\@title}
+		\fontsize{2cm}{2em}\fontseries{sb}\selectfont
+		\@title
 		\vspace{-0.5cm}
 
 		\noindent\makebox[\linewidth]{
@@ -709,11 +709,12 @@
 			\rule{\paperwidth-2.8cm}{2pt}
 		}
 
-		\hspace*{1mm}\huge\@subtitle
+		\hspace*{1mm}\fontseries{r}\selectfont\huge\@subtitle
 
 		\vspace{2.5cm}
 
-		\textbf{\@author}
+		\fontseries{l}\selectfont
+		\@author
 
 		\vfill
 
@@ -723,7 +724,7 @@
 
 		% \@publishers
 
-		\Large
+		\fontseries{r}\selectfont\Large
 		\@date
 
 		\restoregeometry
@@ -761,7 +762,9 @@
 			\vspace*{-1.1cm}
 			\begin{flushleft}
 				\begin{spacing}{5}
-					\fontsize{1.7cm}{1em}\selectfont
+					\fontsize{1.7cm}{1em}
+					\fontseries{tx}\selectfont
+					\selectfont
 					\ifbool{optionDark}{
 						\color{primaryVarient}
 					}{
@@ -780,11 +783,11 @@
 }
 
 
-\addtokomafont{section}{\Huge\color{primary}\fontfamily{\headingsFont}\selectfont}
-\addtokomafont{subsection}{\huge\color{primary}\fontfamily{\headingsFont}\selectfont}
-\addtokomafont{subsubsection}{\LARGE\color{primary}\fontfamily{\headingsFont}\selectfont}
-\addtokomafont{paragraph}{\color{primary!70!text}\fontfamily{\headingsFont}\selectfont}
-\addtokomafont{subparagraph}{\color{primary!70!text}\fontfamily{\headingsFont}\selectfont}
+\addtokomafont{section}{\Huge\color{primary}\bfseries\fontfamily{\headingsFont}\selectfont}
+\addtokomafont{subsection}{\huge\color{primary}\fontseries{sb}\fontfamily{\headingsFont}\selectfont}
+\addtokomafont{subsubsection}{\LARGE\color{primary}\fontseries{sb}\fontfamily{\headingsFont}\selectfont}
+\addtokomafont{paragraph}{\color{primary!70!text}\fontseries{mb}\fontfamily{\headingsFont}\selectfont}
+\addtokomafont{subparagraph}{\color{primary!70!text}\fontseries{mb}\fontfamily{\headingsFont}\selectfont}
 
 \renewcommand{\sectionformat}{
     \bfseries\itshape\thesection\enspace
@@ -904,8 +907,8 @@
 \newcommand{\printMiniToc}{
 	\vfill
 	\hspace*{\dimexpr-1\leftmargin+6.7cm\relax}\parbox[t]{\paperwidth-6.5cm-\leftmargin}{
-		\hspace*{-5mm}\raisebox{0.25mm}{\fontsize{0.6cm}{1ex}\selectfont\ifbool{optionSolid}{\color{contrastColour}}{\color{primary}}\faList}
-		\hspace*{9.6mm} {\huge{Summary}}
+		\hspace*{-3mm}\raisebox{0.25mm}{\fontsize{0.6cm}{1ex}\selectfont\ifbool{optionSolid}{\color{contrastColour}}{\color{primary}}\faList}
+		\hspace*{8.8mm} {\fontseries{tx}\selectfont\huge{Summary}}
 		\vspace*{2mm}
 		\startcontents[chapters]
 		\hypersetup{linkcolor=text}
