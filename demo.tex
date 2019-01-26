@@ -1,6 +1,6 @@
-\documentclass[sans,math-serif,solid,chem,code,notes]{bmc}
+\documentclass[sans,math-serif,solid,chem,code,notes,plot]{bmc}
 
-\titlehead{Bespoke Multipurpose Class}
+% \titlehead{Bespoke Multipurpose Class}
 \title{A Demonstration}
 \subtitle{Of my BMC, created thanks to \LaTeX}
 \author{tecosaur \footnotesize \\ Of Github}
@@ -120,7 +120,19 @@ Sometimes, even a paragraph isn't deep enough.
 
 \newpage
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris nec ante quis tellus aliquet fringilla id nec ligula. Pellentesque vulputate ligula in erat tincidunt, eu venenatis augue pellentesque. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed a augue ut neque dignissim euismod ac nec augue. Pellentesque gravida congue elementum. Duis pulvinar pellentesque sodales. Sed pharetra, nibh nec gravida sagittis, sapien enim cursus diam, a iaculis tellus erat sit amet purus. Nunc tortor felis, ornare eu ultricies sit amet, ultrices vitae dui. Integer ac lacinia leo.
-\criticalInfo{Big Issue}{Critical stuff needs to be paid attention to}
+
+\begin{center}
+	\begin{tikzpicture}
+		\begin{axis}
+		   \addplot coordinates{(0,0) (0.5,1.5) (1,2)};
+		   \addplot coordinates{(0, 0.9) (0.5, 0.9) (0.6, 0.5) (1, 0.4)};
+		   \addplot coordinates{(0,1) (0.95, 2.5) (0.96,3) (0.97,2.5)};
+		\end{axis}
+	 \end{tikzpicture}
+\end{center}
+
+ \criticalInfo{Big Issue}{Critical stuff needs to be paid attention to}
+
 \newpage
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris nec ante quis tellus aliquet fringilla id nec ligula. Pellentesque vulputate ligula in erat tincidunt, eu venenatis augue pellentesque. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed a augue ut neque dignissim euismod ac nec augue. Pellentesque gravida congue elementum. Duis pulvinar pellentesque sodales. Sed pharetra, nibh nec gravida sagittis, sapien enim cursus diam, a iaculis tellus erat sit amet purus. Nunc tortor felis, ornare eu ultricies sit amet, ultrices vitae dui. Integer ac lacinia leo.
 \warningInfo{Hmm, this isn't the best}{Different lorem ipsum paragraphs would probably be better}
