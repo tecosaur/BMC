@@ -200,13 +200,19 @@
 %		Some nice packages
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% \RequirePackage{etex}
+\RequirePackage{ifdraft}
+
 \RequirePackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true]{microtype} % ,factor=1100,stretch=15,shrink=15
 \microtypecontext{spacing=nonfrench}
-\RequirePackage{calc}
-\RequirePackage[usenames,dvipsnames,svgnames,table]{xcolor}
-\RequirePackage[automark]{scrlayer-scrpage}
 \RequirePackage{setspace}
+\RequirePackage[automark]{scrlayer-scrpage}
+\RequirePackage{calc}
+\ifdraft{
+	\RequirePackage[usenames,dvipsnames,svgnames,table,gray]{xcolor}
+}{
+	\RequirePackage[usenames,dvipsnames,svgnames,table]{xcolor}
+}
+
 \RequirePackage{tikz}
 \ifbool{optionPlot}{
 	\RequirePackage{pgfplots}
@@ -994,42 +1000,45 @@
 %      Header and Footer
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\ifdraft{}{
 
-\clearpairofpagestyles
-\cfoot*{\hyperlink{contents}{\pagemark}}
+	\clearpairofpagestyles
+	\cfoot*{\hyperlink{contents}{\pagemark}}
 
-\ifbool{optionArticle}{
-	\chead{\hypersetup{colorlinks,allcolors=.}\hyperlink{section.\arabic{section}}{\headmark}}
-}{
-	\chead{\hypersetup{colorlinks,allcolors=.}\hyperlink{chapter.\arabic{chapter}}{\headmark}}
+	\ifbool{optionArticle}{
+		\chead{\hypersetup{colorlinks,allcolors=.}\hyperlink{section.\arabic{section}}{\headmark}}
+	}{
+		\chead{\hypersetup{colorlinks,allcolors=.}\hyperlink{chapter.\arabic{chapter}}{\headmark}}
+	}
+
+	\addtokomafont{pagehead}{\bfseries\upshape\ifbool{optionSolid}{\color{contrastColour}}{\color{primary}}}
+	\addtokomafont{pagenumber}{\bfseries\color{primary}}
+
+	% shift the predefined head layers
+	\ForEachLayerOfPageStyle*{scrheadings}{%
+	\ifstrstart{#1}{scrheadings.head.}
+		{\ModifyLayer[addvoffset=-.5in-.5\voffset-.5\topmargin]{#1}}
+		{}%
+	}
+	\ForEachLayerOfPageStyle*{plain.scrheadings}{%
+	\ifstrstart{#1}{plain.scrheadings.head.}
+		{\ModifyLayer[addvoffset=-.5in-.5\voffset-.5\topmargin]{#1}}
+		{}%
+	}
+
+	% Defining the Layer
+	\DeclareLayer[
+		background,
+		topmargin,
+		addheight=\headheight,
+		contents={%
+			\ifbool{optionSolid}{\color{primary}}{\color{page}}
+			\rule{\layerwidth}{\layerheight}%
+		}%
+	]{my.head.background}
+
+	%Adding the Layer to the pagestyles
+	\AddLayersAtBeginOfPageStyle{scrheadings}{my.head.background}
+	\AddLayersAtBeginOfPageStyle{plain.scrheadings}{my.head.background}
+
 }
-
-\addtokomafont{pagehead}{\bfseries\upshape\ifbool{optionSolid}{\color{contrastColour}}{\color{primary}}}
-\addtokomafont{pagenumber}{\bfseries\color{primary}}
-
-% shift the predefined head layers
-\ForEachLayerOfPageStyle*{scrheadings}{%
-  \ifstrstart{#1}{scrheadings.head.}
-    {\ModifyLayer[addvoffset=-.5in-.5\voffset-.5\topmargin]{#1}}
-    {}%
-}
-\ForEachLayerOfPageStyle*{plain.scrheadings}{%
-  \ifstrstart{#1}{plain.scrheadings.head.}
-    {\ModifyLayer[addvoffset=-.5in-.5\voffset-.5\topmargin]{#1}}
-    {}%
-}
-
-% Defining the Layer
-\DeclareLayer[
-    background,
-    topmargin,
-    addheight=\headheight,
-    contents={%
-		\ifbool{optionSolid}{\color{primary}}{\color{page}}
-        \rule{\layerwidth}{\layerheight}%
-    }%
-]{my.head.background}
-
-%Adding the Layer to the pagestyles
-\AddLayersAtBeginOfPageStyle{scrheadings}{my.head.background}
-\AddLayersAtBeginOfPageStyle{plain.scrheadings}{my.head.background}
