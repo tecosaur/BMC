@@ -227,13 +227,37 @@
 }{}
 \ifbool{optionPlot}{
 	\RequirePackage{pgfplots}
-	\pgfplotsset{compat=1.16}
+	\usetikzlibrary{plotmarks}
+	\pgfplotsset{
+		compat=newest,
+		tick align=outside,
+		% only marks,
+		legend pos=outer north east,
+		yticklabel style={/pgf/number format/fixed},
+		axis lines=middle,
+		cycle list={quatrinary\\tertiary\\secondary\\},
+		every tick label/.append style={font=\fontfamily{\sfdefault}\selectfont},
+		every axis plot/.append style={
+			very thick,
+			tick style={line width=ultra thick},
+		},
+		% every patch/.append style={line join=round,line cap=round}
+		% every axis/.append style={axis line style={<->}}
+		% tick label style = {font=\large},
+		% every axis label = {font=\sffamily},
+		% legend style = {font=\sffamily},
+		% label style = {font=\sffamily},
+		% small
+	}
 }{}
+
 \RequirePackage{ctable}
 \RequirePackage{tabularx}
 \RequirePackage{multicol}
+
 \RequirePackage{graphicx}
 \RequirePackage{grffile} % fix allowed filenames
+
 \RequirePackage{subcaption}
 \usepackage[hypcap=true]{caption}
 
