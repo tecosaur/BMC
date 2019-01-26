@@ -620,7 +620,7 @@
 	\newcommand{\titleFont}{\ttdefault}
 }{}
 
-% Small Caps
+% Small Caps - source: https://tex.stackexchange.com/a/225078/167605
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -678,25 +678,27 @@
 
 		\fontfamily{\titleFont}\selectfont
 
-		\begin{center}
-			\LARGE
-			% \ifbool{optionSolid}{
-			% 	\color{alternativePrimary}
-			% }{
-					\color{primary!60!contrastColour}
-			% }
-			\expandafter\fauxsc\expandafter{\@titlehead}
-			% \@titlehead
-		\end{center}
+		\ifdefempty{\@titlehead}{}{
+			\begin{center}
+				\LARGE
+				% \ifbool{optionSolid}{
+				% 	\color{alternativePrimary}
+				% }{
+						\color{primary!60!contrastColour}
+				% }
+				\expandafter\fauxsc\expandafter{\@titlehead}
+				%
+			\end{center}
+		}
 
 		\vspace*{3.5cm}
 
-		\fontsize{2cm}{2em}\fontseries{sb}\selectfont
+		\fontsize{2cm}{4em}\fontseries{sb}\selectfont
 		\@title
-		\vspace{-0.5cm}
+		\vspace{-1.1cm}
 
 		\noindent\makebox[\linewidth]{
-			\hspace{2.8cm}
+			\hspace{2.7cm}
 			\ifbool{optionSolid}{
 				\ifbool{optionDark}{
 					\color{contrastColour}
@@ -706,7 +708,7 @@
 			}{
 				\color{primaryVarient}
 			}
-			\rule{\paperwidth-2.8cm}{2pt}
+			\rule{\paperwidth-2.7cm}{2pt}
 		}
 
 		\hspace*{1mm}\fontseries{r}\selectfont\huge\@subtitle
