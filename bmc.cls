@@ -209,7 +209,7 @@
 \RequirePackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true]{microtype} % ,factor=1100,stretch=15,shrink=15
 \microtypecontext{spacing=nonfrench}
 \RequirePackage{setspace}
-\RequirePackage[automark]{scrlayer-scrpage}
+\RequirePackage[automark,draft=false]{scrlayer-scrpage}
 \RequirePackage{calc}
 \ifdraft{
 	\PassOptionsToPackage{grey}{xcolor}
@@ -222,6 +222,7 @@
 	\tikzexternalize[
 		prefix=tikz/,
 		mode=list and make,
+		only named=true
 	]
 }{}
 \ifbool{optionPlot}{
@@ -441,6 +442,10 @@
 
 \setlength{\leftmargin}{2.5cm}
 
+
+\ifdraft{
+	\PassOptionsToPackage{showframe}{geometry}
+}{}
 \ifbool{optionNotes}{
 	\setlength{\rightmargin}{1cm}
 	\PassOptionsToPackage{includemp}{geometry}
@@ -1192,7 +1197,25 @@
 %      Header and Footer
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\ifdraft{}{
+\ifdraft{
+	\AfterPackage*{scrlayer-scrpage}{%
+    \DeclareNewLayer[
+      head,
+      height=0pt,
+      foreground,
+      contents=\textcolor{text!60!page}{\layercontentsmeasure}
+    ]{head.ruler}
+    \DeclareNewLayer[
+      foot,
+      height=0pt,
+      addvoffset=\footheight-\dp\strutbox,
+      background,
+      contents=\textcolor{text!60!page}{\layercontentsmeasure}
+    ]{foot.ruler}
+    \AddLayersAtBeginOfPageStyle{scrheadings}{head.ruler,foot.ruler}
+    \AddLayersAtBeginOfPageStyle{plain.scrheadings}{head.ruler,foot.ruler}
+  }
+}{
 
 	\clearpairofpagestyles
 	\cfoot*{\hyperlink{contents}{\pagemark}}
