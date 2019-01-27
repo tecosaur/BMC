@@ -224,6 +224,9 @@
 		mode=list and make,
 		only named=true
 	]
+	\tikzset{external/system call={pdflatex \tikzexternalcheckshellescape
+		-halt-on-error -interaction=batchmode -jobname "\image" "\texsource"}
+	}
 }{}
 \ifbool{optionPlot}{
 	\RequirePackage{pgfplots}
@@ -968,7 +971,7 @@
 			\begin{flushleft}
 				\begin{spacing}{5}
 					\fontsize{1.7cm}{1em}
-					\fontseries{tx}\selectfont
+					\fontseries{tx}
 					\selectfont
 					\ifbool{optionDark}{
 						\color{primaryVarient}
@@ -1101,9 +1104,9 @@
 }{\endMakeFramed}
 \titlecontents{chapter}[0em]{\vspace*{1\baselineskip}}{
 	\parbox{7.5cm-\leftmargin}{\hfill{\ifbool{optionSolid}{\hypersetup{linkcolor=contrastColour}}{\hypersetup{linkcolor=primary}}\fontsize{1.5cm}{1ex}\selectfont\thecontentspage}\hspace*{3mm}}
-	\vspace*{-1.48cm}\tocChapterText{\large\chaptertitlename~\thecontentslabel}
+	\vspace*{-1.48cm}\fontfamily{\headingsFont}\selectfont\tocChapterText{\large\chaptertitlename~\thecontentslabel}
 	\\[-3mm]
-	\huge
+	\huge\fontfamily{\familydefault}\selectfont
 }{}{\endtocChapterText\vskip-5mm}
 
 %		Mini-ToC
@@ -1113,7 +1116,7 @@
 	\vfill
 	\hspace*{\dimexpr-1\leftmargin+6.7cm\relax}\parbox[t]{\paperwidth-6.5cm-\leftmargin}{
 		\hspace*{-3mm}\raisebox{0.25mm}{\fontsize{0.6cm}{1ex}\selectfont\ifbool{optionSolid}{\color{contrastColour}}{\color{primary}}\faList}
-		\hspace*{8.8mm} {\fontseries{tx}\selectfont\huge{Summary}}
+		\hspace*{6.5mm} {\fontfamily{\headingsFont}\fontseries{tx}\selectfont\huge{Summary}}
 		\vspace*{2mm}
 		\startcontents[chapters]
 		\hypersetup{linkcolor=text}
@@ -1226,8 +1229,8 @@
 		\chead{\hypersetup{colorlinks,allcolors=.}\hyperlink{chapter.\arabic{chapter}}{\headmark}}
 	}
 
-	\addtokomafont{pagehead}{\bfseries\upshape\ifbool{optionSolid}{\color{contrastColour}}{\color{primary}}}
-	\addtokomafont{pagenumber}{\bfseries\color{primary}}
+	\addtokomafont{pagehead}{\fontfamily{\headingsFont}\selectfont\bfseries\upshape\ifbool{optionSolid}{\color{contrastColour}}{\color{primary}}}
+	\addtokomafont{pagenumber}{\fontfamily{\headingsFont}\selectfont\bfseries\color{primary}}
 
 	% shift the predefined head layers
 	\ForEachLayerOfPageStyle*{scrheadings}{%
