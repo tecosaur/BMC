@@ -212,7 +212,7 @@
 \RequirePackage[automark,draft=false]{scrlayer-scrpage}
 \RequirePackage{calc}
 \ifdraft{
-	\PassOptionsToPackage{grey}{xcolor}
+	\PassOptionsToPackage{gray}{xcolor}
 }{}
 \RequirePackage[usenames,dvipsnames,svgnames,table]{xcolor}
 
