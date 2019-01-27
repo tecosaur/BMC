@@ -212,10 +212,9 @@
 \RequirePackage[automark]{scrlayer-scrpage}
 \RequirePackage{calc}
 \ifdraft{
-	\RequirePackage[usenames,dvipsnames,svgnames,table,gray]{xcolor}
-}{
-	\RequirePackage[usenames,dvipsnames,svgnames,table]{xcolor}
-}
+	\PassOptionsToPackage{grey}{xcolor}
+}{}
+\RequirePackage[usenames,dvipsnames,svgnames,table]{xcolor}
 
 \RequirePackage{tikz}
 \ifbool{optionExternalise}{
@@ -444,11 +443,13 @@
 
 \ifbool{optionNotes}{
 	\setlength{\rightmargin}{1cm}
-	\RequirePackage[a4paper, ignoreheadfoot, includemp, left=\leftmargin, right=\rightmargin, top=2cm, bottom=3.5cm, headsep=1cm, marginparwidth=4cm, marginparsep=5mm ]{geometry}
+	\PassOptionsToPackage{includemp}{geometry}
+	\PassOptionsToPackage{marginparwidth=4cm, marginparsep=5mm}{geometry}
 }{
 	\setlength{\rightmargin}{2.7cm}
-	\RequirePackage[a4paper, ignoreheadfoot, left=\leftmargin, right=\rightmargin, top=2cm, bottom=3.5cm, headsep=1cm, marginparwidth=0cm, marginparsep=0mm ]{geometry}
+	\PassOptionsToPackage{marginparwidth=0cm, marginparsep=0mm}{geometry}
 }
+\RequirePackage[a4paper, ignoreheadfoot, left=\leftmargin, right=\rightmargin, top=2cm, bottom=3.5cm, headsep=1cm]{geometry}
 
 \setlength{\skip\footins}{1cm}
 \setlength{\footnotesep}{2mm}
