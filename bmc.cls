@@ -182,7 +182,7 @@
 % Class
 \DeclareOption*{
 	\ifbool{optionArticle}{
-		\PassOptionsToClass{\CurrentOption}{scscrartclrreprt}
+		\PassOptionsToClass{\CurrentOption}{scrartcl}
 	}{
 		\PassOptionsToClass{\CurrentOption}{scrreprt}
 	}
