@@ -1,0 +1,11 @@
+*.cls
+*.aux
+*.toc
+*.ptc
+*.log
+*.out
+*.fls
+*.pygstyle
+*.pygtex
+*.synctex.gz
+*.fdb_latexmk
