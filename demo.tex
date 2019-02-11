@@ -1,9 +1,12 @@
-\documentclass[sans,math-serif,solid,chem,code,notes,plot]{bmc}
+\documentclass[solid,math,chem,code,notes,plot]{bmc}
 
 % \titlehead{Bespoke Multipurpose Class}
 \title{A Demonstration}
 \subtitle{Of my BMC, created thanks to \LaTeX}
 \author{tecosaur \footnotesize \\ Of Github}
+
+% \colorlet{primary}{Orange}
+% \colorlet{primaryVariant}{LightBlue}
 
 \begin{document}
 
@@ -136,6 +139,29 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris nec ante quis te
 \newpage
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris nec ante quis tellus aliquet fringilla id nec ligula. Pellentesque vulputate ligula in erat tincidunt, eu venenatis augue pellentesque. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed a augue ut neque dignissim euismod ac nec augue. Pellentesque gravida congue elementum. Duis pulvinar pellentesque sodales. Sed pharetra, nibh nec gravida sagittis, sapien enim cursus diam, a iaculis tellus erat sit amet purus. Nunc tortor felis, ornare eu ultricies sit amet, ultrices vitae dui. Integer ac lacinia leo.
 \warningInfo{Hmm, this isn't the best}{Different lorem ipsum paragraphs would probably be better}
+
+\section{Colour Theme}
+
+\newcommand{\colorBox}[1]{\begin{tikzpicture}
+	\fill [#1] (0, 0) rectangle (2, 1);
+	\node[text width=2] at (0.2,0.2) {\tiny\color{page} \textsf{#1}};
+\end{tikzpicture}}
+
+\colorBox{primary}\colorBox{secondary}\colorBox{tertiary}\colorBox{quatrinary}
+\quad
+\colorBox{alternativePrimary}\colorBox{primaryVariant}\colorBox{contrastColour}
+
+\subsection{Other Defined Colours}
+
+\colorBox{Grey} \quad \colorBox{LightGrey} \colorBox{DarkGrey} \\[-0.7mm]
+\colorBox{Red} \quad \colorBox{LightRed} \colorBox{DarkRed} \\[-0.7mm]
+\colorBox{Yellow} \quad \colorBox{LightYellow} \colorBox{DarkYellow} \\[-0.7mm]
+\colorBox{Blue} \quad \colorBox{LightBlue} \colorBox{DarkBlue} \\[-0.7mm]
+\colorBox{Green} \quad \colorBox{LightGreen} \colorBox{DarkGreen} \\[-0.7mm]
+\colorBox{Orange} \quad \colorBox{LightOrange} \colorBox{DarkOrange} \\[-0.7mm]
+\colorBox{Purple} \quad \colorBox{LightPurple} \colorBox{DarkPurple} \\[-0.7mm]
+\colorBox{Cyan} \quad \colorBox{LightCyan} \colorBox{DarkCyan}
+
 
 \chapter{A Third Chapter}
 
