@@ -66,7 +66,7 @@
 
 % Defaults
 \booltrue{optionLight}
-\booltrue{optionSans}
+\booltrue{optionSerif}
 \booltrue{optionHeadingsSans}
 
 
@@ -209,7 +209,7 @@
 \RequirePackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true]{microtype} % ,factor=1100,stretch=15,shrink=15
 \microtypecontext{spacing=nonfrench}
 \RequirePackage{setspace}
-\RequirePackage[automark,draft=false]{scrlayer-scrpage}
+\RequirePackage[automark,draft=false,headwidth=textwithmarginpar,footwidth=head]{scrlayer-scrpage}
 \RequirePackage{calc}
 \ifdraft{
 	\PassOptionsToPackage{gray}{xcolor}
@@ -449,10 +449,14 @@
 \ifdraft{
 	\PassOptionsToPackage{showframe}{geometry}
 }{}
+\if@twoside
+	% \PassOptionsToPackage{asymmetric}{geometry}
+	\setlength{\leftmargin}{1cm}
+\fi
 \ifbool{optionNotes}{
 	\setlength{\rightmargin}{1cm}
 	\PassOptionsToPackage{includemp}{geometry}
-	\PassOptionsToPackage{marginparwidth=4cm, marginparsep=5mm}{geometry}
+	\PassOptionsToPackage{marginparwidth=5cm, marginparsep=5mm}{geometry}
 }{
 	\setlength{\rightmargin}{2.7cm}
 	\PassOptionsToPackage{marginparwidth=0cm, marginparsep=0mm}{geometry}
@@ -554,7 +558,7 @@
 }
 
 \definecolor{primary}{HTML}{019875} % emerald
-\definecolor{primaryVarient}{HTML}{1CBE77} % emerald mixed with lighter green
+\definecolor{primaryVariant}{HTML}{1CBE77} % emerald mixed with lighter green
 \definecolor{contrastColour}{HTML}{E8F1F2} % white
 
 \definecolor{secondary}{HTML}{C47238} % orange
@@ -574,27 +578,34 @@
 \definecolor{DarkGrey}{HTML}{4b6584}
 \definecolor{Black}{HTML}{231F20}
 % Primary Colours
-\definecolor{Red}{HTML}{eb3b5a}
+\definecolor{Red}{HTML}{eb3b47}
 \definecolor{LightRed}{HTML}{fc5c65}
+\definecolor{DarkRed}{HTML}{d91c38}
 
 \definecolor{Yellow}{HTML}{f7b731}
 \definecolor{LightYellow}{HTML}{fed330}
+\definecolor{DarkYellow}{HTML}{f0a132}
 
 \definecolor{Blue}{HTML}{3867d6}
 \definecolor{LightBlue}{HTML}{4b7bec}
+\definecolor{DarkBlue}{HTML}{2654bf}
 % Secondary Colours
 \definecolor{Green}{HTML}{20bf6b}
 \definecolor{LightGreen}{HTML}{26de81}
+\definecolor{DarkGreen}{HTML}{1ba155}
 
 \definecolor{Orange}{HTML}{fa8231}
 \definecolor{LightOrange}{HTML}{fd9644}
+\definecolor{DarkOrange}{HTML}{f76b20}
 
 \definecolor{Purple}{HTML}{8854d0}
 \definecolor{LightPurple}{HTML}{a55eea}
+\definecolor{DarkPurple}{HTML}{6e49b8}
 % Tertiary+ Colours
 % \definecolor{Brown}{HTML}{}
 \definecolor{Cyan}{HTML}{0fb9b1}
 \definecolor{LightCyan}{HTML}{2bcbba}
+\definecolor{DarkCyan}{HTML}{00a8a8}
 
 % \definecolor{LightBlue}{HTML}{2d98da}
 % Need to find better name(s) for other ligher blue shades
@@ -635,11 +646,19 @@
 
 % redefine info bulle colours
 
-\colorlet{informationColor}{primaryVarient}
 \colorlet{infoBulleBackground}{page!85!text}
 \colorlet{infoBulleText}{text}
 \colorlet{marginInfoBulleBackground}{page}
 \colorlet{marginInfoBulleText}{text}
+
+\colorlet{criticalColor}{Red}
+\colorlet{questionColor}{Purple}
+\colorlet{informationColor}{Green}
+\colorlet{checkColor}{Blue}
+\colorlet{warningColor}{Orange}
+\colorlet{tipsColor}{Purple}
+\colorlet{mathematicalColor}{Orange}
+\colorlet{codeColor}{Grey}
 
 % set link colour
 \ifbool{optionDark}{
@@ -904,7 +923,7 @@
 		\vspace{-1.1cm}
 
 		\noindent\makebox[\linewidth]{
-			\hspace{2.7cm}
+			\hspace{2.64cm}
 			\ifbool{optionSolid}{
 				\ifbool{optionDark}{
 					\color{contrastColour}
@@ -912,12 +931,12 @@
 					\color{alternativePrimary}
 				}
 			}{
-				\color{primaryVarient}
+				\color{primaryVariant}
 			}
-			\rule{\paperwidth-2.7cm}{2pt}
+			\rule{\paperwidth-2.64cm}{2pt}
 		}
 
-		\hspace*{1mm}\fontseries{r}\selectfont\huge\@subtitle
+		\hspace*{-0.25mm}\fontseries{r}\selectfont\huge\@subtitle
 
 		\vspace{2.5cm}
 
@@ -950,7 +969,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \ifbool{optionArticle}{
-
 }{
 
 \RequirePackage{titlesec}
@@ -974,7 +992,7 @@
 					\fontseries{tx}
 					\selectfont
 					\ifbool{optionDark}{
-						\color{primaryVarient}
+						\color{primary!75!Cream>twheel,-3,360}
 					}{
 						\color{alternativePrimary}
 					}
@@ -1073,7 +1091,7 @@
 	}
 	\begin{textblock*}{5cm}(1.6cm,6cm) % {block width} (coords)
 		\fontsize{4cm}{2em}\selectfont
-		\rotatebox[origin=c]{90}{\color{primaryVarient}Contents}
+		\rotatebox[origin=c]{90}{\color{primary!75!Cream>twheel,-3,360}Contents}
 	\end{textblock*}
 	\newpage
 }
@@ -1081,10 +1099,10 @@
 %		ToC
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\ifboolexpr{bool {optionSolid} and not bool {optionArticle}}{
-	\renewcommand{\contentsname}{}
-}{
+\ifbool{optionArticle}{
 	\renewcommand{\contentsname}{Contents}
+}{
+	\renewcommand{\contentsname}{}
 }
 
 \pretocmd{\tableofcontents}{\hypertarget{contents}{}}{}{}
@@ -1116,7 +1134,7 @@
 	\vfill
 	\hspace*{\dimexpr-1\leftmargin+6.7cm\relax}\parbox[t]{\paperwidth-6.5cm-\leftmargin}{
 		\hspace*{-3mm}\raisebox{0.25mm}{\fontsize{0.6cm}{1ex}\selectfont\ifbool{optionSolid}{\color{contrastColour}}{\color{primary}}\faList}
-		\hspace*{6.5mm} {\fontfamily{\headingsFont}\fontseries{tx}\selectfont\huge{Summary}}
+		\ifbool{optionSerif}{\hspace*{5.5mm}}{\hspace*{6.5mm}} {\fontfamily{\headingsFont}\fontseries{tx}\selectfont\huge{Summary}}
 		\vspace*{2mm}
 		\startcontents[chapters]
 		\hypersetup{linkcolor=text}
@@ -1230,7 +1248,7 @@
 	}
 
 	\addtokomafont{pagehead}{\fontfamily{\headingsFont}\selectfont\bfseries\upshape\ifbool{optionSolid}{\color{contrastColour}}{\color{primary}}}
-	\addtokomafont{pagenumber}{\fontfamily{\headingsFont}\selectfont\bfseries\color{primary}}
+	\addtokomafont{pagenumber}{\fontfamily{\headingsFont}\fontseries{sb}\selectfont\color{primary}}
 
 	% shift the predefined head layers
 	\ForEachLayerOfPageStyle*{scrheadings}{%
