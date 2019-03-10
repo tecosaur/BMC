@@ -262,7 +262,7 @@
 \RequirePackage{grffile} % fix allowed filenames
 
 \RequirePackage{subcaption}
-\usepackage[hypcap=true]{caption}
+\RequirePackage[hypcap=true]{caption}
 
 \RequirePackage{fontawesome5}
 \RequirePackage{infoBulle}
