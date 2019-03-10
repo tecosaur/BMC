@@ -367,6 +367,23 @@
 	\infoBulleAbstractIcon{mathematicalColor}{\fontsize{.6cm}{.72cm}\selectfont$\pi$}%
 }
 
+% Proof commands
+%-------------------------------------------------------------------------------
+% \NewTranslation{english}{proposition}{Proof}
+% \NewTranslation{french}{proposition}{Proof}
+% \NewTranslation{german}{proposition}{Vorschlag}
+\newcounter{proof}[\infoBulle@mathCounterReset]
+\NewDocumentEnvironment{proof}{o}{%
+	\stepcounter{proof}%
+	\begin{mdframed}[%
+		style=infoBulle,
+		linecolor=mathematicalColor,
+		frametitle=\@titleContentMath{proof}{\theproof}{#1}
+		]\relax%
+}{%
+	\end{mdframed}%
+}
+
 % Theorem commands
 %-------------------------------------------------------------------------------
 % \NewTranslation{english}{theorem}{Theorem}
