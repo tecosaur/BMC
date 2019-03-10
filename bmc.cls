@@ -886,6 +886,10 @@
 	\scalebox{\Cscale}[1]{#1}\fi\else\scalebox{\Cscale}[1]{#1}\fi%
 \ifx\relax#2\relax\else\fauxschelphelp#2\relax\fi}
 
+% Add colour to \em
+\let\oldem\em
+\renewrobustcmd{\em}{\fontseries{l}\selectfont\oldem}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %		Titling
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
