@@ -238,7 +238,7 @@
 		legend pos=outer north east,
 		yticklabel style={/pgf/number format/fixed},
 		axis lines=middle,
-		cycle list={quatrinary\\tertiary\\secondary\\},
+		cycle list={quatrinary\\secondary\\tertiary\\},
 		every tick label/.append style={font=\fontfamily{\sfdefault}\selectfont},
 		every axis plot/.append style={
 			very thick,
@@ -570,11 +570,14 @@
 }
 
 \definecolor{primary}{HTML}{019875} % emerald
-\definecolor{primaryVariant}{HTML}{1CBE77} % emerald mixed with lighter green
+% \definecolor{primaryVariant}{HTML}{1CBE77} % emerald mixed with lighter green
+\AtEndPreamble{
+	\@ifundefined{\string\color@primaryVariant}{\colorlet{primaryVariant}{primary!75!Cream>twheel,-3,360}}{}
+}
 \definecolor{contrastColour}{HTML}{E8F1F2} % white
 
-\definecolor{secondary}{HTML}{C47238} % orange
-\definecolor{tertiary}{HTML}{C6B53C} % yellow
+\definecolor{tertiary}{HTML}{C47238} % yellow
+\definecolor{secondary}{HTML}{C6B53C} % orange
 \definecolor{quatrinary}{HTML}{BD3E4C} % red
 
 \definecolor{alternativePrimary}{HTML}{13293D} % blue
@@ -601,7 +604,7 @@
 \definecolor{Blue}{HTML}{3867d6}
 \definecolor{LightBlue}{HTML}{4b7bec}
 \definecolor{DarkBlue}{HTML}{2654bf}
-% Secondary Colours
+% tertiary Colours
 \definecolor{Green}{HTML}{20bf6b}
 \definecolor{LightGreen}{HTML}{26de81}
 \definecolor{DarkGreen}{HTML}{1ba155}
@@ -613,7 +616,7 @@
 \definecolor{Purple}{HTML}{8854d0}
 \definecolor{LightPurple}{HTML}{a55eea}
 \definecolor{DarkPurple}{HTML}{6e49b8}
-% Tertiary+ Colours
+% secondary+ Colours
 % \definecolor{Brown}{HTML}{}
 \definecolor{Cyan}{HTML}{0fb9b1}
 \definecolor{LightCyan}{HTML}{2bcbba}
@@ -641,7 +644,7 @@
 
 % \definecolor{Blue}{HTML}{2980b9}
 % \definecolor{LightBlue}{HTML}{3498db}
-% % Secondary Colours
+% % tertiary Colours
 % \definecolor{Green}{HTML}{27ae60}
 % \definecolor{LightGreen}{HTML}{2ecc71}
 
@@ -650,7 +653,7 @@
 
 % \definecolor{Purple}{HTML}{8e44ad}
 % \definecolor{LightPurple}{HTML}{9b59b6}
-% % Tertiary+ Colours
+% % secondary+ Colours
 % % \definecolor{Brown}{HTML}{}
 % \definecolor{Cyan}{HTML}{16a085}
 % \definecolor{LightCyan}{HTML}{1abc9c}
@@ -673,11 +676,13 @@
 \colorlet{codeColor}{Grey}
 
 % set link colour
-\ifbool{optionDark}{
-	\colorlet{hrefColor}{tertiary}
-}{
-	\colorlet{hrefColor}{secondary}
-}
+% \AtEndPreamble{
+% 	\ifbool{optionDark}{
+		\colorlet{href}{secondary}
+% 	}{
+% 		\colorlet{href}{tertiary}
+% 	}
+% }
 
 % ================
 % Setup Font
@@ -1014,7 +1019,7 @@
 					\fontseries{tx}
 					\selectfont
 					\ifbool{optionDark}{
-						\color{primary!75!Cream>twheel,-3,360}
+						\color{primaryVariant}
 					}{
 						\color{alternativePrimary}
 					}
@@ -1113,7 +1118,7 @@
 	}
 	\begin{textblock*}{5cm}(1.6cm,6cm) % {block width} (coords)
 		\fontsize{4cm}{2em}\selectfont
-		\rotatebox[origin=c]{90}{\color{primary!75!Cream>twheel,-3,360}Contents}
+		\rotatebox[origin=c]{90}{\color{primaryVariant}Contents}
 	\end{textblock*}
 	\newpage
 }
@@ -1143,7 +1148,7 @@
 	}
 }{\endMakeFramed}
 \titlecontents{chapter}[0em]{\vspace*{1\baselineskip}}{
-	\parbox{7.5cm-\leftmargin}{\hfill{\ifbool{optionSolid}{\hypersetup{linkcolor=contrastColour}}{\hypersetup{linkcolor=primary}}\fontsize{1.5cm}{1ex}\selectfont\thecontentspage}\hspace*{3mm}}
+	\parbox{7.5cm-\leftmargin}{\hfill{\ifbool{optionSolid}{\hypersetup{linkcolor=contrastColour}}{\hypersetup{linkcolor=primary}}\fontsize{1.5cm}{1ex}\selectfont\color{page}\thecontentspage}\hspace*{3mm}}
 	\vspace*{-1.48cm}\fontfamily{\headingsFont}\selectfont\tocChapterText{\large\chaptertitlename~\thecontentslabel}
 	\\[-3mm]
 	\huge\fontfamily{\familydefault}\selectfont
@@ -1201,23 +1206,25 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \RequirePackage{hyperref}
 \RequirePackage{hyperxmp}
-\hypersetup{
-	pdftoolbar=false,
-	pdfmenubar=true,
-	pdffitwindow=false,
-	pdfborder={1 1 0},
-	pdftitle={\@title},
-	pdfauthor={\@author},
-	pdfsubject={\@subtitle},
-	pdfcreator=pdfLaTeX,
-	% pdfkeywords={{a}{b}},
-	colorlinks=true,
-	linkcolor=hrefColor,
-	linktoc=all,
-	urlcolor=hrefColor,
-	citecolor=hrefColor,
-	filecolor=hrefColor,
-	breaklinks=true
+\AtEndPreamble{
+	\hypersetup{
+		pdftoolbar=false,
+		pdfmenubar=true,
+		pdffitwindow=false,
+		pdfborder={1 1 0},
+		pdftitle={\@title},
+		pdfauthor={\@author},
+		pdfsubject={\@subtitle},
+		pdfcreator=pdfLaTeX,
+		% pdfkeywords={{a}{b}},
+		colorlinks=true,
+		linkcolor=href,
+		linktoc=all,
+		urlcolor=href,
+		citecolor=href,
+		filecolor=href,
+		breaklinks=true
+	}
 }
 \urlstyle{same}
 
