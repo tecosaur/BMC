@@ -696,7 +696,7 @@
 
 \ifboolexpr{bool {optionMathSerif} or bool {optionMathSans} or bool {optionMathMono}}{
 	\RequirePackage{amsmath,amssymb}
-	\RequirePackage{fourier}
+	\RequirePackage[utopia]{mathdesign}
 	\RequirePackage{xfrac}
 	\RequirePackage[makeroom]{cancel}
 
