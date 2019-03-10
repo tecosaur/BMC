@@ -710,6 +710,9 @@
 	\newcommand{\dd}[1][]{\ensuremath{\ifstrempty{#1}{\mathrm{d}}{\mathrm{d}^{#1}}}}
 	\DeclareMathOperator{\Lap}{\mathcal{L}}
 }{}
+
+% 1mu padding
+
 \ifbool{optionMathSerif}{
 	\renewcommand{\familydefault}{\rmdefault}
 	\RequirePackage[basic,italic,symbolgreek]{mathastext}
@@ -719,59 +722,60 @@
 	% \MTsetmathskips{\@tempa}{0.5mu}{0.5mu}}
 	%
 
-	\MTsetmathskips{a}{-1.2mu}{+0.5mu}
-	\MTsetmathskips{b}{-1.5mu}{+0.5mu}
-	\MTsetmathskips{c}{-1.5mu}{+0.7mu}
-	\MTsetmathskips{d}{-1.3mu}{+0.7mu}
-	\MTsetmathskips{e}{-1.5mu}{+0.7mu}
-	\MTsetmathskips{f}{+1.4mu}{+0.7mu}
-	\MTsetmathskips{g}{-0.5mu}{+0.6mu}
-	\MTsetmathskips{h}{-1.5mu}{+0.0mu}
-	\MTsetmathskips{i}{-1.5mu}{+0.8mu}
-	\MTsetmathskips{j}{+1.2mu}{+0.8mu}
-	\MTsetmathskips{k}{-1.5mu}{+0.5mu}
-	\MTsetmathskips{l}{-1.8mu}{+0.8mu}
-	\MTsetmathskips{m}{-1.4mu}{+0.0mu}
-	\MTsetmathskips{n}{-1.4mu}{+0.0mu}
-	\MTsetmathskips{o}{-1.2mu}{+0.3mu}
-	\MTsetmathskips{p}{-0.8mu}{+0.5mu}
-	\MTsetmathskips{q}{-1.2mu}{+0.3mu}
-	\MTsetmathskips{r}{-1.8mu}{+0.8mu}
-	\MTsetmathskips{s}{-0.9mu}{+0.5mu}
-	\MTsetmathskips{t}{-2.0mu}{+0.5mu}
-	\MTsetmathskips{u}{-2.1mu}{+0.3mu}
-	\MTsetmathskips{v}{-2.1mu}{+0.8mu}
-	\MTsetmathskips{w}{-2.0mu}{+0.8mu}
-	\MTsetmathskips{x}{-0.5mu}{+0.7mu}
-	\MTsetmathskips{y}{+0.2mu}{+0.8mu}
-	\MTsetmathskips{z}{-0.6mu}{+0.3mu}
 
-	\MTsetmathskips{A}{+0.4mu}{+0.4mu}
-	\MTsetmathskips{B}{-0.4mu}{+0.7mu}
-	\MTsetmathskips{C}{-1.8mu}{+0.5mu}
-	\MTsetmathskips{D}{-0.5mu}{+0.7mu}
-	\MTsetmathskips{E}{-0.4mu}{+0.6mu}
-	\MTsetmathskips{F}{-0.4mu}{+0.6mu}
-	\MTsetmathskips{G}{-2.0mu}{+0.6mu}
-	\MTsetmathskips{H}{-0.4mu}{+0.7mu}
-	\MTsetmathskips{I}{-0.4mu}{+0.7mu}
-	\MTsetmathskips{J}{+0.8mu}{+0.7mu}
-	\MTsetmathskips{K}{-0.5mu}{+0.7mu}
-	\MTsetmathskips{L}{-0.5mu}{+0.6mu}
-	\MTsetmathskips{M}{-0.4mu}{+0.7mu}
-	\MTsetmathskips{N}{-0.4mu}{+0.7mu}
-	\MTsetmathskips{O}{-2.0mu}{+0.7mu}
-	\MTsetmathskips{P}{-0.7mu}{+0.7mu}
-	\MTsetmathskips{Q}{-1.9mu}{+0.7mu}
-	\MTsetmathskips{R}{-0.8mu}{+0.7mu}
-	\MTsetmathskips{S}{-1.2mu}{+0.7mu}
-	\MTsetmathskips{T}{-2.3mu}{+0.7mu}
-	\MTsetmathskips{U}{-2.8mu}{+0.7mu}
-	\MTsetmathskips{V}{-2.3mu}{+0.7mu}
-	\MTsetmathskips{W}{-2.3mu}{+0.7mu}
-	\MTsetmathskips{X}{+0.0mu}{+0.7mu}
-	\MTsetmathskips{Y}{-2.0mu}{+0.7mu}
-	\MTsetmathskips{Z}{+0.0mu}{+0.7mu}
+	\MTsetmathskips{a}{-0.20mu}{1.50mu}
+	\MTsetmathskips{b}{-0.50mu}{1.50mu}
+	\MTsetmathskips{c}{-0.50mu}{1.70mu}
+	\MTsetmathskips{d}{-0.30mu}{1.70mu}
+	\MTsetmathskips{e}{-0.50mu}{1.70mu}
+	\MTsetmathskips{f}{2.40mu}{1.70mu}
+	\MTsetmathskips{g}{0.50mu}{1.60mu}
+	\MTsetmathskips{h}{-0.50mu}{1.00mu}
+	\MTsetmathskips{i}{-0.50mu}{1.80mu}
+	\MTsetmathskips{j}{2.20mu}{1.80mu}
+	\MTsetmathskips{k}{-0.50mu}{1.50mu}
+	\MTsetmathskips{l}{-0.80mu}{1.80mu}
+	\MTsetmathskips{m}{-0.40mu}{1.00mu}
+	\MTsetmathskips{n}{-0.40mu}{1.00mu}
+	\MTsetmathskips{o}{-0.20mu}{1.30mu}
+	\MTsetmathskips{p}{0.20mu}{1.50mu}
+	\MTsetmathskips{q}{-0.20mu}{1.30mu}
+	\MTsetmathskips{r}{-0.80mu}{1.80mu}
+	\MTsetmathskips{s}{0.10mu}{1.50mu}
+	\MTsetmathskips{t}{-1.00mu}{1.50mu}
+	\MTsetmathskips{u}{-1.10mu}{1.30mu}
+	\MTsetmathskips{v}{-1.10mu}{1.80mu}
+	\MTsetmathskips{w}{-1.00mu}{1.80mu}
+	\MTsetmathskips{x}{0.50mu}{1.70mu}
+	\MTsetmathskips{y}{1.20mu}{1.80mu}
+	\MTsetmathskips{z}{0.40mu}{1.30mu}
+
+	\MTsetmathskips{A}{1.40mu}{1.40mu}
+	\MTsetmathskips{B}{0.60mu}{1.70mu}
+	\MTsetmathskips{C}{-0.80mu}{1.50mu}
+	\MTsetmathskips{D}{0.50mu}{1.70mu}
+	\MTsetmathskips{E}{0.60mu}{1.60mu}
+	\MTsetmathskips{F}{0.60mu}{1.60mu}
+	\MTsetmathskips{G}{-1.00mu}{1.60mu}
+	\MTsetmathskips{H}{0.60mu}{1.70mu}
+	\MTsetmathskips{I}{0.60mu}{1.70mu}
+	\MTsetmathskips{J}{1.80mu}{1.70mu}
+	\MTsetmathskips{K}{0.50mu}{1.70mu}
+	\MTsetmathskips{L}{0.50mu}{1.60mu}
+	\MTsetmathskips{M}{0.60mu}{1.70mu}
+	\MTsetmathskips{N}{0.60mu}{1.70mu}
+	\MTsetmathskips{O}{-1.00mu}{1.70mu}
+	\MTsetmathskips{P}{0.30mu}{1.70mu}
+	\MTsetmathskips{Q}{-0.90mu}{1.70mu}
+	\MTsetmathskips{R}{0.20mu}{1.70mu}
+	\MTsetmathskips{S}{-0.20mu}{1.70mu}
+	\MTsetmathskips{T}{-1.30mu}{1.70mu}
+	\MTsetmathskips{U}{-1.80mu}{1.70mu}
+	\MTsetmathskips{V}{-1.30mu}{1.70mu}
+	\MTsetmathskips{W}{-1.30mu}{1.70mu}
+	\MTsetmathskips{X}{1.00mu}{1.70mu}
+	\MTsetmathskips{Y}{-1.00mu}{1.70mu}
+	\MTsetmathskips{Z}{1.00mu}{1.70mu}
 }{}
 \ifbool{optionMathSans}{
 	\renewcommand{\familydefault}{\sfdefault}
@@ -782,32 +786,31 @@
 	% \MTsetmathskips{\@tempa}{0.5mu}{0.5mu}}
 	%
 
-	\MTsetmathskips{a}{-1.0mu}{-1.0mu}
-	\MTsetmathskips{b}{-0.7mu}{-1.0mu}
-	\MTsetmathskips{c}{-1.0mu}{-0.2mu}
-	\MTsetmathskips{d}{-1.0mu}{+0.0mu}
-	\MTsetmathskips{e}{-1.0mu}{-0.4mu}
-	\MTsetmathskips{f}{+1.6mu}{+0.0mu}
-	\MTsetmathskips{g}{+0.3mu}{+0.0mu}
-	\MTsetmathskips{h}{-0.6mu}{-1.1mu}
-	\MTsetmathskips{i}{-1.0mu}{+0.0mu}
-	\MTsetmathskips{j}{+1.9mu}{+0.0mu}
-	\MTsetmathskips{k}{-0.7mu}{-0.1mu}
-	\MTsetmathskips{l}{-1.0mu}{+0.0mu}
-	\MTsetmathskips{m}{-0.7mu}{-1.1mu}
-	\MTsetmathskips{n}{-0.7mu}{-1.1mu}
-	\MTsetmathskips{o}{-0.8mu}{-0.9mu}
-	\MTsetmathskips{p}{+0.2mu}{-1.0mu}
-	\MTsetmathskips{q}{-1.0mu}{-0.7mu}
-	\MTsetmathskips{r}{-0.7mu}{+0.0mu}
-	\MTsetmathskips{s}{-0.2mu}{-0.7mu}
-	\MTsetmathskips{t}{-1.2mu}{+0.0mu}
-	\MTsetmathskips{u}{-1.2mu}{-0.7mu}
-	\MTsetmathskips{v}{-1.3mu}{+0.0mu}
-	\MTsetmathskips{w}{-1.5mu}{+0.0mu}
-	\MTsetmathskips{x}{+0.7mu}{+0.0mu}
-	\MTsetmathskips{y}{+0.5mu}{+0.0mu}
-	\MTsetmathskips{z}{+0.1mu}{+0.0mu}
+	\MTsetmathskips{a}{0.00mu}{0.00mu}
+	\MTsetmathskips{b}{0.30mu}{0.00mu}
+	\MTsetmathskips{c}{0.00mu}{0.80mu}
+	\MTsetmathskips{d}{0.00mu}{1.00mu}
+	\MTsetmathskips{e}{0.00mu}{0.60mu}
+	\MTsetmathskips{f}{2.60mu}{1.00mu}
+	\MTsetmathskips{g}{1.30mu}{1.00mu}
+	\MTsetmathskips{h}{0.40mu}{-0.10mu}
+	\MTsetmathskips{i}{0.00mu}{1.00mu}
+	\MTsetmathskips{j}{2.90mu}{1.00mu}
+	\MTsetmathskips{k}{0.30mu}{0.90mu}
+	\MTsetmathskips{l}{0.00mu}{1.00mu}
+	\MTsetmathskips{m}{0.30mu}{-0.10mu}
+	\MTsetmathskips{n}{0.30mu}{-0.10mu}
+	\MTsetmathskips{o}{0.20mu}{0.10mu}
+	\MTsetmathskips{p}{1.20mu}{0.00mu}
+	\MTsetmathskips{q}{0.00mu}{0.30mu}
+	\MTsetmathskips{r}{0.30mu}{1.00mu}
+	\MTsetmathskips{s}{0.80mu}{0.30mu}
+	\MTsetmathskips{t}{-0.20mu}{1.00mu}
+	\MTsetmathskips{u}{-0.20mu}{0.30mu}
+	\MTsetmathskips{v}{-0.30mu}{1.00mu}
+	\MTsetmathskips{w}{-0.50mu}{1.00mu}
+	\MTsetmathskips{x}{1.70mu}{1.00mu}
+	\MTsetmathskips{y}{1.50mu}{1.00mu}
 }{}
 \ifbool{optionMathMono}{
 	\renewcommand{\familydefault}{\ttdefault}
