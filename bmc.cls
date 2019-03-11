@@ -896,7 +896,9 @@
 \renewrobustcmd{\em}{\fontseries{l}\selectfont\oldem}
 
 % Add colour to inline math
-\renewrobustcmd{\(}{\relax\ifmmode\@badmath\else$\fi\color{tertiary!50!text}}
+\renewrobustcmd{\(}{\@ifstar\@inlinemath\@@inlinemath}
+\DeclareRobustCommand{\@inlinemath}{\relax\ifmmode\@badmath\else$\fi}
+\DeclareRobustCommand{\@@inlinemath}{\relax\ifmmode\@badmath\else$\fi\color{tertiary!50!text}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %		Titling
