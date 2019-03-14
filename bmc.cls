@@ -991,8 +991,10 @@
 }
 
 
-\color{text}
-\pagecolor{page}
+\AtBeginDocument{%
+	\color{text}
+	\pagecolor{page}
+}
 
 % Other Titling
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
