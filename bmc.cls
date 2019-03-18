@@ -671,7 +671,7 @@
 
 % redefine info bulle colours
 
-\colorlet{infoBulleBackground}{page!85!text}
+\colorlet{infoBulleBackground}{page!90!text}
 \colorlet{infoBulleText}{text}
 \colorlet{marginInfoBulleBackground}{page}
 \colorlet{marginInfoBulleText}{text}
