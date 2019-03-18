@@ -440,6 +440,16 @@
 	}{}
 }{}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%		Set Penalties
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\@beginparpenalty=10000 % don't like it when a paragraph title is on a different page to the start of the content
+\hyphenpenalty=500 % not a huge fan of hyphens, but they are worthwhile
+\righthyphenmin=4 % min letters post-hyphen
+\lefthyphenmin=4 % min letters pre-hyphen
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Layout
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
