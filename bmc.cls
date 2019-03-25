@@ -710,20 +710,31 @@
 % \setlength{\mathLetterPadding}{1mm}
 
 \ifboolexpr{bool {optionMathSerif} or bool {optionMathSans} or bool {optionMathMono}}{
+	% various math packages
 	\RequirePackage{amsmath,amssymb}
 	\RequirePackage[utopia]{mathdesign}
 	\RequirePackage{xfrac}
 	\RequirePackage[makeroom]{cancel}
-
+	% package to use text font for math
 	\usepackage{mathtools}
+
+	% deliminators
 	\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
 	\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+	% number sets
 	\newcommand{\R}[1][]{\ensuremath{\ifstrempty{#1}{\mathbb{R}}{\mathbb{R}^{#1}}}}
 	\newcommand{\N}[1][]{\ensuremath{\ifstrempty{#1}{\mathbb{N}}{\mathbb{N}^{#1}}}}
 	\newcommand{\Z}[1][]{\ensuremath{\ifstrempty{#1}{\mathbb{Z}}{\mathbb{Z}^{#1}}}}
 	\newcommand{\C}[1][]{\ensuremath{\ifstrempty{#1}{\mathbb{C}}{\mathbb{C}^{#1}}}}
+	% commonly used macros
 	\newcommand{\dd}[1][]{\ensuremath{\ifstrempty{#1}{\mathrm{d}}{\mathrm{d}^{#1}}}}
 	\DeclareMathOperator{\Lap}{\mathcal{L}}
+
+	% I prefer the slanted \leq
+	\let\oldleq\leq % save them in case they're every wanted
+	\let\oldgeq\geq
+	\renewcommand{\leq}{\leqslant}
+	\renewcommand{\geq}{\geqslant}
 }{}
 
 % 1mu padding
