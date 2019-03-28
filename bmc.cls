@@ -682,6 +682,7 @@
 \colorlet{checkColor}{Blue}
 \colorlet{warningColor}{Orange}
 \colorlet{tipsColor}{Purple}
+\colorlet{exampleColor}{Blue}
 \colorlet{mathematicalColor}{Orange}
 \colorlet{codeColor}{Grey}
 

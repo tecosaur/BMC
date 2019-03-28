@@ -127,6 +127,7 @@
 \definecolor{checkColor}{RGB}{3, 169, 244}
 \definecolor{warningColor}{RGB}{255, 165, 0}
 \definecolor{tipsColor}{RGB}{142, 68, 173}
+\definecolor{exampleColor}{RGB}{156, 39, 176}
 \definecolor{mathematicalColor}{RGB}{230, 126, 34}
 \colorlet{codeColor}{Grey}
 
@@ -216,6 +217,11 @@
 % icon color, icon, theorem sort (theorem, lemma, etc.), theorem counter, title
 \DeclareDocumentCommand{\@titleContentMath}{m m m}{%
 	\@titleContentTwoPart{mathematicalColor}{\mathematicalIcon}{#1 \arabic{\infoBulle@mathCounterReset}.#2}{#3}%
+}
+
+% Command for example title
+\DeclareDocumentCommand{\@titleContentExample}{m m m}{%
+	\@titleContentTwoPart{exampleColor}{\exampleIcon}{#1 \arabic{\infoBulle@mathCounterReset}.#2}{#3}%
 }
 
 % infoBulle skeleton
@@ -309,6 +315,12 @@
 {\begin{@infoBulleSkeletonEnv}{tipsColor}{\tipsIcon}{#1}}
 	{\end{@infoBulleSkeletonEnv}}
 
+% exampleInfo
+%-------------------------------------------------------------------------------
+\newcommand{\exampleIcon}{%
+	\infoBulleAbstractIcon{exampleColor}{\faClipboard}
+}
+
 % codeInfo
 %-------------------------------------------------------------------------------
 \newcommand{\codeIcon}{%
@@ -353,7 +365,17 @@
 	\end{@infoBulleSkeletonEnv}
 }
 
-
+\newcounter{example}[\infoBulle@mathCounterReset]
+\NewDocumentEnvironment{example}{o}{%
+	\stepcounter{example}%
+	\begin{mdframed}[%
+		style=infoBulle,
+		linecolor=exampleColor,
+		frametitle=\@titleContentExample{Example}{\theexample}{#1}
+		]\relax%
+}{%
+	\end{mdframed}%
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %		User Math Commands
