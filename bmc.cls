@@ -731,6 +731,10 @@
 	\newcommand{\dd}[1][]{\ensuremath{\ifstrempty{#1}{\mathrm{d}}{\mathrm{d}^{#1}}}}
 	\DeclareMathOperator{\Lap}{\mathcal{L}}
 
+	% Since the amsthm package isn't loaded
+	\newcommand*{\qed}{\hfill\ensuremath{\blacksquare}}
+	\newcommand*{\qedhere}{\hfill\ensuremath{\square}}
+
 	% I prefer the slanted \leq
 	\let\oldleq\leq % save them in case they're every wanted
 	\let\oldgeq\geq
