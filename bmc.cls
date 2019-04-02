@@ -268,6 +268,8 @@
 \RequirePackage{infoBulle}
 \RequirePackage{marginInfoBulle}
 
+\RequirePackage[check=warning]{widows-and-orphans}
+
 \RequirePackage{xpatch}
 
 \ifbool{optionChem}{
