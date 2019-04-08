@@ -268,7 +268,7 @@
 \RequirePackage{infoBulle}
 \RequirePackage{marginInfoBulle}
 
-\RequirePackage[check=warning]{widows-and-orphans}
+% \RequirePackage[check=warning]{widows-and-orphans} % wait till texlive 2019
 
 \RequirePackage{xpatch}
 
