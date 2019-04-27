@@ -733,6 +733,9 @@
 	% commonly used macros
 	\newcommand{\dd}[1][]{\ensuremath{\ifstrempty{#1}{\mathrm{d}}{\mathrm{d}^{#1}}}}
 	\DeclareMathOperator{\Lap}{\mathcal{L}}
+	\DeclareMathOperator{\Var}{Var} % varience
+	\DeclareMathOperator{\Cov}{Cov} % covarience
+	\DeclareMathOperator{\E}{E} % expected
 
 	% Since the amsthm package isn't loaded
 	\newcommand*{\qed}{\hfill\ensuremath{\blacksquare}}
