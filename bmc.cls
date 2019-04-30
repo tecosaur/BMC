@@ -937,6 +937,10 @@
 \DeclareRobustCommand{\@inlinemath}{\relax\ifmmode\@badmath\else$\fi}
 \DeclareRobustCommand{\@@inlinemath}{\relax\ifmmode\@badmath\else$\fi\color{tertiary!50!text}}
 
+% Roman Numerals
+\newcommand*{\RN}[1]{\expandafter\@slowromancap\romannumeral #1@}
+\newcommand*{\Rn}[1]{\romannumeral#1\relax}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %		Titling
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
