@@ -478,7 +478,11 @@
 \setlength{\skip\footins}{1cm}
 \setlength{\footnotesep}{2mm}
 \setlength{\parskip}{1ex}
-\setlength{\parindent}{0ex}
+% we don't want paragraphs to indent, but we do want \indent to work
+\newlength\tindent
+\setlength{\tindent}{\parindent}
+\setlength{\parindent}{0pt}
+\renewcommand{\indent}{\hspace*{\tindent}}
 
 % title formating
 \RequirePackage{titlesec}
