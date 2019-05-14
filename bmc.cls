@@ -1,4 +1,4 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%══════════════════════════════════════════%
 %                                          %
 %                  BMC                     %
 %     A Bespoke, Multipurpose Class        %
@@ -6,7 +6,7 @@
 %          Designed by tecosaur            %
 %        Insired by Yves Zumbach           %
 %                                          %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%══════════════════════════════════════════%
 
 
 %% bmc.cls
@@ -221,29 +221,36 @@
 	\usetikzlibrary{external}
 	\tikzexternalize[
 		prefix=tikz/,
-		mode=list and make,
+		% mode=list and make,
 		only named=true
 	]
-	\tikzset{external/system call={pdflatex \tikzexternalcheckshellescape
-		-halt-on-error -interaction=batchmode -jobname "\image" "\texsource"}
-	}
+	% \tikzset{external/system call={pdflatex \tikzexternalcheckshellescape
+	% 	-halt-on-error -interaction=batchmode -jobname "\image" "\texsource"}
+	% }
 }{}
 \ifbool{optionPlot}{
 	\RequirePackage{pgfplots}
 	\usetikzlibrary{plotmarks}
+	\usetikzlibrary{arrows.meta}
 	\pgfplotsset{
 		compat=newest,
 		tick align=outside,
 		% only marks,
 		legend pos=outer north east,
+		legend style={draw=none,fill=text!3!page},
+		legend cell align={left},
+		%
 		yticklabel style={/pgf/number format/fixed},
 		axis lines=middle,
 		cycle list={quatrinary\\secondary\\tertiary\\},
+		%
 		every tick label/.append style={font=\fontfamily{\sfdefault}\selectfont},
 		every axis plot/.append style={
 			very thick,
 			tick style={line width=ultra thick},
 		},
+		% every inner x axis line/.append style={|->},
+		inner axis line style={-Latex[round]}, % TODO: improve look of arrow
 		% every patch/.append style={line join=round,line cap=round}
 		% every axis/.append style={axis line style={<->}}
 		% tick label style = {font=\large},
@@ -456,7 +463,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \setlength{\leftmargin}{2.5cm}
-
 
 \ifdraft{
 	\PassOptionsToPackage{showframe}{geometry}
