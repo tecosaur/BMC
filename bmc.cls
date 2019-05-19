@@ -195,9 +195,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \ifbool{optionArticle}{
-	\LoadClass[usegeometry]{scrartcl}
+	\LoadClass[usegeometry,pointlessnumbers]{scrartcl}
 }{
-	\LoadClass[usegeometry]{scrreprt}
+	\LoadClass[usegeometry,pointlessnumbers]{scrreprt}
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
