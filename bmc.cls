@@ -730,6 +730,16 @@
 % 	}
 % }
 
+% and fill the row after \toprule
+\colorlet{tableheadcolor}{text!5!page} % Table header colour = 25% gray
+\renewcommand{\toprule}{\arrayrulecolor{text}\specialrule{\heavyrulewidth}{\abovetopsep}{0pt}%
+            \arrayrulecolor{tableheadcolor}\specialrule{\belowrulesep}{0pt}{0pt}%
+            \arrayrulecolor{text}\rowcolor{tableheadcolor}}
+\renewcommand{\midrule}{\arrayrulecolor{tableheadcolor}\specialrule{\aboverulesep}{0pt}{0pt}%
+            \arrayrulecolor{text}\specialrule{\lightrulewidth}{0pt}{0pt}%
+            \arrayrulecolor{page}\specialrule{\belowrulesep}{0pt}{0pt}%
+            \arrayrulecolor{text}}
+
 % ================
 % Setup Font
 % ================
