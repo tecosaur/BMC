@@ -504,8 +504,8 @@
 \renewcommand{\indent}{\hspace*{\tindent}}
 
 % set caption style
-\setkomafont{caption}{\itshape}
-\setkomafont{captionlabel}{\fontseries{tx}\selectfont\upshape}
+\setkomafont{caption}{\itshape\color{text}}
+\setkomafont{captionlabel}{\fontseries{tx}\selectfont\upshape\color{text}}
 
 % title formating
 \RequirePackage{titlesec}
