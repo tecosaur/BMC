@@ -513,6 +513,9 @@
 \setkomafont{captionlabel}{\fontseries{tx}\selectfont\upshape\color{text}}
 \captionsetup{justification=raggedright,singlelinecheck=true}
 
+% ensure tables have correct text colour
+\AtBeginEnvironment{tabular}{\color{text}}
+
 % title formating
 \RequirePackage{titlesec}
 
