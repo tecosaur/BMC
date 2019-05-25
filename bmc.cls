@@ -269,7 +269,7 @@
 \RequirePackage{grffile} % fix allowed filenames
 
 \RequirePackage{subcaption}
-\RequirePackage[hypcap=true,labelfont={it,color=text},font={color=text}]{caption}
+\RequirePackage[hypcap=true]{caption}
 
 \RequirePackage{fontawesome5}
 \RequirePackage{infoBulle}
@@ -489,6 +489,10 @@
 \setlength{\tindent}{\parindent}
 \setlength{\parindent}{0pt}
 \renewcommand{\indent}{\hspace*{\tindent}}
+
+% set caption style
+\setkomafont{caption}{\itshape}
+\setkomafont{captionlabel}{\fontseries{tx}\selectfont\upshape}
 
 % title formating
 \RequirePackage{titlesec}
