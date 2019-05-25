@@ -238,7 +238,12 @@
 		% only marks,
 		% -- LEGEND
 		legend pos=outer north east,
-		legend style={draw=none,fill=text!4!page},
+		legend style={
+			draw=none,
+			fill opacity=0.75,
+			fill=text!6!page,
+			text opacity=1
+		},
 		legend cell align={left},
 		% -- AXIS
 		axis lines=middle,
