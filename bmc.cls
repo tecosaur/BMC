@@ -231,33 +231,46 @@
 \ifbool{optionPlot}{
 	\RequirePackage{pgfplots}
 	\usetikzlibrary{plotmarks}
+	\usepgfplotslibrary{fillbetween}
 	\usetikzlibrary{arrows.meta}
 	\pgfplotsset{
 		compat=newest,
-		tick align=outside,
 		% only marks,
+		% -- LEGEND
 		legend pos=outer north east,
-		legend style={draw=none,fill=text!3!page},
+		legend style={draw=none,fill=text!4!page},
 		legend cell align={left},
-		%
-		yticklabel style={/pgf/number format/fixed},
+		% -- AXIS
 		axis lines=middle,
+		inner axis line style={-Latex[round]}, % TODO: improve look of arrow
+		axis on top,
+		% -- TICKS
+		minor x tick num=1,
+		% xtick pos=left,
+		% ytick pos=left,
+		enlarge x limits=false,
+		every x tick/.style={color=text, thin},
+		every y tick/.style={color=text, thin},
+		tick align=outside,
+		% -- LABELS
+		yticklabel style={/pgf/number format/fixed},
+		every tick label/.append style={font=\fontfamily{\sfdefault}\selectfont},
+		xlabel near ticks,
+		ylabel near ticks,
+		% -- COLOURS
 		cycle list={quatrinary\\secondary\\tertiary\\},
 		%
-		every tick label/.append style={font=\fontfamily{\sfdefault}\selectfont},
 		every axis plot/.append style={
 			very thick,
-			tick style={line width=ultra thick},
 		},
 		% every inner x axis line/.append style={|->},
-		inner axis line style={-Latex[round]}, % TODO: improve look of arrow
 		% every patch/.append style={line join=round,line cap=round}
 		% every axis/.append style={axis line style={<->}}
 		% tick label style = {font=\large},
 		% every axis label = {font=\sffamily},
 		% legend style = {font=\sffamily},
 		% label style = {font=\sffamily},
-		% small
+		% small,
 	}
 }{}
 
