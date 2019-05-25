@@ -511,6 +511,7 @@
 % set caption style
 \setkomafont{caption}{\itshape\color{text}}
 \setkomafont{captionlabel}{\fontseries{tx}\selectfont\upshape\color{text}}
+\captionsetup{justification=raggedright,singlelinecheck=true}
 
 % title formating
 \RequirePackage{titlesec}
