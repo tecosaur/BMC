@@ -719,6 +719,7 @@
 % \AtEndPreamble{
 % 	\ifbool{optionDark}{
 		\colorlet{href}{secondary}
+		\colorlet{inlinemath}{tertiary!50!text}
 % 	}{
 % 		\colorlet{href}{tertiary}
 % 	}
@@ -962,7 +963,7 @@
 % Add colour to inline math
 \renewrobustcmd{\(}{\@ifstar\@inlinemath\@@inlinemath}
 \DeclareRobustCommand{\@inlinemath}{\relax\ifmmode\@badmath\else$\fi}
-\DeclareRobustCommand{\@@inlinemath}{\relax\ifmmode\@badmath\else$\fi\color{tertiary!50!text}}
+\DeclareRobustCommand{\@@inlinemath}{\relax\ifmmode\@badmath\else$\fi\color{inlinemath}}
 
 % Roman Numerals
 \newcommand*{\RN}[1]{\expandafter\@slowromancap\romannumeral #1@}
