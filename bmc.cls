@@ -966,8 +966,10 @@
 \DeclareRobustCommand{\@@inlinemath}{\relax\ifmmode\@badmath\else$\fi\color{inlinemath}}
 
 % Roman Numerals
-\newcommand*{\RN}[1]{\expandafter\@slowromancap\romannumeral #1@}
-\newcommand*{\Rn}[1]{\romannumeral#1\relax}
+\AtEndPreamble{
+	\providecommand*{\RN}[1]{\expandafter\@slowromancap\romannumeral #1@}
+	\providecommand*{\Rn}[1]{\romannumeral#1\relax}
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %		Titling
