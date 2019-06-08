@@ -1296,7 +1296,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %		Links
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\RequirePackage{hyperref}
+\RequirePackage[pdfa]{hyperref}
 \RequirePackage{hyperxmp}
 \AtEndPreamble{
 	\hypersetup{
