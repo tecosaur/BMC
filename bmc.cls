@@ -977,10 +977,6 @@
 	\scalebox{\Cscale}[1]{#1}\fi\else\scalebox{\Cscale}[1]{#1}\fi%
 \ifx\relax#2\relax\else\fauxschelphelp#2\relax\fi}
 
-% Add colour to \em
-\let\oldem\em
-\renewrobustcmd{\em}{\fontseries{l}\selectfont\oldem}
-
 % Add colour to inline math
 \renewrobustcmd{\(}{\@ifstar\@inlinemath\@@inlinemath}
 \DeclareRobustCommand{\@inlinemath}{\relax\ifmmode\@badmath\else$\fi}
