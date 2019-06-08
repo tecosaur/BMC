@@ -578,7 +578,20 @@
 		}
 	}
 
-	\renewcommand\theFancyVerbLine{\color{text!60!page}\arabic{FancyVerbLine}}
+	\renewcommand\theFancyVerbLine{\color{text!60!page}\arabic{FancyVerbLine}} % minted line numbering
+
+	\let\mintinlineold\mintinline
+	\setmintedinline{breaklines,bgcolor={}}
+	% FIXME: issue with line breaking (it doesn't)
+	\DeclareTotalTCBox{\mintinline}{v v}{
+		nobeforeafter,tcbox raise base,
+		enhanced, frame hidden, arc=3pt,
+		boxsep=0pt,left=3pt,right=3pt,top=2pt,bottom=2pt, % minimal margin/paddding
+		colback=page!94!text,
+		outer arc=0pt,
+		leftrule=0pt,rightrule=0pt,toprule=0pt,bottomrule=0pt
+	}{\mintinlineold{#1}{#2}}
+
 }{}
 
 % % Set Image Max Dimentions
