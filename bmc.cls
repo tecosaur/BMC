@@ -740,14 +740,15 @@
 \colorlet{codeColor}{Grey}
 
 % set link colour
-% \AtEndPreamble{
-% 	\ifbool{optionDark}{
+\AtEndPreamble{
+	\ifbool{optionDark}{
 		\colorlet{href}{secondary}
 		\colorlet{inlinemath}{tertiary!50!text}
-% 	}{
-% 		\colorlet{href}{tertiary}
-% 	}
-% }
+	}{
+		\colorlet{href}{tertiary}
+		\colorlet{inlinemath}{secondary!50!text}
+	}
+}
 
 % and fill the row(s) after \toprule
 \newbool{tabularTitleRow}
