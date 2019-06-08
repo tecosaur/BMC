@@ -774,11 +774,11 @@
 	\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
 	\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
 	% number sets
-	\newcommand{\R}[1][]{\ensuremath{\ifstrempty{#1}{\mathbb{R}}{\mathbb{R}^{#1}}}}
-	\newcommand{\N}[1][]{\ensuremath{\ifstrempty{#1}{\mathbb{N}}{\mathbb{N}^{#1}}}}
-	\newcommand{\Z}[1][]{\ensuremath{\ifstrempty{#1}{\mathbb{Z}}{\mathbb{Z}^{#1}}}}
-	\newcommand{\Q}[1][]{\ensuremath{\ifstrempty{#1}{\mathbb{Q}}{\mathbb{Q}^{#1}}}}
-	\newcommand{\C}[1][]{\ensuremath{\ifstrempty{#1}{\mathbb{C}}{\mathbb{C}^{#1}}}}
+	\newcommand{\RR}[1][]{\ensuremath{\ifstrempty{#1}{\mathbb{R}}{\mathbb{R}^{#1}}}}
+	\newcommand{\NN}[1][]{\ensuremath{\ifstrempty{#1}{\mathbb{N}}{\mathbb{N}^{#1}}}}
+	\newcommand{\ZZ}[1][]{\ensuremath{\ifstrempty{#1}{\mathbb{Z}}{\mathbb{Z}^{#1}}}}
+	\newcommand{\QQ}[1][]{\ensuremath{\ifstrempty{#1}{\mathbb{Q}}{\mathbb{Q}^{#1}}}}
+	\newcommand{\CC}[1][]{\ensuremath{\ifstrempty{#1}{\mathbb{C}}{\mathbb{C}^{#1}}}}
 	% commonly used macros
 	\newcommand{\dd}[1][]{\ensuremath{\ifstrempty{#1}{\mathrm{d}}{\mathrm{d}^{#1}}}}
 	\DeclareMathOperator{\Lap}{\mathcal{L}}
