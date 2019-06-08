@@ -796,8 +796,8 @@
 	\renewcommand{\leq}{\leqslant}
 	\renewcommand{\geq}{\geqslant}
 
-	% redefine matrix env to allow for alignment, c by default
-	\renewcommand*\env@matrix[1][c]{\hskip -\arraycolsep
+	% redefine matrix env to allow for alignment, use r as default
+	\renewcommand*\env@matrix[1][r]{\hskip -\arraycolsep
 		\let\@ifnextchar\new@ifnextchar
 		\array{*\c@MaxMatrixCols #1}}
 }{}
