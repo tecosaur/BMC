@@ -1363,9 +1363,9 @@
 	\cfoot*{\hyperlink{contents}{\pagemark}}
 
 	\ifbool{optionArticle}{
-		\chead{\hypersetup{colorlinks,allcolors=.}\hyperlink{section.\arabic{section}}{\headmark}}
+		\chead{\hypersetup{allcolors=.}\hyperlink{section.\arabic{section}}{\headmark}}
 	}{
-		\chead{\hypersetup{colorlinks,allcolors=.}\hyperlink{chapter.\arabic{chapter}}{\headmark}}
+		\chead{\hypersetup{allcolors=.}\hyperlink{chapter.\arabic{chapter}}{\headmark}}
 	}
 
 	\addtokomafont{pagehead}{\fontfamily{\headingsFont}\selectfont\bfseries\upshape\ifbool{optionSolid}{\color{contrastColour}}{\color{primary}}}
