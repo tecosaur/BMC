@@ -281,6 +281,8 @@
 
 \RequirePackage{ctable}
 \RequirePackage{tabularx}
+\RequirePackage{longtable}
+
 \RequirePackage{multicol}
 
 \RequirePackage{graphicx}
