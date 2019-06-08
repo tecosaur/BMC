@@ -510,7 +510,7 @@
 
 % set caption style
 \setkomafont{caption}{\itshape\color{text}}
-\setkomafont{captionlabel}{\fontseries{tx}\selectfont\upshape\color{text}}
+\setkomafont{captionlabel}{\fontfamily{\headingsFont}\fontseries{tx}\selectfont\upshape\color{text}}
 \captionsetup{justification=raggedright,singlelinecheck=true}
 
 % ensure tables have correct text colour
