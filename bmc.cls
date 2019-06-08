@@ -535,7 +535,7 @@
 		breakautoindent=true,
 		breaklines=true,
 		tabsize=4,
-		xleftmargin=3em,
+		xleftmargin=3.5em,
 		autogobble=true,
 		obeytabs=true,
 		python3=true,
@@ -548,7 +548,7 @@
 	\BeforeBeginEnvironment{minted}{
 		\begin{tcolorbox}[
 			enhanced,
-			overlay={\fill[page!90!text] (frame.south west) rectangle ([xshift=2.5em]frame.north west);},
+			overlay={\fill[page!90!text] (frame.south west) rectangle ([xshift=2.8em]frame.north west);},
 			colback=page!95!text,
 			colframe=page!95!text, % make frame colour same as background
 			breakable,% Allow page breaks
