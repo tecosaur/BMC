@@ -1,0 +1,701 @@
+\documentclass[solid,math,chem,code,plot]{bmc}
+
+\titlehead{Bespoke Multipurpose Class}
+\title{BMC \hfill \fontsize{1.35cm}{1.35cm}\fontseries{t}\selectfont \emph{v}0.1}
+\subtitle{Pretentiousness Given Form}
+\author{tecosaur \footnotesize \newline Of Github}
+
+\usepackage[symbol*]{footmisc}
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+\usepackage[normalem]{ulem}
+
+\begin{document}
+
+\maketitle{}
+
+\section*{Preamble}
+
+\vspace{1cm}
+
+Like with most things I didn't start out with the intent to end up this way.
+Initially I had a slowly growing template that I used for most documents;
+every so often I'd discover a package that did something I liked,
+or a setting that I preferred to be non-default.
+\emph{Every} time that happened I'd want to go through the current documents I was working on
+and apply the latest revelations.
+Then when revisiting old documents I'd want to get them `up to scratch'.
+There would always be the odd document I forgot about, or line missed,
+and so I quickly became tired of this process.
+
+After realising that if I made a class and shoved it in my \verb|texmf|
+directory that I'd be able to as many improvements as I like and they'd all
+be applied when I recompiled, \emph{as well} as make initial configuration
+greatly simplified --- I couldn't see a reason not to do it.
+
+This class is very much written with my personal taste, and specific use case in mind.
+While I try to keep things general it is very much built around my particular perspective.
+As such it is reasonable to think that to the community as a whole the
+self-importance in the name is a tad exaggerated or undeserved.
+Considering that is also designed to not just convey information but also
+designed to visually impress, the tagline ``Pretentiousness given form''
+seems somewhat appropriate.
+
+I'm pleased to say that I consider this a project a success (in those respects).
+As I have largely drawn upon snippets of LaTeX floating around online
+I though the least I could do is give others that same opportunity.
+As such here you have an overview of my personal class
+designed to work for all of the documents I produce.
+In other words a \emph{bespoke, multipurpose class} --- or BMC for short.
+
+\vspace{1cm}
+
+Enjoy!
+
+\vfill
+
+tecosaur
+
+\vspace{3cm}
+
+\newpage
+\fancytoc{}
+
+\chapter{What This Does}
+
+\section{Typography}
+
+\subsection{Typefaces}
+
+This package loads three typefaces.
+\begin{enumerate}
+    \item IBM Plex Serf
+    \item IBM Plex Sans
+    \item IBM Plex Mono
+\end{enumerate}
+I wanted a selection where serif, sans, and mono all mix well.
+Ideally with a few weight variants.
+Additionally I wanted a typographic style that meshed well with the
+large class of documents I indented to use this for. IBM Plex seems like a good fit
+(For more info see \autoref{sec:why-typefaces}). For all three of these a linespread of 1.15 is used.
+
+\newcommand\setrow[1]{\gdef\rowmac{#1}#1\ignorespaces}
+\newcommand\clearrow{\global\let\rowmac\relax}
+\clearrow
+\begin{table}[!htb]
+    \centering
+    \setlength{\tabcolsep}{4pt}
+    \begin{tabular}{
+        l
+        >{\rowmac\ifbool{tabularTitleRow}{}{\fontseries{b}\selectfont}}l
+        >{\rowmac\ifbool{tabularTitleRow}{}{\fontseries{sb}\selectfont}}l
+        >{\rowmac\ifbool{tabularTitleRow}{}{\fontseries{mb}\selectfont}}l
+        >{\rowmac\ifbool{tabularTitleRow}{}{\fontseries{tx}\selectfont}}l
+        >{\rowmac}l
+        >{\rowmac\ifbool{tabularTitleRow}{}{\fontseries{l}\selectfont}}l
+        >{\rowmac\ifbool{tabularTitleRow}{}{\fontseries{el}\selectfont}}l
+        >{\rowmac\ifbool{tabularTitleRow}{}{\fontseries{t}\selectfont}}l
+        }
+        \toprule
+        Typeface & Bold & Semibold & Medium & Text & Regular & Light & Extra L & Thin \\
+        \setrow{\ttfamily\scriptsize}\verb|\selectfont| & b & sb & mb & tx & m & l & el & t \\
+        \midrule
+        \setrow{\rmfamily}\!Plex Serif & Words & Words & Words & Words & Words & Words & Words & Words \\
+        \setrow{\rmfamily\itshape}\!Plex Serif & Words & Words & Words & Words & Words & Words & Words & Words \\
+        \arrayrulecolor{page}\midrule
+        \setrow{\sffamily}Plex Sans & Words & Words & Words & Words & Words & Words & Words & Words \\
+        \setrow{\sffamily\itshape}Plex Sans & Words & Words & Words & Words & Words & Words & Words & Words \\
+        \midrule
+        \setrow{\plexsanscondensed}Condensed & Words & Words & Words & Words & Words & Words & Words & Words \\
+        \setrow{\plexsanscondensed\itshape}Condensed & Words & Words & Words & Words & Words & Words & Words & Words \\
+        \midrule\arrayrulecolor{text}
+        \setrow{\ttfamily}Plex Mono & Words & Words & Words & Words & Words & Words & Words & Words \\
+        \setrow{\ttfamily\itshape}Plex Mono & Words & Words & Words & Words & Words & Words & Words & Words \\
+        \bottomrule
+    \end{tabular}
+    % \caption{Font Styles}
+    \label{table:font-styles}
+\end{table}
+
+\subsection{Roman Numerals}
+
+While biblatex does provide handy roman numeral command,
+it's nice to have them available regardless.
+Hence this class provides them if they aren't already available.
+To get upper case roman numerals use \mintinline{tex}{\RN{1978}}
+to produce \RN{1978}, and \mintinline{tex}{\Rn{1978}}
+to produce \Rn{1978}.
+
+\begin{minted}[firstnumber=1037]{tex}
+        \providecommand*{\RN}[1]{\expandafter\@slowromancap\romannumeral #1@}
+        \providecommand*{\Rn}[1]{\romannumeral#1\relax}
+\end{minted}
+
+\subsection{Fake Small Caps}
+Some fonts (such as IBM Plex) are not kind enough to provide small caps.
+Simply using downscaled capitals is a barbaric and decidedly inferior solution.
+So \mintinline{tex}{\fauxsc{}} is defined which, while not as nice as \emph{true}
+small caps, is a darn sight better than just reducing the font size.
+\vspace{-6pt}
+\begin{center}
+    \parbox{0cm}{
+        \begin{tabbing}
+            Barbaric Solution:\quad \= S{\footnotesize MALL} C{\footnotesize APS} \\
+            \texttt{\textbackslash fauxsc{}}: \> \fauxsc{Small Caps}
+        \end{tabbing}}
+\end{center}
+
+\subsection{Penalties}
+The class sets new penalties.
+\begin{minted}[firstnumber=482]{tex}
+    \@beginparpenalty=10000 % don't like it when a paragraph title is on a different page to the start of the content
+    \hyphenpenalty=500 % not a huge fan of hyphens, but they are worthwhile
+    \righthyphenmin=4 % min letters post-hyphen
+    \lefthyphenmin=4 % min letters pre-hyphen
+\end{minted}
+
+\subsection{Captions}
+Caption labels are made to be upright sans-serif in the `text' style,
+while captions are italic in the style of the body.
+When captions flow beyond a single line, ragged right alignment is used.
+
+\begin{minted}[firstnumber=520]{tex}
+    \setkomafont{caption}{\itshape\color{text}}
+    \setkomafont{captionlabel}{\fontfamily{\headingsFont}\fontseries{tx}\selectfont\upshape\color{text}}
+    \captionsetup{justification=raggedright,singlelinecheck=true}
+\end{minted}
+
+\section{Colour}
+\subsection{Theme Colours}
+\newcommand{\colorBox}[2][page]{\begin{tikzpicture}
+	\fill [#2] (0, 0) rectangle (2, 1);
+	\node[text width=2] at (0.2,0.2) {\tiny\color{#1} \textsf{#2}};
+\end{tikzpicture}}
+
+This class makes use of the following defined colours.
+
+\begin{center}
+    \colorBox{primary}\colorBox{secondary}\colorBox{tertiary}\colorBox{quatrinary}
+\quad
+\colorBox{alternativePrimary}\colorBox{primaryVariant}\colorBox[text]{contrastColour}
+\end{center}
+
+Modifying these colours in the preamble affects the entire document.
+
+\subsection{Colour Palette}
+While xcolor and latex do already come with some `nice' shades,
+nice colour themes may be found at \url{https://flatuicolors.com}.
+These shades do not use the pretentious names listed, we just call them what they are
+(e.g.\ nephritis \(*\to \) green). Instead of overwriting the pre-existing colour, these colours
+have been differentiated by capitalisation, i.e.\ ``Green'' instead of `green'.
+
+\subsection{Functional Colours}
+This package has a few special colours that describe a particular aspect of a document,
+such as \verb|href| and \verb|inlinemath|. For more information see \autoref{subsec:config-colours}.
+
+\begin{multicols}{2}
+    \centering
+    \colorBox{Grey} \qquad \colorBox{LightGrey} \colorBox{DarkGrey} \\[-0.7mm]
+    \colorBox{Red} \qquad \colorBox{LightRed} \colorBox{DarkRed} \\[-0.7mm]
+    \colorBox{Yellow} \qquad \colorBox{LightYellow} \colorBox{DarkYellow} \\[-0.7mm]
+    \colorBox{Blue} \qquad \colorBox{LightBlue} \colorBox{DarkBlue} \\[-0.7mm]
+    \colorBox{Green} \qquad \colorBox{LightGreen} \colorBox{DarkGreen} \\[-0.7mm]
+    \colorBox{Orange} \qquad \colorBox{LightOrange} \colorBox{DarkOrange} \\[-0.7mm]
+    \colorBox{Purple} \qquad \colorBox{LightPurple} \colorBox{DarkPurple} \\[-0.7mm]
+    \colorBox{Cyan} \qquad \colorBox{LightCyan} \colorBox{DarkCyan}
+\end{multicols}
+
+\section{Mathematics}
+
+This class makes a few additions, and one or two modifications to Mathematics.
+
+\subsection{Modifications}
+
+\paragraph{Less/greater than or equal}
+The less than or equal, and greater than or equal symbols are changed as such:
+\vspace{-6pt}
+\begin{center}
+    \parbox{0cm}{
+    \begin{tabbing}
+        \(*\leq \) \quad \= new\quad \= \(*\geq \) \kill
+        \(*\oldleq \) \> old \> \(*\oldgeq \) \\
+        \(*\leq \) \> new \> \(*\geq \)
+    \end{tabbing}}
+\end{center}
+
+\paragraph{Inline math colour}
+After interspersing maths and text a fair bit I've begun to think there's some
+merit to the Beamer `make all maths a different colour' approach.
+So I've redefined the LaTeX inline math command such that
+\mintinline{tex}{\(a^x + bx + c\)} now becomes \(ax^2 + bx + c\).
+Avoiding this is easy, just change the colour of \mintinline{tex}{inlinemath}
+in the preamble like so \mintinline{tex}{\colorlet{inlinemath}{text}}
+ and you won't notice this exists.
+For once-offs I've defined a stared variant \mintinline{tex}{\(* a^x + bx + c\)}
+which produces the normal \(*ax^2 + bx + c\).
+
+\begin{minted}[firstnumber=1030]{tex}
+    \renewrobustcmd{\(}{\@ifstar\@inlinemath\@@inlinemath}
+    \DeclareRobustCommand{\@inlinemath}{\relax\ifmmode\@badmath\else$\fi}
+    \DeclareRobustCommand{\@@inlinemath}{\relax\ifmmode\@badmath\else$\fi\color{inlinemath}}
+\end{minted}
+
+\paragraph{Matrix environment}
+The default for matrices (using \mintinline{tex}{\begin{bmatrix}} or similar)
+is left aligned values, with no option to change this.
+This class adds an optional parameter to change the alignment,
+(\mintinline{tex}{\begin{bmatrix}[r]}), and defaults to right aligned.
+
+\begin{multicols}{2}
+    \subparagraph{Old}
+    \[
+        \begin{bmatrix}[l]
+            3 & -2 \\
+            -1 & 7 \\
+        \end{bmatrix}
+    \]
+
+    \columnbreak
+
+    \subparagraph{New}
+    \[
+        \begin{bmatrix}
+            3 & -2 \\
+            -1 & 7 \\
+        \end{bmatrix}
+    \]
+\end{multicols}
+
+\subsection{Additions}
+
+\paragraph{\rlap{Deliminators}\hspace*{8em}}
+\begin{tabular}{p{4.2em}>{\(*\to\quad \)}p{4em}}
+    \mintinline{tex}{\abs{x}} & \(*\abs{x} \) \\
+    \mintinline{tex}{\norm{x}} & \(*\norm{x}\)
+\end{tabular}
+
+\footnotetext[2]{Can also be used outside of math mode.\label{fn:1}}
+\paragraph{\rlap{Sets\footref{fn:1}}\hspace*{8em}}
+\begin{tabular}{p{4.2em}>{\(*\to\quad \)}p{4em}p{4em}>{\(*\to\quad \)}p{4em}} % chktex 21
+    \mintinline{tex}{\RR} & \RR & \mintinline{tex}{\RR[n]} & \RR[n] \\
+    \mintinline{tex}{\NN} & \NN & \mintinline{tex}{\NN[n]} & \NN[n] \\
+    \mintinline{tex}{\ZZ} & \ZZ & \mintinline{tex}{\ZZ[n]} & \ZZ[n] \\
+    \mintinline{tex}{\QQ} & \QQ & \mintinline{tex}{\QQ[n]} & \QQ[n] \\
+    \mintinline{tex}{\CC}& \CC & \mintinline{tex}{\CC[n]} & \CC[n] \\
+\end{tabular}
+
+\paragraph{\rlap{Differential d}\hspace*{8em}}
+\begin{tabular}{p{4.2em}>{\(*\to\quad \)}p{4em}}
+\mintinline{tex}{\dd}\footref{fn:1} & \(*\dd \) % chktex 21
+\end{tabular}
+
+\paragraph{\rlap{Stats Operators}\hspace*{8em}}
+\begin{tabular}{p{4.2em}>{\(*\to\quad \)}p{4em}}
+    \mintinline{tex}{\Var} & \(*\Var \) \\
+    \mintinline{tex}{\Cov} & \(*\Cov \) \\
+    \mintinline{tex}{\E} & \(*\E \)
+\end{tabular}
+
+\paragraph{\rlap{Others}\hspace*{8em}}
+\begin{tabular}{p{4.2em}>{\(*\to\quad \)}p{4em}}
+    \mintinline{tex}{\qed}\footref{fn:1} & \(*\qed \) \\
+    \mintinline{tex}{\qedhere}\footref{fn:1} & \(*\qedhere \) \\
+    \mintinline{tex}{\Lap} & \(*\Lap \)
+\end{tabular}
+
+\section{Code}
+
+This package spends a few lines tweaking
+the minted and tcolorbox config to get code
+blocks to look rather nice.
+
+For example:
+\begin{minted}[escapeinside=||,highlightlines={8,17}]{tex}
+    \section{Code}
+
+    This package spends a few lines tweaking
+    the minted and tcolorbox config to get code
+    blocks to look rather nice.
+
+    For example:
+    \begin{minted}[escapeinside=||,highlightlines={8,17}]{tex}
+        \section{Code}
+
+        This package spends a few lines tweaking
+        the minted and tcolorbox config to get code
+        blocks to look rather nice.
+
+        For example:
+        |\dots|
+    \end||{minted}
+\end{minted}
+
+\section{Chemistry}
+When the \mintinline{tex}{chem} option is used, \mintinline{tex}{mhchem}
+is loaded with the configuration, however \mintinline{tex}{chemfig}
+undergos a few modifications to make the results look cleaner.
+
+\chemfig{*6(-=-(-COOH)=-=)}
+\chemfig{X-[1]=^[-1]-[1]-[-1]-[1]-[-1]=^[1]-[-1]}
+\qquad
+\chemfig{-[1](=[3]O)-[-1]}
+
+\begin{minted}[firstnumber=310]{tex}
+	\setchemfig{
+		chemfig style={line width=0.06642 em},  % 'Line Width'
+		angle increment=30,
+		double bond sep=0.35700 em,  % 'Bond Spacing'
+		atom sep=1.78500 em,  % 'Fixed Length'
+		bond offset=0.18265 em  % 'Margin Width'
+	}
+	\renewcommand*\printatom[1]{\small\ensuremath{\mathsf{#1}}}
+\end{minted}
+
+\section{Links and Metadata}
+\renewcommand{\ULthickness}{1pt}
+\def\soutt{\bgroup \ULdepth=-.45ex \ULset}
+Both the \mintinline{tex}{hyperref} and \mintinline{tex}{hyperxmp} packages are used.
+The widely used hyperref package of course provides hyperlinks.
+This is \soutt{abused} used to add a few extra links; specificly
+every page number is a link to the TOC, and the text of every header
+links to the relevant chapter page.
+This allows you to jump all over the document in just a few clicks.
+
+The hyperxmp package is rather handy for setting a few fields of pdf metadata.
+Using the \mintinline{tex}{\title}, \mintinline{tex}{\author}, and \mintinline{tex}{\subtitle}
+attributes it sets the relevant metadata fields.
+\enlargethispage{\baselineskip}
+
+\chapter{Boring Info}
+
+\section{Class Options}
+
+This class builds off \mintinline{tex}{scrartcl},
+any other options than those listed here will just be passed through.
+
+\subsection{Main Styling}
+
+\paragraph{\ttfamily dark}
+Switches to a dark version of the style
+\paragraph{\ttfamily solid}
+Uses style with solid title page, and wide stripes on chapter pages, with solid colour bar at top of pages
+\paragraph{\ttfamily stripe}
+Uses plain background on title page, and thin stripes on chapter pages
+\paragraph{\ttfamily article}
+Use \mintinline{tex}{scrartcl} class instead of \mintinline{tex}{scrrept}
+\paragraph{\ttfamily notes}
+Move the margins to make room for notes
+
+\subsection{Fonts}
+\subsubsection{Body Text}
+
+\paragraph{\ttfamily serif}
+{\rmfamily Use serif font as main}
+\paragraph{\ttfamily sans}
+{\sffamily Use sans font as main}
+\paragraph{\ttfamily mono}
+{\ttfamily Use mono font as main}
+
+\subsubsection{Math}
+
+\paragraph{\ttfamily math-serif}
+Same as with math option but forcing a serif font
+\paragraph{\ttfamily math-sans}
+Same as with math option but forcing a sans font
+\paragraph{\ttfamily math-mono}
+Same as with math option but forcing a mono font
+
+\subsection{Headings}
+
+These options set the style of the following components
+\begin{itemize}
+    \item \mintinline{tex}{\chapter} through to \mintinline{tex}{\subparagraph}
+    \item The page head, and page number
+    \item Caption labels
+\end{itemize}
+
+\paragraph{\ttfamily headings-serif}
+Not a default.
+\paragraph{\ttfamily headings-sans}
+Default when either \mintinline{tex}{serif}
+or \mintinline{tex}{sans} options are given.
+\paragraph{\ttfamily headings-mono}
+Default when either \mintinline{tex}{mono} option is given.
+
+\subsection{Package Related}
+
+\paragraph{\ttfamily chem}
+Load and configure \mintinline{tex}{mhchem} and \mintinline{tex}{chemfig} packages
+
+\paragraph{\ttfamily code}
+Load and configure minted package
+
+\paragraph{\ttfamily plot}
+Load and configure \mintinline{tex}{pgfplots} package
+
+\paragraph{\ttfamily math}
+Load and configure some mathematical packages, and set font to match main text font (also see \mintinline{tex}{math-serif} etc.)
+
+\newpage
+\section{Packages Used}
+
+\subsection{Overview}
+
+\begin{center}
+    \small
+    \setlength{\tabcolsep}{0pt}
+    \begin{tabular}{>{\hspace{3pt}\normalsize}l>{\hspace{5pt}}*{5}{p{7.9em}}}
+        \toprule
+        Category & \multicolumn{5}{l}{\normalsize Packages} \\
+        \midrule
+        General & \hyperref[par:etoolbox]{etoolbox} & \hyperref[par:xpatch]{xpatch} & \hyperref[par:Silence]{Silence} & \hyperref[par:ifdraft]{ifdraft} & \hyperref[par:geometry]{geometry}  \\
+        & \hyperref[par:titlesec]{titlesec} & \hyperref[par:titletoc]{titletoc} &\hyperref[par:framed]{framed} & \hyperref[par:textpos]{textpos} & \hyperref[par:calc]{calc} \\
+         & \hyperref[par:xcolor]{xcolor} & \hyperref[par:tikz]{tikz} & \hyperref[par:hyperref]{hyperref} & \hyperref[par:hyperxmp]{hyperxmp} & \hyperref[par:scrlayer-scrpage]{scrlayer-scrpage} \\
+         \arrayrulecolor{page}\midrule
+        Text & \hyperref[par:microtype]{microtype} & \hyperref[par:setspace]{setspace} & \hyperref[par:plex-serif]{plex-serif} & \hyperref[par:plex-sans]{plex-sans} & \hyperref[par:plex-mono]{plex-mono} \\
+        & \hyperref[par:multicol]{multicol} & \\
+         \midrule
+         Table & \hyperref[par:booktabs]{booktabs} & \hyperref[par:tabularx]{tabularx} & \hyperref[par:longtable]{longtable}  \\
+         \midrule
+         Graphics & \hyperref[par:graphicx]{graphicx} & \hyperref[par:grffile]{grffile} & \hyperref[par:subcaption]{subcaption} & \hyperref[par:caption]{caption} \\
+         \midrule
+         infoBulle & \hyperref[par:infoBulle]{infoBulle} & \hyperref[par:marginInfoBulle]{marginInfoBulle} & \hyperref[par:fontawesome5]{fontawesome5}\\
+         \midrule
+         Chemistry & \hyperref[par:mhchem]{mhchem} & \hyperref[par:chemfig]{chemfig} \\
+         \midrule
+         Code & \hyperref[par:minted]{minted} & \hyperref[par:tcolorbox]{tcolorbox} \\
+         \midrule\arrayrulecolor{text}
+         Math & \hyperref[par:amssymb]{amsmath} & \hyperref[par:amssymb]{amssymb} & \hyperref[par:mathdesign]{mathdesign} & \hyperref[par:xfrac]{xfrac} & \hyperref[par:cancel]{cancel} \\
+         & \hyperref[par:mathtools]{mathtools} & \hyperref[par:mathastext]{mathastext} & \hyperref[par:pgfplots]{pgfplots} \\
+         \bottomrule
+    \end{tabular}
+\end{center}
+
+\subsection{General Packages}
+
+\paragraph{\ttfamily etoolbox}\label{par:etoolbox}
+Provides LaTeX frontends to some of the new primitives provided by e-TeX
+as well as some rather useful some generic tools --- namely,
+\begin{itemize}
+    \item Robust definitions
+    \item Command Patching
+    \item Command Protection
+    \item Arithmetic counters and lengths
+    \item Document Hooks
+    \item Environment Hooks
+\end{itemize}
+\paragraph{\ttfamily xpatch}\label{par:xpatch}
+Extends the command patching provided by \hyperref[par:etoolbox]{etoolbox}
+\paragraph{\ttfamily Silence}\label{par:Silence}
+Allows me to ignore expected warnings.
+\paragraph{\ttfamily ifdraft}\label{par:ifdraft}
+To make it easy to change things up a bit more than usual for draft mode.
+\paragraph{\ttfamily scrlayer-scrpage}\label{par:scrlayer-scrpage}
+To allow for those lovely headers and footers.
+\paragraph{\ttfamily geometry}\label{par:geometry}
+Loaded with options,
+\begin{minted}[firstnumber=507]{tex}
+    a4paper, ignoreheadfoot, left=\leftmargin, right=\rightmargin, top=2cm, bottom=3.5cm, headsep=1cm
+\end{minted}
+\paragraph{\ttfamily titlesec}\label{par:titlesec}
+Allows for customisation of \mintinline{tex}{\chapter} etc.
+Was originally used for all section commands, but now all except for
+\mintinline{tex}{\chapter} have been transitioned to KOMA-script.
+\paragraph{\ttfamily titletoc}\label{par:titletoc}
+Allows significant tweaking to how the table of contents looks.
+\paragraph{\ttfamily framed}\label{par:framed}
+Facilitate the definition of new environments that take multi-line material, wrap it with some
+non-breakable formatting (some kind of box or decoration) and allow page breaks in the material
+\paragraph{\ttfamily textpos}\label{par:textpos}
+Facilitates placement of boxes at absolute positions on the LaTeX page.
+Loaded with options \mintinline{tex}{absolute,overlay}
+\paragraph{\ttfamily hyperref}\label{par:hyperref}
+Used to produce all sorts of hyperlinks in a document.
+Loaded with option \mintinline{tex}{pdfa}
+\paragraph{\ttfamily hyperxmp}\label{par:hyperxmp}
+Improves metadata setting with hyperref.
+\paragraph{\ttfamily calc}\label{par:calc}
+Adds infix expressions to perform arithmetic on the arguments of the LaTeX commands
+\mintinline{tex}{\setcounter}, \mintinline{tex}{\addtocounter}, \mintinline{tex}{\setlength}, and \mintinline{tex}{\addtolength}
+\paragraph{\ttfamily xcolor}\label{par:xcolor}
+Provides all sorts of colour use and mixing capabilities.
+\paragraph{\ttfamily tikz}\label{par:tikz}
+It's tikz. You can't draw anything without it.
+
+\subsection{Text}
+
+\paragraph{\ttfamily microtype}\label{par:microtype}
+Always good to have. It simply makes text look better, specificity it applies the following,
+\begin{itemize}
+    \item Character protrusion
+    \item Font expansion
+    \item Adjustment of interword spacing and kerning
+    \item Letterspacing
+\end{itemize}
+Configured with,
+\begin{minted}[firstnumber=215]{tex}
+activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true
+\end{minted}
+\paragraph{\ttfamily plex-serif}\label{par:plex-serif}
+\paragraph{\ttfamily plex-sans}\label{par:plex-sans}
+\paragraph{\ttfamily plex-mono}\label{par:plex-mono}
+\paragraph{\ttfamily setspace}\label{par:setspace}
+Provides an easy way to set line spacing with commands such as
+\mintinline{tex}{\doublespacing} and \mintinline{tex}{\setstretch{1.25}}.
+\paragraph{\ttfamily multicol}\label{par:multicol}
+Split text into multiple columns (up to 10).
+
+\subsection{Table-related}
+
+\paragraph{\ttfamily booktabs}\label{par:booktabs}
+Contribues different width \mintinline{tex}{\hline} variants.
+\paragraph{\ttfamily tabularx}\label{par:tabularx}
+Adds the \mintinline{tex}{tabularx} environment which has its width explicitly set,
+\mintinline{tex}{X} column type which automatically determines its width based on its contents.
+\paragraph{\ttfamily longtable}\label{par:longtable}
+Provides a good way of allowing tables to spread over multiple pages.
+
+\subsection{Graphics and Figures}
+
+\paragraph{\ttfamily graphicx}\label{par:graphicx}
+Makes loading images (\mintinline{tex}{includegraphics}) work well.
+\paragraph{\ttfamily grffile}\label{par:grffile}
+This fixes the fix allowed filenames of graphicx.
+\paragraph{\ttfamily caption}\label{par:caption}
+Povides many ways to customise the captions in floating environments like figure and table,
+and cooperates with many other packages.
+Facilities include rotating captions, sideways captions, continued captions (for tables or figures that come in several parts).
+Loaded with option \mintinline{tex}{hypcap=true}
+\paragraph{\ttfamily subcaption}\label{par:subcaption}
+Allows for typeseting of sub-figures and sub-tables.
+
+\subsection{infoBulle}
+
+\paragraph{\ttfamily fontawesome5}\label{par:fontawesome5}
+Fontawesome 5, need I say any more?
+\paragraph{\ttfamily infoBulle}\label{par:infoBulle}
+\paragraph{\ttfamily marginInfoBulle}\label{par:marginInfoBulle}
+
+\subsection{Chemistry}
+
+\paragraph{\ttfamily mhchem}\label{par:mhchem}
+Useful for simple inline chemistry.
+\paragraph{\ttfamily chemfig}\label{par:chemfig}
+Useful for chemical diagrams.
+
+\subsection{Code}
+
+\paragraph{\ttfamily minted}\label{par:minted}
+Configured as follows,
+\begin{minted}[firstnumber=534]{tex}
+    \setminted{
+        frame=none,
+        % framesep=2mm,
+        baselinestretch=1.2,
+        fontsize=\footnotesize,
+        highlightcolor=page!95!text!80!primary,
+        linenos,
+        breakanywhere=true,
+        breakautoindent=true,
+        breaklines=true,
+        tabsize=4,
+        xleftmargin=3em,
+        autogobble=true,
+        obeytabs=true,
+        python3=true,
+        texcomments=true,
+        framesep=2mm,
+        breakbefore=\\\.+,
+        breakafter=\,
+    }
+\end{minted}
+
+\paragraph{\ttfamily tcolorbox}\label{par:tcolorbox}
+Used for prettifying the \mintinline{tex}{minted} environment.
+Loaded with option \mintinline{tex}{many}
+
+\subsection{Math Related}
+These packages are loaded by the \mintinline{tex}{math}
+option (or one of its derivatives).
+
+\paragraph{\ttfamily amsmath,amssymb}\label{par:amssymb}
+Extends the math commands and symbols in latex.
+\paragraph{\ttfamily mathdesign}\label{par:mathdesign}
+To use the Utopia font for math symbols.
+\paragraph{\ttfamily xfrac}\label{par:xfrac}
+Allows split level fractions \(*\sfrac{a}{b}\) better than \mintinline{tex}{{}^{a}/{}_{b}} can produce.
+\paragraph{\ttfamily cancel}\label{par:cancel}
+Allows for easy canceling within math like so ---
+\(*\cancel{\eta}\) and \(*\cancelto{0}{\eta}\).
+Loaded with option \mintinline{tex}{makeroom}
+\paragraph{\ttfamily mathtools}\label{par:mathtools}
+Provides a varienty of enhancements to make math \emph{even} better.
+\begin{itemize}
+    \item Extensible symbols, such as brackets, arrows, harpoons, etc.;
+    \item Various symbols such as \mintinline{tex}{\coloneqq} (\(*\coloneqq\));
+    \item Easy creation of new tag forms;
+    \item Showing equation numbers only for referenced equations;
+    \item Extensible arrows, harpoons and hookarrows;
+    \item Starred versions of the amsmath matrix environments for specifying the column alignment;
+    \item More building blocks: multlined, cases-like environments, new gathered environments;
+    \item Maths versions of \mintinline{tex}{\makebox}, \mintinline{tex}{\llap}, \mintinline{tex}{\rlap} etc.;
+    \item Cramped math styles; and more\dots
+\end{itemize}
+\paragraph{\ttfamily mathastext}\label{par:mathastext}
+Uses relevant plex font for maths letters.
+Uses options \mintinline{tex}{basic,italic,symbolgreek}.
+
+\paragraph{\ttfamily pgfplots}\label{par:pgfplots}
+Loaded by the \mintinline{tex}{plot} option.
+
+\section{Configuration}
+
+\subsection{Colours}
+\label{subsec:config-colours}
+\clearrow
+\begin{longtable}{l>{\rowmac}p{10em}>{\rowmac}p{10em}}
+    \toprule
+    Name & Default (Light) & Default (Dark) \\
+    \midrule
+    \endfirsthead
+    \toprule
+    \setrow{\scriptsize} Name & Default (Light) & Default (Dark) \clearrow \\
+    \midrule
+    \setrow{\scriptsize} \hspace{1em}\vdots & \hspace{1em}\vdots & \hspace{1em}\vdots \clearrow \\
+    \endhead
+    \setrow{\scriptsize} \hspace{1em}\vdots & \hspace{1em}\vdots & \hspace{1em}\vdots \clearrow \\
+    % \midrule
+    \bottomrule
+    \endfoot
+    \bottomrule
+    \endlastfoot
+    \mintinline{tex}{text} & \#000000 & \#FCFCFC \\
+    \mintinline{tex}{page} & \#FFFFFF & \#222222 \\
+    \mintinline{tex}{href} & tertiary & secondary \\
+    \mintinline{tex}{primaryVariant} & primary\linebreak[0]!75!Cream\linebreak[0]>twheel,-3,360 & \ditto \\
+    \mintinline{tex}{inlinemath} & secondary\linebreak[0]!50!text & tertiary\linebreak[0]!50!text \\
+    \rowcolor{tableheadcolor}
+    \multicolumn{2}{l}{\fontseries{l}\selectfont infoBulle} & \\
+    \mintinline{tex}{infoBulleBackground} & page!90!text & \ditto \\
+    \mintinline{tex}{infoBulleText} & text & \ditto \\
+    \mintinline{tex}{marginInfoBulleBackground} & page & \ditto \\
+    \mintinline{tex}{marginInfoBulleText} & text & \ditto \\
+    \mintinline{tex}{criticalColor} & Red & \ditto \\
+    \mintinline{tex}{questionColor} & Purple & \ditto \\
+    \mintinline{tex}{informationColor} & Green & \ditto \\
+    \mintinline{tex}{checkColor} & Blue & \ditto \\
+    \mintinline{tex}{warningColor} & Orange & \ditto \\
+    \mintinline{tex}{tipsColor} & Purple & \ditto \\
+    \mintinline{tex}{exampleColor} & Blue & \ditto \\
+    \mintinline{tex}{mathematicalColor} & Orange & \ditto \\
+    \mintinline{tex}{codeColor} & Grey & \ditto \\
+\end{longtable}
+
+\chapter{The Whys}
+
+\section{Layout}
+\section{Typefaces}
+\label{sec:why-typefaces}
+\section{Colour}
+
+\end{document}
+

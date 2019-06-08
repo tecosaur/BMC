@@ -1,7 +1,8 @@
 # Bespoke, Multifunctional Class
+
 ### A LaTeX Class designed to make my documents magnificent in style as well as content
 
-Want to see how it looks? Take a peek at [the demo pdf](demo.pdf).
+Want to see how it looks? Take a peek at [the documentation](documentation/bmc.pdf).
 
 This project was heavily inspired, and initially built off the fantastic work of @HarveySheppard (see [yLaTeX](https://github.com/HarveySheppard/yLaTeX)).
 
