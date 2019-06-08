@@ -749,15 +749,45 @@
 % 	}
 % }
 
-% and fill the row after \toprule
+% and fill the row(s) after \toprule
+\newbool{tabularTitleRow}
+\boolfalse{tabularTitleRow}
 \colorlet{tableheadcolor}{text!5!page} % Table header colour = 25% gray
-\renewcommand{\toprule}{\arrayrulecolor{text}\specialrule{\heavyrulewidth}{\abovetopsep}{0pt}%
-            \arrayrulecolor{tableheadcolor}\specialrule{\belowrulesep}{0pt}{0pt}%
-            \arrayrulecolor{text}\rowcolor{tableheadcolor}}
-\renewcommand{\midrule}{\arrayrulecolor{tableheadcolor}\specialrule{\aboverulesep}{0pt}{0pt}%
-            \arrayrulecolor{text}\specialrule{\lightrulewidth}{0pt}{0pt}%
-            \arrayrulecolor{page}\specialrule{\belowrulesep}{0pt}{0pt}%
-            \arrayrulecolor{text}}
+
+\AfterEndEnvironment{tabular}{%
+	\global\boolfalse{tabularTitleRow}
+	\makeatletter\global\let\CT@do@color\relax\makeatother
+}
+
+\renewcommand{\toprule}{
+    \arrayrulecolor{text}\specialrule{\heavyrulewidth}{\abovetopsep}{0pt}%
+    \arrayrulecolor{tableheadcolor}\specialrule{\belowrulesep}{0pt}{0pt}%
+    \arrayrulecolor{text}%
+    \rowcolor{tableheadcolor}%
+    \global\booltrue{tabularTitleRow}%
+}
+
+\let\oldmidrule\midrule
+\renewcommand{\midrule}{
+	\ifbool{tabularTitleRow}{
+		\arrayrulecolor{tableheadcolor}\specialrule{\aboverulesep}{0pt}{0pt}%
+		\arrayrulecolor{text}\specialrule{\lightrulewidth}{0pt}{0pt}%
+		\arrayrulecolor{page}\specialrule{\belowrulesep}{0pt}{0pt}%
+		\arrayrulecolor{text}%
+		\rowcolor{page}%
+		% \global\rownum=0\relax%
+		\global\boolfalse{tabularTitleRow}%
+	}{%
+		\oldmidrule
+	}
+}
+
+% \catcode`@=11 % or \catcode"0040=11 or \makeatletter to change category code of @ to 11 and temporarily to access kernel macro \@xarraycr
+
+\let\old@xarraycr\@xarraycr
+\def\@xarraycr{\old@xarraycr \ifbool{tabularTitleRow}{\rowcolor{tableheadcolor}}{}}
+
+% \catcode`@=12 % or \catcode"0040=12 or \makeatother to restore category code of @ to 12
 
 % ================
 % Setup Font
