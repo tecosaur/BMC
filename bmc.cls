@@ -750,7 +750,8 @@
 % Setup Font
 % ================
 
-\usepackage[T1]{fontenc}
+\RequirePackage[T1]{fontenc}
+\RequirePackage[utf8]{inputenc}
 % Load fonts
 \RequirePackage{plex-serif}
 \RequirePackage{plex-sans}
