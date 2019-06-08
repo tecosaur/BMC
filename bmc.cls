@@ -263,7 +263,7 @@
 		xlabel near ticks,
 		ylabel near ticks,
 		% -- COLOURS
-		cycle list={quatrinary\\secondary\\tertiary\\},
+		cycle list={quatrinary\\secondary\\primary\\tertiary\\},
 		%
 		every axis plot/.append style={
 			very thick,
