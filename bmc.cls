@@ -801,6 +801,8 @@
 \RequirePackage{plex-sans}
 \RequirePackage{plex-mono}
 
+\newcommand*{\ditto}{\enspace\ensuremath{\prime\prime}\enspace}
+
 % Math Font & Setup
 % =================
 
