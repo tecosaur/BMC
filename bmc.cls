@@ -753,7 +753,7 @@
 % and fill the row(s) after \toprule
 \newbool{tabularTitleRow}
 \boolfalse{tabularTitleRow}
-\colorlet{tableheadcolor}{text!5!page} % Table header colour = 25% gray
+\colorlet{tableheadcolor}{text!5!page} % Table header colour = 5% gray
 
 \AfterEndEnvironment{tabular}{%
 	\global\boolfalse{tabularTitleRow}
