@@ -279,7 +279,7 @@
 	}
 }{}
 
-\RequirePackage{ctable}
+\RequirePackage{booktabs}
 \RequirePackage{tabularx}
 \RequirePackage{longtable}
 
