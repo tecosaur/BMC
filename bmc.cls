@@ -755,263 +755,45 @@
 \boolfalse{tabularTitleRow}
 \colorlet{tableheadcolor}{text!5!page} % Table header colour = 5% gray
 
-\AfterEndEnvironment{tabular}{%
-	\global\boolfalse{tabularTitleRow}
-	\makeatletter\global\let\CT@do@color\relax\makeatother
-}
-
-\renewcommand{\toprule}{
+% region headerfill
+\renewcommand{\toprule}{%
+    \showrowcolors
     \arrayrulecolor{text}\specialrule{\heavyrulewidth}{\abovetopsep}{0pt}%
     \arrayrulecolor{tableheadcolor}\specialrule{\belowrulesep}{0pt}{0pt}%
     \arrayrulecolor{text}%
     \rowcolor{tableheadcolor}%
-    \global\booltrue{tabularTitleRow}%
 }
 
-\let\oldmidrule\midrule
-\renewcommand{\midrule}{
-	\ifbool{tabularTitleRow}{
-		\arrayrulecolor{tableheadcolor}\specialrule{\aboverulesep}{0pt}{0pt}%
-		\arrayrulecolor{text}\specialrule{\lightrulewidth}{0pt}{0pt}%
-		\arrayrulecolor{page}\specialrule{\belowrulesep}{0pt}{0pt}%
-		\arrayrulecolor{text}%
-		\rowcolor{page}%
-		% \global\rownum=0\relax%
-		\global\boolfalse{tabularTitleRow}%
-	}{%
-		\oldmidrule
-	}
+\apptocmd\midrule{\hiderowcolors}{}{\FAILED}
+
+\let\@BTrule@ORI=\@BTrule
+\let\my@BTrule=\@BTrule
+
+% Modified version of \@BTrule that doesn't do \vskip\@aboverulesep, for use
+% when the corresponding vertical space should be coloured.
+\patchcmd{\my@BTrule}{%
+    \ifnum\@lastruleclass=\z@\vskip\@aboverulesep\else
+  }{%
+    \ifnum\@lastruleclass=\z@\else
+  }{}{\FAILED}
+
+\let\@arraycrORI=\@arraycr
+
+\renewcommand*{\@arraycr}{%
+  \@ifnextchar\midrule\my@endtablehead\@arraycrORI
 }
 
-% \catcode`@=11 % or \catcode"0040=11 or \makeatletter to change category code of @ to 11 and temporarily to access kernel macro \@xarraycr
-
-\let\old@xarraycr\@xarraycr
-\def\@xarraycr{\old@xarraycr \ifbool{tabularTitleRow}{\rowcolor{tableheadcolor}}{}}
-
-% \catcode`@=12 % or \catcode"0040=12 or \makeatother to restore category code of @ to 12
-
-% ================
-% Setup Font
-% ================
-
-\RequirePackage[T1]{fontenc}
-\RequirePackage[utf8]{inputenc}
-% Load fonts
-\RequirePackage{plex-serif}
-\RequirePackage{plex-sans}
-\RequirePackage{plex-mono}
-
-\newcommand*{\ditto}{\enspace\ensuremath{\prime\prime}\enspace}
-
-% Math Font & Setup
-% =================
-
-% \setlength{\mathLetterPadding}{1mm}
-
-\ifboolexpr{bool {optionMathSerif} or bool {optionMathSans} or bool {optionMathMono}}{
-	% various math packages
-	\RequirePackage{amsmath,amssymb}
-	\RequirePackage[utopia]{mathdesign}
-	\RequirePackage{xfrac}
-	\RequirePackage[makeroom]{cancel}
-	% package to use text font for math
-	\usepackage{mathtools}
-
-	% deliminators
-	\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
-	\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
-	% number sets
-	\newcommand{\RR}[1][]{\ensuremath{\ifstrempty{#1}{\mathbb{R}}{\mathbb{R}^{#1}}}}
-	\newcommand{\NN}[1][]{\ensuremath{\ifstrempty{#1}{\mathbb{N}}{\mathbb{N}^{#1}}}}
-	\newcommand{\ZZ}[1][]{\ensuremath{\ifstrempty{#1}{\mathbb{Z}}{\mathbb{Z}^{#1}}}}
-	\newcommand{\QQ}[1][]{\ensuremath{\ifstrempty{#1}{\mathbb{Q}}{\mathbb{Q}^{#1}}}}
-	\newcommand{\CC}[1][]{\ensuremath{\ifstrempty{#1}{\mathbb{C}}{\mathbb{C}^{#1}}}}
-	% commonly used macros
-	\newcommand{\dd}[1][]{\ensuremath{\ifstrempty{#1}{\mathrm{d}}{\mathrm{d}^{#1}}}}
-	\DeclareMathOperator{\Lap}{\mathcal{L}}
-	\DeclareMathOperator{\Var}{Var} % varience
-	\DeclareMathOperator{\Cov}{Cov} % covarience
-	\DeclareMathOperator{\E}{E} % expected
-
-	% Since the amsthm package isn't loaded
-	\newcommand*{\qed}{\hfill\ensuremath{\blacksquare}}
-	\newcommand*{\qedhere}{\hfill\ensuremath{\square}}
-
-	% I prefer the slanted \leq
-	\let\oldleq\leq % save them in case they're every wanted
-	\let\oldgeq\geq
-	\renewcommand{\leq}{\leqslant}
-	\renewcommand{\geq}{\geqslant}
-
-	% redefine matrix env to allow for alignment, use r as default
-	\renewcommand*\env@matrix[1][r]{\hskip -\arraycolsep
-		\let\@ifnextchar\new@ifnextchar
-		\array{*\c@MaxMatrixCols #1}}
-}{}
-
-% 1mu padding
-
-\ifbool{optionMathSerif}{
-	\renewcommand{\familydefault}{\rmdefault}
-	\RequirePackage[basic,italic,symbolgreek]{mathastext}
-
-	%
-	% \@for\@tempa:=a,b,c,d,e,h,i,k,l,m,n,o,q,r,t,u,v,w\do{
-	% \MTsetmathskips{\@tempa}{0.5mu}{0.5mu}}
-	%
-
-
-	\MTsetmathskips{a}{-0.20mu}{1.50mu}
-	\MTsetmathskips{b}{-0.50mu}{1.50mu}
-	\MTsetmathskips{c}{-0.50mu}{1.70mu}
-	\MTsetmathskips{d}{-0.30mu}{1.70mu}
-	\MTsetmathskips{e}{-0.50mu}{1.70mu}
-	\MTsetmathskips{f}{2.40mu}{1.70mu}
-	\MTsetmathskips{g}{0.50mu}{1.60mu}
-	\MTsetmathskips{h}{-0.50mu}{1.00mu}
-	\MTsetmathskips{i}{-0.50mu}{1.80mu}
-	\MTsetmathskips{j}{2.20mu}{1.80mu}
-	\MTsetmathskips{k}{-0.50mu}{1.50mu}
-	\MTsetmathskips{l}{-0.80mu}{1.80mu}
-	\MTsetmathskips{m}{-0.40mu}{1.00mu}
-	\MTsetmathskips{n}{-0.40mu}{1.00mu}
-	\MTsetmathskips{o}{-0.20mu}{1.30mu}
-	\MTsetmathskips{p}{0.20mu}{1.50mu}
-	\MTsetmathskips{q}{-0.20mu}{1.30mu}
-	\MTsetmathskips{r}{-0.80mu}{1.80mu}
-	\MTsetmathskips{s}{0.10mu}{1.50mu}
-	\MTsetmathskips{t}{-1.00mu}{1.50mu}
-	\MTsetmathskips{u}{-1.10mu}{1.30mu}
-	\MTsetmathskips{v}{-1.10mu}{1.80mu}
-	\MTsetmathskips{w}{-1.00mu}{1.80mu}
-	\MTsetmathskips{x}{0.50mu}{1.70mu}
-	\MTsetmathskips{y}{1.20mu}{1.80mu}
-	\MTsetmathskips{z}{0.40mu}{1.30mu}
-
-	\MTsetmathskips{A}{1.40mu}{1.40mu}
-	\MTsetmathskips{B}{0.60mu}{1.70mu}
-	\MTsetmathskips{C}{-0.80mu}{1.50mu}
-	\MTsetmathskips{D}{0.50mu}{1.70mu}
-	\MTsetmathskips{E}{0.60mu}{1.60mu}
-	\MTsetmathskips{F}{0.60mu}{1.60mu}
-	\MTsetmathskips{G}{-1.00mu}{1.60mu}
-	\MTsetmathskips{H}{0.60mu}{1.70mu}
-	\MTsetmathskips{I}{0.60mu}{1.70mu}
-	\MTsetmathskips{J}{1.80mu}{1.70mu}
-	\MTsetmathskips{K}{0.50mu}{1.70mu}
-	\MTsetmathskips{L}{0.50mu}{1.60mu}
-	\MTsetmathskips{M}{0.60mu}{1.70mu}
-	\MTsetmathskips{N}{0.60mu}{1.70mu}
-	\MTsetmathskips{O}{-1.00mu}{1.70mu}
-	\MTsetmathskips{P}{0.30mu}{1.70mu}
-	\MTsetmathskips{Q}{-0.90mu}{1.70mu}
-	\MTsetmathskips{R}{0.20mu}{1.70mu}
-	\MTsetmathskips{S}{-0.20mu}{1.70mu}
-	\MTsetmathskips{T}{-1.30mu}{1.70mu}
-	\MTsetmathskips{U}{-1.80mu}{1.70mu}
-	\MTsetmathskips{V}{-1.30mu}{1.70mu}
-	\MTsetmathskips{W}{-1.30mu}{1.70mu}
-	\MTsetmathskips{X}{1.00mu}{1.70mu}
-	\MTsetmathskips{Y}{-1.00mu}{1.70mu}
-	\MTsetmathskips{Z}{1.00mu}{1.70mu}
-}{}
-\ifbool{optionMathSans}{
-	\renewcommand{\familydefault}{\sfdefault}
-	\RequirePackage[basic,italic,symbolgreek]{mathastext}
-
-	%
-	% \@for\@tempa:=a,b,c,d,e,h,i,k,l,m,n,o,q,r,s,t,u,v,w,x\do{
-	% \MTsetmathskips{\@tempa}{0.5mu}{0.5mu}}
-	%
-
-	\MTsetmathskips{a}{0.00mu}{0.00mu}
-	\MTsetmathskips{b}{0.30mu}{0.00mu}
-	\MTsetmathskips{c}{0.00mu}{0.80mu}
-	\MTsetmathskips{d}{0.00mu}{1.00mu}
-	\MTsetmathskips{e}{0.00mu}{0.60mu}
-	\MTsetmathskips{f}{2.60mu}{1.00mu}
-	\MTsetmathskips{g}{1.30mu}{1.00mu}
-	\MTsetmathskips{h}{0.40mu}{-0.10mu}
-	\MTsetmathskips{i}{0.00mu}{1.00mu}
-	\MTsetmathskips{j}{2.90mu}{1.00mu}
-	\MTsetmathskips{k}{0.30mu}{0.90mu}
-	\MTsetmathskips{l}{0.00mu}{1.00mu}
-	\MTsetmathskips{m}{0.30mu}{-0.10mu}
-	\MTsetmathskips{n}{0.30mu}{-0.10mu}
-	\MTsetmathskips{o}{0.20mu}{0.10mu}
-	\MTsetmathskips{p}{1.20mu}{0.00mu}
-	\MTsetmathskips{q}{0.00mu}{0.30mu}
-	\MTsetmathskips{r}{0.30mu}{1.00mu}
-	\MTsetmathskips{s}{0.80mu}{0.30mu}
-	\MTsetmathskips{t}{-0.20mu}{1.00mu}
-	\MTsetmathskips{u}{-0.20mu}{0.30mu}
-	\MTsetmathskips{v}{-0.30mu}{1.00mu}
-	\MTsetmathskips{w}{-0.50mu}{1.00mu}
-	\MTsetmathskips{x}{1.70mu}{1.00mu}
-	\MTsetmathskips{y}{1.50mu}{1.00mu}
-}{}
-\ifbool{optionMathMono}{
-	\renewcommand{\familydefault}{\ttdefault}
-	\RequirePackage[basic,italic,symbolgreek]{mathastext}
-}{}
-
-% Text Font
-% =========
-
-\linespread{1.15}
-
-\ifbool{optionSerif}{
-	\renewcommand{\familydefault}{\rmdefault}
-}{}
-\ifbool{optionSans}{
-	\renewcommand{\familydefault}{\sfdefault}
-}{}
-\ifbool{optionMono}{
-	\renewcommand{\familydefault}{\ttdefault}
-}{}
-
-% Section font
-% ============
-
-\ifboolexpr{not bool {optionHeadingsSerif} and not bool {optionHeadingsSans} and not bool {optionHeadingsMono}}{
-	\ifbool{optionSerif}{
-		\booltrue{optionHeadingsSerif}
-	}{}
-	\ifbool{optionSans}{
-		\booltrue{optionHeadingsSans}
-	}{}
-	\ifbool{optionMono}{
-		\booltrue{optionHeadingsMono}
-	}{}
-}{}
-
-\ifbool{optionHeadingsSerif}{
-	\newcommand{\headingsFont}{\rmdefault}
-	\newcommand{\titleFont}{\rmdefault}
-}{}
-\ifbool{optionHeadingsSans}{
-	\newcommand{\headingsFont}{\sfdefault}
-	\newcommand{\titleFont}{\sfdefault}
-}{}
-\ifbool{optionHeadingsMono}{
-	\newcommand{\headingsFont}{\ttdefault}
-	\newcommand{\titleFont}{\ttdefault}
-}{}
-
-% Small Caps - source: https://tex.stackexchange.com/a/225078/167605
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-\newlength\fake@f
-\newlength\fake@c
-\def\fakesc#1{%
-\begingroup%
-\xdef\fake@name{\csname\curr@fontshape/\f@size\endcsname}%
-\fontsize{\fontdimen8\fake@name}{\baselineskip}\selectfont%
-\uppercase{#1}%
-\endgroup%
+\newcommand*{\my@endtablehead}{%
+ \@arraycrORI[\aboverulesep]% this colours the additional space with the
+                            % current row color
+ \noalign{\global\let\@BTrule\my@BTrule}% temporarily modify \@BTrule
+ \midrule
+ \noalign{\global\let\@BTrule\@BTrule@ORI}% restore it
+ \@gobble % gobble the following \midrule (which *must* be there!)
 }
 
+\rowcolors{1}{tableheadcolor}{tableheadcolor}
+% endregion headerfill
 
 \newcommand\fauxsc[1]{\fauxschelper#1 \relax\relax}
 \def\fauxschelper#1 #2\relax{%
