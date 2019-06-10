@@ -200,6 +200,12 @@
 	\LoadClass[usegeometry,pointlessnumbers]{scrreprt}
 }
 
+% Ignore Certain Warnings
+\RequirePackage{silence}
+\WarningFilter{microtype}{You are using the `ragged2e' package}
+\WarningFilter{mathdesign}{Package 'amsfonts' shouldn't be used in conjonction with package mdput}
+\WarningFilter{mathdesign}{Package 'amssymb' shouldn't be used in conjonction with package mdput}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %		Some nice packages
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
