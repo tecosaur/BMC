@@ -756,6 +756,9 @@
 \colorlet{tableheadcolor}{text!5!page} % Table header colour = 5% gray
 
 % region headerfill
+
+% from https://tex.stackexchange.com/a/494959/167605
+
 \renewcommand{\toprule}{%
     \showrowcolors
     \arrayrulecolor{text}\specialrule{\heavyrulewidth}{\abovetopsep}{0pt}%
@@ -779,17 +782,34 @@
 
 \let\@arraycrORI=\@arraycr
 
+% The “master counter” hackery is explained in the TeXbook appendix D (Dirty
+% Tricks), pp. 385-386. It is also mentioned in the array.sty implementation
+% notes concerning \@arraycr.
 \renewcommand*{\@arraycr}{%
-  \@ifnextchar\midrule\my@endtablehead\@arraycrORI
+  % Increase the master counter. This is needed to prevent TeX from
+  % prematurely finishing the alignment entry in case \\ was followed by '&'
+  % (when the \futurelet from \@ifnextchar causes TeX to read a '&', this
+  % finishes the entry unless the master counter has a different value than it
+  % had when the entry was started).
+  \relax\iffalse{\fi\ifnum 0=`}\fi
+  % Each of the two branches takes care of decreasing the master counter.
+  \@ifnextchar\midrule
+    {\@firstoftwo{\my@endtablehead}}% gobble the following \midrule
+    \my@closebrace@and@arraycrORI
 }
 
 \newcommand*{\my@endtablehead}{%
+ \ifnum 0=`{}\fi % the second brace decreases the master counter
  \@arraycrORI[\aboverulesep]% this colours the additional space with the
                             % current row color
  \noalign{\global\let\@BTrule\my@BTrule}% temporarily modify \@BTrule
  \midrule
  \noalign{\global\let\@BTrule\@BTrule@ORI}% restore it
- \@gobble % gobble the following \midrule (which *must* be there!)
+}
+
+\newcommand*{\my@closebrace@and@arraycrORI}{%
+  \ifnum 0=`{}\fi % the second brace decreases the master counter
+  \@arraycrORI
 }
 
 \rowcolors{1}{tableheadcolor}{tableheadcolor}
