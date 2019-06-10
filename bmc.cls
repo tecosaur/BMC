@@ -902,7 +902,7 @@
 			\rule{\paperwidth-2.64cm}{2pt}
 		}
 
-		\hspace*{-0.25mm}\fontseries{r}\selectfont\huge\@subtitle
+		\hspace*{-0.25mm}\fontseries{m}\selectfont\huge\@subtitle
 
 		\vspace{2.5cm}
 
@@ -917,7 +917,7 @@
 
 		% \@publishers
 
-		\fontseries{r}\selectfont\Large
+		\fontseries{m}\selectfont\Large
 		\@date
 
 		\restoregeometry
