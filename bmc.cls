@@ -3,7 +3,7 @@
 %                  BMC                     %
 %     A Bespoke, Multipurpose Class        %
 %                 -~=~-                    %
-%          Designed by tecosaur            %
+%          Authored by tecosaur            %
 %        Insired by Yves Zumbach           %
 %                                          %
 %══════════════════════════════════════════%
@@ -24,177 +24,99 @@
 %
 % The Current Maintainer of this work is tecosaur
 %
-% This work consists of the files bmc.cls and modifications made to infoBulle.sty and marginInfoBulle.sty
+% This work consists of the files bmc.cls, accompanying bmc-*.sty files,
+% and modifications made to infoBulle.sty and marginInfoBulle.sty
 
 
 \ProvidesClass{bmc}[1/1/2019 Bespoke Multipurpose Class]
 \NeedsTeXFormat{LaTeX2e}
 
+\newcommand*{\@bmc}{true}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %		Options
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \RequirePackage{etoolbox}
-% \RequirePackage{kvoptions}
+\RequirePackage{kvoptions}
 
-\newbool{optionLight}
-\newbool{optionDark}
+\SetupKeyvalOptions{family=bmc, prefix=bmc@}
 
-\newbool{optionSolid}
-\newbool{optionStripe}
+% General
+\DeclareBoolOption{solid}
+\DeclareBoolOption{stripe}
 
-\newbool{optionArticle}
+\DeclareBoolOption{article}
 
-\newbool{optionParagraph}
+\DeclareBoolOption{paragraph}
 
-\newbool{optionNotes}
-\newbool{optionChem}
-\newbool{optionCode}
-\newbool{optionPlot}
-\newbool{optionExternalise}
+% extras
+\DeclareBoolOption{notes}
+\DeclareBoolOption{chem}
+\DeclareBoolOption{code}
+\DeclareBoolOption{plot}
+\DeclareBoolOption{externalise}
 
-\newbool{optionSerif}
-\newbool{optionSans}
-\newbool{optionMono}
+% text font
+\DeclareBoolOption{serif}
+\DeclareBoolOption{sans}
+\DeclareBoolOption{mono}
+\DeclareStringOption[serif]{body} % serif, sans, or mono
 
-\newbool{optionMathSerif}
-\newbool{optionMathSans}
-\newbool{optionMathMono}
+\DeclareStringOption{math}[serif] % serif, sans, or mono
 
-\newbool{optionHeadingsSerif}
-\newbool{optionHeadingsSans}
-\newbool{optionHeadingsMono}
+\DeclareBoolOption{headingsSerif}
+\DeclareBoolOption{headingsSans}
+\DeclareBoolOption{headingsMono}
+\DeclareStringOption[sans]{headings} % serif, sans, or mono
 
-% Defaults
-\booltrue{optionLight}
-\booltrue{optionSerif}
-\booltrue{optionHeadingsSans}
+% colour options
+\DeclareBoolOption[true]{light}
+\DeclareBoolOption{dark}
+\DeclareStringOption[de]{palette}
 
-
-% Get The Settings
-% ================
-
-% Document appearence related
-\DeclareOption{light}{
-	\booltrue{optionLight}
-}
-\DeclareOption{dark}{
-	\booltrue{optionDark}
-}
-\DeclareOption{solid}{
-	\booltrue{optionSolid}
-}
-\DeclareOption{stripe}{
-	\booltrue{optionStripe}
-}
-\DeclareOption{notes}{
-	\booltrue{optionNotes}
-}
-% class type related options
-\DeclareOption{article}{
-	\booltrue{optionArticle}
-}
-% Other document style related options
-\DeclareOption{paragraph}{
-	\booltrue{optionParagraph}
-}
-% package setup related options
-\DeclareOption{chem}{
-	\booltrue{optionChem}
-}
-\DeclareOption{code}{
-	\booltrue{optionCode}
-}
-\DeclareOption{plot}{
-	\booltrue{optionPlot}
-}
-\DeclareOption{externalise}{
-	\booltrue{optionExternalise}
-}
-% Font
-\DeclareOption{serif}{
-	\booltrue{optionSerif}
-	\boolfalse{optionSans}
-	\boolfalse{optionMono}
-	% default heading style
-	\booltrue{optionHeadingsSans}
-}
-\DeclareOption{sans}{
-	\booltrue{optionSans}
-	\boolfalse{optionSerif}
-	\boolfalse{optionMono}
-	% default heading style
-	\booltrue{optionHeadingsSans}
-}
-\DeclareOption{mono}{
-	\booltrue{optionMono}
-	\boolfalse{optionSerif}
-	\boolfalse{optionSerif}
-	% default headings style
-	\booltrue{optionHeadingsMono}
-	\boolfalse{optionHeadingsSans}
-}
-% Maths
-\DeclareOption{math}{
-	\ifbool{optionSans}{
-		\booltrue{optionMathSans}
-	}{}
-	\ifbool{optionSerif}{
-		\booltrue{optionMathSerif}
-		\boolfalse{optionMathSans}
-	}{}
-	\ifbool{optionMono}{
-		\booltrue{optionMathMono}
-		\boolfalse{optionMathSans}
-		\boolfalse{optionMathSerif}
-	}{}
-}
-\DeclareOption{math-serif}{
-	\booltrue{optionMathSerif}
-	\boolfalse{optionMathSans}
-	\boolfalse{optionMathMono}
-}
-\DeclareOption{math-sans}{
-	\booltrue{optionMathSans}
-	\boolfalse{optionMathSerif}
-	\boolfalse{optionMathMono}
-}
-\DeclareOption{math-mono}{
-	\booltrue{optionMathMono}
-	\boolfalse{optionMathSans}
-	\boolfalse{optionMathSerif}
-}
-% Sections Font
-\DeclareOption{headings-serif}{
-	\booltrue{optionHeadingsSerif}
-	\boolfalse{optionHeadingsSans}
-	\boolfalse{optionHeadingsMono}
-}
-\DeclareOption{headings-sans}{
-	\booltrue{optionHeadingsSans}
-	\boolfalse{optionHeadingsSerif}
-	\boolfalse{optionHeadingsMono}
-}
-\DeclareOption{headings-mono}{
-	\booltrue{optionHeadingsMono}
-	\boolfalse{optionHeadingsSerif}
-	\boolfalse{optionHeadingsSerif}
-}
-% Class
-\DeclareOption*{
-	\ifbool{optionArticle}{
+\DeclareDefaultOption{
+	\ifbool{bmc@article}{
 		\PassOptionsToClass{\CurrentOption}{scrartcl}
 	}{
 		\PassOptionsToClass{\CurrentOption}{scrreprt}
 	}
 }
-% Finish
-\ProcessOptions\relax
+
+\ProcessKeyvalOptions*
+
+% process values
+
+\newcommand{\ifdefstringx}[2]{%
+  \begingroup
+  \edef\x{#1}%
+  \ifdefstring{\x}{#2}{\endgroup\@firstoftwo}{\endgroup\@secondoftwo}%
+}
+
+\ifbool{bmc@serif}{
+	\renewcommand{\bmc@body}{serif}
+}{}
+\ifbool{bmc@sans}{
+	\renewcommand{\bmc@body}{sans}
+}{}
+\ifbool{bmc@mono}{
+	\renewcommand{\bmc@body}{mono}
+}{}
+
+\ifbool{bmc@headingsSerif}{
+	\renewcommand{\bmc@headings}{serif}
+}{}
+\ifbool{bmc@headingsSans}{
+	\renewcommand{\bmc@headings}{sans}
+}{}
+\ifbool{bmc@headingsMono}{
+	\renewcommand{\bmc@headings}{mono}
+}{}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %		Basic settings, options processing
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\ifbool{optionArticle}{
+\ifbool{bmc@article}{
 	\LoadClass[usegeometry,pointlessnumbers]{scrartcl}
 }{
 	\LoadClass[usegeometry,pointlessnumbers]{scrreprt}
@@ -211,10 +133,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \RequirePackage{ifdraft}
-
-\RequirePackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true]{microtype} % ,factor=1100,stretch=15,shrink=15
-\microtypecontext{spacing=nonfrench}
-\RequirePackage{setspace}
 \RequirePackage[automark,draft=false,headwidth=textwithmarginpar,footwidth=head]{scrlayer-scrpage}
 \RequirePackage{calc}
 \ifdraft{
@@ -223,7 +141,7 @@
 \RequirePackage[usenames,dvipsnames,svgnames,table]{xcolor}
 
 \RequirePackage{tikz}
-\ifbool{optionExternalise}{
+\ifbool{bmc@externalise}{
 	\usetikzlibrary{external}
 	\tikzexternalize[
 		prefix=tikz/,
@@ -234,7 +152,7 @@
 	% 	-halt-on-error -interaction=batchmode -jobname "\image" "\texsource"}
 	% }
 }{}
-\ifbool{optionPlot}{
+\ifbool{bmc@plot}{
 	\RequirePackage{pgfplots}
 	\usetikzlibrary{plotmarks}
 	\usepgfplotslibrary{fillbetween}
@@ -290,6 +208,7 @@
 \RequirePackage{longtable}
 
 \RequirePackage{multicol}
+% \RequirePackage{siunitx}
 
 \RequirePackage{graphicx}
 \RequirePackage{grffile} % fix allowed filenames
@@ -305,7 +224,7 @@
 
 \RequirePackage{xpatch}
 
-\ifbool{optionChem}{
+\ifbool{bmc@chem}{
 	\RequirePackage[version=4]{mhchem}
 	\RequirePackage{chemfig}
 	\setchemfig{
@@ -496,7 +415,7 @@
 	% \PassOptionsToPackage{asymmetric}{geometry}
 	\setlength{\leftmargin}{1cm}
 \fi
-\ifbool{optionNotes}{
+\ifbool{bmc@notes}{
 	\setlength{\rightmargin}{1cm}
 	\PassOptionsToPackage{includemp}{geometry}
 	\PassOptionsToPackage{marginparwidth=5cm, marginparsep=5mm}{geometry}
@@ -523,11 +442,8 @@
 % ensure tables have correct text colour
 \AtBeginEnvironment{tabular}{\color{text}}
 
-% title formating
-\RequirePackage{titlesec}
-
 % Code blocks
-\ifbool{optionCode}{
+\ifbool{bmc@code}{
 	\RequirePackage{minted}
 	\RequirePackage[many]{tcolorbox}
 
@@ -565,7 +481,7 @@
 	}
 	\AfterEndEnvironment{minted}{\end{tcolorbox}}
 
-	\ifbool{optionDark}{
+	\ifbool{bmc@dark}{
 		\setminted{
 			style=monokai,
 			breaksymbol=\color{page!80!text}\tiny\ensuremath{\hookrightarrow},
@@ -626,134 +542,7 @@
 %		Colors & Font
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Colour Theme Colours
-% ====================
-
-\ifbool{optionDark}{
-	\definecolor{page}{HTML}{222222} % dark grey
-	\definecolor{text}{HTML}{FCFCFC} % white
-}{
-	\definecolor{page}{HTML}{FFFFFF} % white
-	\definecolor{text}{HTML}{000000} % black
-}
-
-\definecolor{primary}{HTML}{019875} % emerald
-% \definecolor{primaryVariant}{HTML}{1CBE77} % emerald mixed with lighter green
-\AtEndPreamble{
-	\@ifundefined{\string\color@primaryVariant}{\colorlet{primaryVariant}{primary!75!Cream>twheel,-3,360}}{}
-}
-\definecolor{contrastColour}{HTML}{E8F1F2} % white
-
-\definecolor{tertiary}{HTML}{C47238} % yellow
-\definecolor{secondary}{HTML}{C6B53C} % orange
-\definecolor{quatrinary}{HTML}{BD3E4C} % red
-
-\definecolor{alternativePrimary}{HTML}{13293D} % blue
-
-% Generaly Nice Shades of Common Colours
-% ======================================
-% source: https://flatuicolors.com/palette/de
-
-% Shades
-\definecolor{Cream}{HTML}{FFFCCF}
-\definecolor{LightGrey}{HTML}{a5b1c2}
-\definecolor{Grey}{HTML}{778ca3}
-\definecolor{DarkGrey}{HTML}{4b6584}
-\definecolor{Black}{HTML}{231F20}
-% Primary Colours
-\definecolor{Red}{HTML}{eb3b47}
-\definecolor{LightRed}{HTML}{fc5c65}
-\definecolor{DarkRed}{HTML}{d91c38}
-
-\definecolor{Yellow}{HTML}{f7b731}
-\definecolor{LightYellow}{HTML}{fed330}
-\definecolor{DarkYellow}{HTML}{f0a132}
-
-\definecolor{Blue}{HTML}{3867d6}
-\definecolor{LightBlue}{HTML}{4b7bec}
-\definecolor{DarkBlue}{HTML}{2654bf}
-% tertiary Colours
-\definecolor{Green}{HTML}{20bf6b}
-\definecolor{LightGreen}{HTML}{26de81}
-\definecolor{DarkGreen}{HTML}{1ba155}
-
-\definecolor{Orange}{HTML}{fa8231}
-\definecolor{LightOrange}{HTML}{fd9644}
-\definecolor{DarkOrange}{HTML}{f76b20}
-
-\definecolor{Purple}{HTML}{8854d0}
-\definecolor{LightPurple}{HTML}{a55eea}
-\definecolor{DarkPurple}{HTML}{6e49b8}
-% secondary+ Colours
-% \definecolor{Brown}{HTML}{}
-\definecolor{Cyan}{HTML}{0fb9b1}
-\definecolor{LightCyan}{HTML}{2bcbba}
-\definecolor{DarkCyan}{HTML}{00a8a8}
-
-% \definecolor{LightBlue}{HTML}{2d98da}
-% Need to find better name(s) for other ligher blue shades
-
-% % Another Colour Theme
-% % --------------------
-% % source: https://flatuicolors.com/palette/de
-
-% % Shades
-% \definecolor{Cream}{HTML}{FFFCCF}
-% \definecolor{LightGrey}{HTML}{a5b1c2}
-% \definecolor{Grey}{HTML}{778ca3}
-% \definecolor{DarkGrey}{HTML}{4b6584}
-% \definecolor{Black}{HTML}{231F20}
-% % Primary Colours
-% \definecolor{Red}{HTML}{e74c3c}
-% \definecolor{LightRed}{HTML}{fc5c65}
-
-% \definecolor{Yellow}{HTML}{f1c40f}
-% \definecolor{LightYellow}{HTML}{fed330}
-
-% \definecolor{Blue}{HTML}{2980b9}
-% \definecolor{LightBlue}{HTML}{3498db}
-% % tertiary Colours
-% \definecolor{Green}{HTML}{27ae60}
-% \definecolor{LightGreen}{HTML}{2ecc71}
-
-% \definecolor{Orange}{HTML}{e67e22}
-% \definecolor{LightOrange}{HTML}{f39c12}
-
-% \definecolor{Purple}{HTML}{8e44ad}
-% \definecolor{LightPurple}{HTML}{9b59b6}
-% % secondary+ Colours
-% % \definecolor{Brown}{HTML}{}
-% \definecolor{Cyan}{HTML}{16a085}
-% \definecolor{LightCyan}{HTML}{1abc9c}
-
-
-% redefine info bulle colours
-
-\colorlet{infoBulleBackground}{page!90!text}
-\colorlet{infoBulleText}{text}
-\colorlet{marginInfoBulleBackground}{page}
-\colorlet{marginInfoBulleText}{text}
-
-\colorlet{criticalColor}{Red}
-\colorlet{questionColor}{Purple}
-\colorlet{informationColor}{Green}
-\colorlet{checkColor}{Blue}
-\colorlet{warningColor}{Orange}
-\colorlet{tipsColor}{Purple}
-\colorlet{exampleColor}{Blue}
-\colorlet{mathematicalColor}{Orange}
-\colorlet{codeColor}{Grey}
-
-% set link colour
-\AtEndPreamble{
-	\ifbool{optionDark}{
-		\colorlet{href}{secondary}
-		\colorlet{inlinemath}{tertiary!50!text}
-	}{
-		\colorlet{href}{tertiary}
-		\colorlet{inlinemath}{secondary!50!text}
-	}
-}
+\RequirePackage{bmc-color}
 
 % and fill the row(s) after \toprule
 \newbool{tabularTitleRow}
@@ -820,31 +609,17 @@
 \rowcolors{1}{tableheadcolor}{tableheadcolor}
 % endregion headerfill
 
-\newcommand\fauxsc[1]{\fauxschelper#1 \relax\relax}
-\def\fauxschelper#1 #2\relax{%
-\fauxschelphelp#1\relax\relax%
-\if\relax#2\relax\else\ \fauxschelper#2\relax\fi%
-}
-\def\Hscale{.83}\def\Vscale{.72}\def\Cscale{1.00}
-\def\fauxschelphelp#1#2\relax{%
-\ifnum`#1>``\ifnum`#1<`\{\scalebox{\Hscale}[\Vscale]{\uppercase{#1}}\else%
-	\scalebox{\Cscale}[1]{#1}\fi\else\scalebox{\Cscale}[1]{#1}\fi%
-\ifx\relax#2\relax\else\fauxschelphelp#2\relax\fi}
 
-% Add colour to inline math
-\renewrobustcmd{\(}{\@ifstar\@inlinemath\@@inlinemath}
-\DeclareRobustCommand{\@inlinemath}{\relax\ifmmode\@badmath\else$\fi}
-\DeclareRobustCommand{\@@inlinemath}{\relax\ifmmode\@badmath\else$\fi\color{inlinemath}}
-
-% Roman Numerals
-\AtEndPreamble{
-	\providecommand*{\RN}[1]{\expandafter\@slowromancap\romannumeral #1@}
-	\providecommand*{\Rn}[1]{\romannumeral#1\relax}
+\RequirePackage{bmc-fonts}
+\ifdefempty{\bmc@math}{}{
+	\RequirePackage{bmc-maths}
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %		Titling
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\RequirePackage{bmc-sectioning}
 
 % Cover Page
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -853,7 +628,9 @@
 % \newcommand\@subtitle{\@latex@error{No \noexpand\subtitle given}\@ehc}
 
 \renewcommand{\maketitle}{
-	\ifbool{optionSolid}{
+	\thispdfpagelabel{Cover}
+
+	\ifbool{bmc@solid}{
 		\pagecolor{primary}
 	}{
 		\pagecolor{page}
@@ -862,8 +639,8 @@
 	\begin{titlepage}
 		\newgeometry{left=4cm,right=2.7cm, top=1.5cm}
 
-		\ifbool{optionSolid}{
-			\ifbool{optionDark}{
+		\ifbool{bmc@solid}{
+			\ifbool{bmc@dark}{
 				\color{page}
 			}{
 				\color{contrastColour}
@@ -877,7 +654,7 @@
 		\ifdefempty{\@titlehead}{}{
 			\begin{center}
 				\LARGE
-				% \ifbool{optionSolid}{
+				% \ifbool{bmc@solid}{
 				% 	\color{alternativePrimary}
 				% }{
 						\color{primary!60!contrastColour}
@@ -895,8 +672,8 @@
 
 		\noindent\makebox[\linewidth]{
 			\hspace{2.64cm}
-			\ifbool{optionSolid}{
-				\ifbool{optionDark}{
+			\ifbool{bmc@solid}{
+				\ifbool{bmc@dark}{
 					\color{contrastColour}
 				}{
 					\color{alternativePrimary}
@@ -938,318 +715,3 @@
 	\pagecolor{page}
 }
 
-% Other Titling
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\ifbool{optionArticle}{
-}{
-
-\RequirePackage{titlesec}
-% Chapter format
-\titleformat{\chapter}[display]
-	{}
-	{\titleBackground\thispagestyle{empty}}
-	{4pt}
-	{
-		\begin{minipage}[t]{8.2cm-\leftmargin}
-			\mbox{}\\
-			\null\hfill\fontsize{6.5cm}{1ex}\selectfont{\ifbool{optionSolid}{\color{page}}{\color{primary}}\thechapter}
-		\end{minipage}
-		\hspace*{-5mm}
-		\begin{minipage}[t]{\paperwidth-7cm-\leftmargin}
-			\mbox{}\\
-			\vspace*{-1.1cm}
-			\begin{flushleft}
-				\begin{spacing}{5}
-					\fontsize{1.7cm}{1em}
-					\fontseries{tx}
-					\selectfont
-					\ifbool{optionDark}{
-						\color{primaryVariant}
-					}{
-						\color{alternativePrimary}
-					}
-	}[\end{spacing}\end{flushleft}\end{minipage}]
-
-\titleformat{name=\chapter, numberless}[display]
-	{}
-	{\titleBackground\thispagestyle{empty}}
-	{0pt}
-	{
-		\fontsize{2cm}{1em}
-	}
-
-}
-
-
-\addtokomafont{section}{\Huge\color{primary}\bfseries\fontfamily{\headingsFont}\selectfont}
-\addtokomafont{subsection}{\huge\color{primary}\fontseries{sb}\fontfamily{\headingsFont}\selectfont}
-\addtokomafont{subsubsection}{\LARGE\color{primary}\fontseries{sb}\fontfamily{\headingsFont}\selectfont}
-\addtokomafont{paragraph}{\color{primary!70!text}\fontseries{mb}\fontfamily{\headingsFont}\selectfont}
-\addtokomafont{subparagraph}{\color{primary!70!text}\fontseries{mb}\fontfamily{\headingsFont}\selectfont}
-
-\renewcommand{\sectionformat}{
-    \bfseries\itshape\thesection\enspace
-}
-
-\renewcommand{\subsectionformat}{
-    \bfseries\itshape\thesubsection\enspace
-}
-
-\renewcommand{\subsubsectionformat}{
-    \bfseries\itshape\thesubsubsection\enspace
-}
-
-\ifbool{optionArticle}{
-	\renewcommand{\sectionlinesformat}[4]{
-		#4 \hfill #3
-		\vspace*{-.5\baselineskip}
-		\mbox{}
-		\textcolor{primary}{\rule{\textwidth}{.4pt}}\par\nobreak
-	}
-}{}
-
-\RedeclareSectionCommands[indent=0em]{section,subsection,subsubsection}
-
-% \titleformat
-% {\section} % command
-% {\huge} % format
-% {\hspace*{-3mm}\fontsize{3ex}{3.6ex}\sectionNumbers\selectfont\color{sectionNumbersColor}\raisebox{-1mm}{\thesection}}
-% % label
-% {-3mm} % sep
-% {\fontspec{Fira Sans Medium}\selectfont} % before
-% {}
-
-% \titleformat{\subsection}{\LARGE}{%
-% 	\hspace*{-3mm}\fontsize{3ex}{3.6ex}\selectfont\color{subsectionNumbersColor}%
-% 	\raisebox{-1mm}{\thesubsection}%
-% }{-3mm}{}{}
-
-
-	%Titling spacing
-% \titlespacing*{\chapter}{0mm}{0pt}{10pt}
-% \titlespacing*{name=\chapter,numberless}{0pt}{10pt}{0pt} %starred version of chapter default: 0pt, 50pt, 40pt
-% \titlespacing*{\section}{0mm}{4mm}{3mm}
-% \titlespacing*{\subsection}{0mm}{3mm}{2mm}
-% \titlespacing*{\subsubsection}{0mm}{2mm}{1.5mm}
-
-% Make parahraphs and subparagraphs more like sections (unless disabled)
-\ifbool{optionParagraph}{}{
-	\ifx\paragraph\undefined\else
-	\let\oldparagraph\paragraph
-	\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
-	\fi
-	\ifx\subparagraph\undefined\else
-	\let\oldsubparagraph\subparagraph
-	\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
-	\fi
-}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%		ToC and Mini-ToC
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\RequirePackage{titletoc}
-\RequirePackage{framed}
-\RequirePackage[absolute,overlay]{textpos}
-
-\newcommand{\fancytoc}{
-	% \titleBackground
-	{\hypersetup{linkcolor=text}
-		\setcounter{tocdepth}{0}
-		\begingroup
-			\let\clearpage\relax
-			\tableofcontents
-		\endgroup
-	}
-	\begin{textblock*}{5cm}(1.6cm,6cm) % {block width} (coords)
-		\fontsize{4cm}{2em}\selectfont
-		\rotatebox[origin=c]{90}{\color{primaryVariant}Contents}
-	\end{textblock*}
-	\newpage
-}
-
-%		ToC
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\ifbool{optionArticle}{
-	\renewcommand{\contentsname}{Contents}
-}{
-	\renewcommand{\contentsname}{}
-}
-
-\pretocmd{\tableofcontents}{\hypertarget{contents}{}}{}{}
-
-\newenvironment{tocChapterText}{
-	\def\FrameCommand{
-		\ifbool{optionNotes}{
-			\hspace*{\dimexpr13.3cm-1\leftmargin\relax}
-		}{
-			\hspace*{\dimexpr9.7cm-1\leftmargin\relax}
-		}
-	}
-	\MakeFramed{
-		% \parshape 1 0cm .75\textwidth \relax\FrameRestore
-		\parshape 1 0cm 12.5cm \relax
-	}
-}{\endMakeFramed}
-\titlecontents{chapter}[0em]{\vspace*{1\baselineskip}}{
-	\parbox{7.5cm-\leftmargin}{\hfill{\ifbool{optionSolid}{\hypersetup{linkcolor=contrastColour}}{\hypersetup{linkcolor=primary}}\fontsize{1.5cm}{1ex}\selectfont\color{page}\thecontentspage}\hspace*{3mm}}
-	\vspace*{-1.48cm}\fontfamily{\headingsFont}\selectfont\tocChapterText{\large\chaptertitlename~\thecontentslabel}
-	\\[-3mm]
-	\huge\fontfamily{\familydefault}\selectfont
-}{}{\endtocChapterText\vskip-5mm}
-
-%		Mini-ToC
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\newcommand{\printMiniToc}{
-	\vfill
-	\hspace*{\dimexpr-1\leftmargin+6.7cm\relax}\parbox[t]{\paperwidth-6.5cm-\leftmargin}{
-		\hspace*{-3mm}\raisebox{0.25mm}{\fontsize{0.6cm}{1ex}\selectfont\ifbool{optionSolid}{\color{contrastColour}}{\color{primary}}\faList}
-		\ifbool{optionSerif}{\hspace*{5.5mm}}{\hspace*{6.5mm}} {\fontfamily{\headingsFont}\fontseries{tx}\selectfont\huge{Summary}}
-		\vspace*{2mm}
-		\startcontents[chapters]
-		\hypersetup{linkcolor=text}
-		\begin{spacing}{1}
-			\printcontents[chapters]{p}{1}{\setcounter{tocdepth}{1}}
-		\end{spacing}
-	}
-	\vfill
-	\newpage
-}
-
-
-%Redefining toc style so that it dont get indented in partialTocs
-\titlecontents{psection}[3em]
-{} {\large{\ifbool{optionSolid}{\color{contrastColour}}{\color{primary}}\bfseries\contentslabel{3.5em}}} {} {, \thecontentspage}
-
-\titlecontents{psubsection}[3em]
-{} {\large{\ifbool{optionSolid}{\color{contrastColour}}{\color{primary}}\bfseries\contentslabel{3.5em}}} {} {, \thecontentspage} %\contentslabel{4.2em} to right-align
-
-\ifbool{optionSolid}{
-	\newcommand{\titleBackground}{
-		\begin{tikzpicture}[remember picture, overlay]
-			\fill[fill=primary] (current page.south west) rectangle ++(7.5cm, \paperheight);
-		\end{tikzpicture}
-	}
-}{}
-
-\ifbool{optionStripe}{
-	\newcommand{\titleBackground}{
-		\begin{tikzpicture}[remember picture, overlay]
-			\fill[fill=primary] ([xshift=7.42cm]current page.south west) rectangle ++(1mm, \paperheight);
-		\end{tikzpicture}
-	}
-}{}
-
-\ifboolexpr{not bool {optionSolid} and not bool {optionStripe}}{
-	\newcommand{\titleBackground}{}
-}{}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%		Links
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\RequirePackage[pdfa]{hyperref}
-\RequirePackage{hyperxmp}
-\AtEndPreamble{
-	\hypersetup{
-		pdftoolbar=false,
-		pdfmenubar=true,
-		pdffitwindow=false,
-		pdfborder={1 1 0},
-		pdftitle={\@title},
-		pdfauthor={\@author},
-		pdfsubject={\@subtitle},
-		pdfcreator=pdfLaTeX,
-		% pdfkeywords={{a}{b}},
-		colorlinks=true,
-		linkcolor=href,
-		linktoc=all,
-		urlcolor=href,
-		citecolor=href,
-		filecolor=href,
-		breaklinks=true
-	}
-}
-\urlstyle{same}
-
-%%%%%%%%%%%%%%%%%%
-
-% Automatically add to \chapter
-
-% \let\oldscr@@startchapter\scr@@startchapter
-% \def\scr@@startchapter#1[#2]#3{%
-% 	\oldscr@@startchapter{#1}[#2]{#3}%
-% 	% \newgeometry{right=2.7cm, marginparwidth=0cm, marginparsep=0mm}
-% 	\printMiniToc
-% 	% \restoregeometry
-% }
-
-% \xpretocmd{\scr@@startchapter}{}{}{}
-\xapptocmd{\scr@@startchapter}{\printMiniToc}{}{}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%      Header and Footer
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\ifdraft{
-	\AfterPackage*{scrlayer-scrpage}{%
-    \DeclareNewLayer[
-      head,
-      height=0pt,
-      foreground,
-      contents=\textcolor{text!60!page}{\layercontentsmeasure}
-    ]{head.ruler}
-    \DeclareNewLayer[
-      foot,
-      height=0pt,
-      addvoffset=\footheight-\dp\strutbox,
-      background,
-      contents=\textcolor{text!60!page}{\layercontentsmeasure}
-    ]{foot.ruler}
-    \AddLayersAtBeginOfPageStyle{scrheadings}{head.ruler,foot.ruler}
-    \AddLayersAtBeginOfPageStyle{plain.scrheadings}{head.ruler,foot.ruler}
-  }
-}{
-
-	\clearpairofpagestyles
-	\cfoot*{\hyperlink{contents}{\pagemark}}
-
-	\ifbool{optionArticle}{
-		\chead{\hypersetup{allcolors=.}\hyperlink{section.\arabic{section}}{\headmark}}
-	}{
-		\chead{\hypersetup{allcolors=.}\hyperlink{chapter.\arabic{chapter}}{\headmark}}
-	}
-
-	\addtokomafont{pagehead}{\fontfamily{\headingsFont}\selectfont\bfseries\upshape\ifbool{optionSolid}{\color{contrastColour}}{\color{primary}}}
-	\addtokomafont{pagenumber}{\fontfamily{\headingsFont}\fontseries{sb}\selectfont\color{primary}}
-
-	% shift the predefined head layers
-	\ForEachLayerOfPageStyle*{scrheadings}{%
-	\ifstrstart{#1}{scrheadings.head.}
-		{\ModifyLayer[addvoffset=-.5in-.5\voffset-.5\topmargin]{#1}}
-		{}%
-	}
-	\ForEachLayerOfPageStyle*{plain.scrheadings}{%
-	\ifstrstart{#1}{plain.scrheadings.head.}
-		{\ModifyLayer[addvoffset=-.5in-.5\voffset-.5\topmargin]{#1}}
-		{}%
-	}
-
-	% Defining the Layer
-	\DeclareLayer[
-		background,
-		topmargin,
-		addheight=\headheight,
-		contents={%
-			\ifbool{optionSolid}{\color{primary}}{\color{page}}
-			\rule{\layerwidth}{\layerheight}%
-		}%
-	]{my.head.background}
-
-	%Adding the Layer to the pagestyles
-	\AddLayersAtBeginOfPageStyle{scrheadings}{my.head.background}
-	\AddLayersAtBeginOfPageStyle{plain.scrheadings}{my.head.background}
-
-}

@@ -1,0 +1,58 @@
+%══════════════════════════════════════════%
+%                                          %
+%                  BMC                     %
+%     A Bespoke, Multipurpose Class        %
+%        -- Maths Functionality --         %
+%                 -~=~-                    %
+%          Authored by tecosaur            %
+%                                          %
+%══════════════════════════════════════════%
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{bmc-maths}[2019/06/09 Maths functionality used in the BMC class]
+
+% various math packages
+\RequirePackage{amsmath,amssymb}
+% \RequirePackage[utopia]{mathdesign}
+\RequirePackage{xfrac}
+\RequirePackage[makeroom]{cancel}
+% package to use text font for math
+\usepackage{mathtools}
+
+% deliminators
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+\DeclarePairedDelimiter{\round}{\lfloor}{\rceil}
+% number sets
+\newcommand{\RR}[1][]{\ensuremath{\ifstrempty{#1}{\mathbb{R}}{\mathbb{R}^{#1}}}}
+\newcommand{\NN}[1][]{\ensuremath{\ifstrempty{#1}{\mathbb{N}}{\mathbb{N}^{#1}}}}
+\newcommand{\ZZ}[1][]{\ensuremath{\ifstrempty{#1}{\mathbb{Z}}{\mathbb{Z}^{#1}}}}
+\newcommand{\QQ}[1][]{\ensuremath{\ifstrempty{#1}{\mathbb{Q}}{\mathbb{Q}^{#1}}}}
+\newcommand{\CC}[1][]{\ensuremath{\ifstrempty{#1}{\mathbb{C}}{\mathbb{C}^{#1}}}}
+\newcommand{\PP}[1][]{\ensuremath{\ifstrempty{#1}{\mathbb{P}}{\mathbb{P}^{#1}}}}
+\newcommand{\HH}[1][]{\ensuremath{\ifstrempty{#1}{\mathbb{H}}{\mathbb{H}^{#1}}}}
+
+% commonly used macros
+\newcommand{\dd}[1][]{\ensuremath{\ifstrempty{#1}{\mathrm{d}}{\mathrm{d}^{#1}}}}
+\DeclareMathOperator{\Lap}{\mathcal{L}}
+\DeclareMathOperator{\Var}{Var} % varience
+\DeclareMathOperator{\Cov}{Cov} % covarience
+\DeclareMathOperator{\E}{E} % expected
+
+% Since the amsthm package isn't loaded
+\newcommand*{\qed}{\hfill\ensuremath{\blacksquare}}
+\newcommand*{\qedhere}{\hfill\ensuremath{\square}}
+
+% I prefer the slanted \leq
+\let\oldleq\leq % save them in case they're every wanted
+\let\oldgeq\geq
+\renewcommand{\leq}{\leqslant}
+\renewcommand{\geq}{\geqslant}
+
+% redefine matrix env to allow for alignment, use r as default
+\renewcommand*\env@matrix[1][r]{\hskip -\arraycolsep
+    \let\@ifnextchar\new@ifnextchar
+    \array{*\c@MaxMatrixCols #1}}

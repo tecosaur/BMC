@@ -1,0 +1,573 @@
+%══════════════════════════════════════════%
+%                                          %
+%                  BMC                     %
+%     A Bespoke, Multipurpose Class        %
+%       -- Colour Functionality --         %
+%                 -~=~-                    %
+%          Authored by tecosaur            %
+%                                          %
+%══════════════════════════════════════════%
+
+\ProvidesPackage{bmc-color}[2019/06/09 Colour functionality used in the BMC class]
+\NeedsTeXFormat{LaTeX2e}
+
+\ifdefined\@bmc\else
+    \RequirePackage{etoolbox}
+    \RequirePackage{kvoptions}
+
+    \SetupKeyvalOptions{family=bmc, prefix=bmc@}
+    \DeclareStringOption[de]{palette}
+
+    \DeclareBoolOption[true]{light}
+    \DeclareBoolOption{dark}
+
+    \ProcessKeyvalOptions*
+\fi
+
+\RequirePackage{ifdraft}
+\ifdraft{
+	\PassOptionsToPackage{gray}{xcolor}
+}{}
+\RequirePackage[usenames,dvipsnames,svgnames,table]{xcolor}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Theme Colours
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\ifbool{bmc@dark}{
+	\definecolor{page}{HTML}{222222} % dark grey
+	\definecolor{text}{HTML}{FCFCFC} % white
+}{
+	\definecolor{page}{HTML}{FFFFFF} % white
+	\definecolor{text}{HTML}{000000} % black
+}
+
+\definecolor{primary}{HTML}{019875} % emerald
+% \definecolor{primaryVariant}{HTML}{1CBE77} % emerald mixed with lighter green
+\AtEndPreamble{
+	\@ifundefined{\string\color@primaryVariant}{\colorlet{primaryVariant}{primary!75!Cream>twheel,-3,360}}{}
+}
+\definecolor{contrastColour}{HTML}{E8F1F2} % white
+
+\definecolor{tertiary}{HTML}{C47238} % yellow
+\definecolor{secondary}{HTML}{C6B53C} % orange
+\definecolor{quatrinary}{HTML}{BD3E4C} % red
+
+\definecolor{alternativePrimary}{HTML}{13293D} % blue
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Colour Pallets
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% source: https://flatuicolors.com/
+
+\newcommand{\newpalette}[2]{
+    \expandafter\newcommand\csname palette#1\endcsname{#2}%
+}
+\newcommand{\usepalette}[1]{
+    \undefinepalette
+    \csname palette#1\endcsname
+    \ensurepalettecomplete
+}
+
+\newcommand{\undefinepalette}{
+    \let\color@Cream\undefined
+    \let\color@White\undefined
+    \let\color@Black\undefined
+    \let\color@Grey\undefined
+    \let\color@LightGrey\undefined
+    \let\color@DarkGrey\undefined
+    \let\color@Red\undefined
+    \let\color@LightRed\undefined
+    \let\color@DarkRed\undefined
+    \let\color@Yellow\undefined
+    \let\color@LightYellow\undefined
+    \let\color@DarkYellow\undefined
+    \let\color@Blue\undefined
+    \let\color@LightBlue\undefined
+    \let\color@DarkBlue\undefined
+    \let\color@Green\undefined
+    \let\color@LightGreen\undefined
+    \let\color@DarkGreen\undefined
+    \let\color@Orange\undefined
+    \let\color@LightOrange\undefined
+    \let\color@DarkOrange\undefined
+    \let\color@Purple\undefined
+    \let\color@LightPurple\undefined
+    \let\color@DarkPurple\undefined
+    \let\color@Cyan\undefined
+    \let\color@LightCyan\undefined
+    \let\color@DarkCyan\undefined
+}
+
+\newcommand{\ensurepalettecomplete}{
+    \@ifundefined{\string\color@Cream}{\definecolor{Cream}{HTML}{FFFCCF}}{}
+    \@ifundefined{\string\color@White}{\definecolor{White}{HTML}{FCFCFC}}{}
+    \@ifundefined{\string\color@Black}{\definecolor{Black}{HTML}{2f3640}}{}
+
+    \@ifundefined{\string\color@Grey}{\colorlet{Grey}{White!50!Black}}{}
+    \@ifundefined{\string\color@LightGrey}{\colorlet{LightGrey}{Grey!70!White}}{}
+    \@ifundefined{\string\color@DarkGrey}{\colorlet{DarkGrey}{Grey!70!Black}}{}
+
+    \@ifundefined{\string\color@Red}{\definecolor{Red}{HTML}{eb3b47}}{}
+    \@ifundefined{\string\color@LightRed}{\colorlet{LightRed}{Red!80!White}}{}
+    \@ifundefined{\string\color@DarkRed}{\colorlet{DarkRed}{Red!80!Black}}{}
+
+    \@ifundefined{\string\color@Yellow}{\definecolor{Yellow}{HTML}{f7b731}}{}
+    \@ifundefined{\string\color@LightYellow}{\colorlet{LightYellow}{Yellow!90!White}}{}
+    \@ifundefined{\string\color@DarkYellow}{\colorlet{DarkYellow}{Yellow!90!Black}}{}
+
+    \@ifundefined{\string\color@Blue}{\definecolor{Blue}{HTML}{3867d6}}{}
+    \@ifundefined{\string\color@LightBlue}{\colorlet{LightBlue}{Blue!85!White}}{}
+    \@ifundefined{\string\color@DarkBlue}{\colorlet{DarkBlue}{Blue!85!Black}}{}
+
+    \@ifundefined{\string\color@Green}{\definecolor{Green}{HTML}{20bf6b}}{}
+    \@ifundefined{\string\color@LightGreen}{\colorlet{LightGreen}{Green!85!White}}{}
+    \@ifundefined{\string\color@DarkGreen}{\colorlet{DarkGreen}{Green!85!Black}}{}
+
+    \@ifundefined{\string\color@Orange}{\definecolor{Orange}{HTML}{fa8231}}{}
+    \@ifundefined{\string\color@LightOrange}{\colorlet{LightOrange}{Orange!90!White}}{}
+    \@ifundefined{\string\color@DarkOrange}{\colorlet{DarkOrange}{Orange!90!Black}}{}
+
+    \@ifundefined{\string\color@Purple}{\definecolor{Purple}{HTML}{8854d0}}{}
+    \@ifundefined{\string\color@LightPurple}{\colorlet{LightPurple}{Purple!70!White}}{}
+    \@ifundefined{\string\color@DarkPurple}{\colorlet{DarkPurple}{Purple!70!Black}}{}
+
+    \@ifundefined{\string\color@Cyan}{\definecolor{Cyan}{HTML}{0fb9b1}}{}
+    \@ifundefined{\string\color@LightCyan}{\colorlet{LightCyan}{Cyan!85!White}}{}
+    \@ifundefined{\string\color@DarkCyan}{\colorlet{DarkCyan}{Cyan!85!Black}}{}
+}
+
+\newpalette{de}{
+    % Shades
+    \definecolor{LightGrey}{HTML}{a5b1c2}
+    \definecolor{Grey}{HTML}{778ca3}
+    \definecolor{DarkGrey}{HTML}{4b6584}
+    \definecolor{Black}{HTML}{231F20}
+    % Primary Colours
+    \definecolor{Red}{HTML}{eb3b47}
+    \definecolor{LightRed}{HTML}{fc5c65}
+    \definecolor{DarkRed}{HTML}{d91c38}
+
+    \definecolor{Yellow}{HTML}{f7b731}
+    \definecolor{LightYellow}{HTML}{fed330}
+    \definecolor{DarkYellow}{HTML}{f0a132}
+
+    \definecolor{Blue}{HTML}{3867d6}
+    \definecolor{LightBlue}{HTML}{4b7bec}
+    \definecolor{DarkBlue}{HTML}{2654bf}
+    % tertiary Colours
+    \definecolor{Green}{HTML}{20bf6b}
+    \definecolor{LightGreen}{HTML}{26de81}
+    \definecolor{DarkGreen}{HTML}{1ba155}
+
+    \definecolor{Orange}{HTML}{fa8231}
+    \definecolor{LightOrange}{HTML}{fd9644}
+    \definecolor{DarkOrange}{HTML}{f76b20}
+
+    \definecolor{Purple}{HTML}{8854d0}
+    \definecolor{LightPurple}{HTML}{a55eea}
+    \definecolor{DarkPurple}{HTML}{6e49b8}
+    % secondary+ Colours
+    % \definecolor{Brown}{HTML}{}
+    \definecolor{Cyan}{HTML}{0fb9b1}
+    \definecolor{LightCyan}{HTML}{2bcbba}
+    \definecolor{DarkCyan}{HTML}{00a8a8}
+}
+
+\newpalette{fui}{
+    % Shades
+    \definecolor{White}{HTML}{ecf0f1}
+    \definecolor{LightGrey}{HTML}{bdc3c7}
+    \definecolor{Grey}{HTML}{95a5a6}
+    \definecolor{DarkGrey}{HTML}{7f8c8d}
+    \definecolor{Black}{HTML}{2c3e50}
+    % Primary Colours
+    \definecolor{Red}{HTML}{e74c3c}
+    % \definecolor{LightRed}{HTML}{fc5c65}
+    \definecolor{DarkRed}{HTML}{c0392b}
+
+    \definecolor{Yellow}{HTML}{f1c40f}
+    % \definecolor{LightYellow}{HTML}{fed330}
+    % \definecolor{DarkYellow}{HTML}{f0a132}
+
+    \definecolor{Blue}{HTML}{3498db}
+    % \definecolor{LightBlue}{HTML}{4b7bec}
+    \definecolor{DarkBlue}{HTML}{2980b9}
+    % tertiary Colours
+    \definecolor{Green}{HTML}{2ecc71}
+    % \definecolor{LightGreen}{HTML}{26de81}
+    \definecolor{DarkGreen}{HTML}{27ae60}
+
+    \definecolor{Orange}{HTML}{e67e22}
+    \definecolor{LightOrange}{HTML}{f39c12}
+    \definecolor{DarkOrange}{HTML}{d35400}
+
+    \definecolor{Purple}{HTML}{9b59b6}
+    % \definecolor{LightPurple}{HTML}{a55eea}
+    \definecolor{DarkPurple}{HTML}{8e44ad}
+    % secondary+ Colours
+    % \definecolor{Brown}{HTML}{}
+    \definecolor{Cyan}{HTML}{1abc9c}
+    % \definecolor{LightCyan}{HTML}{2bcbba}
+    \definecolor{DarkCyan}{HTML}{16a085}
+}
+
+\newpalette{au}{
+    % Shades
+    \definecolor{White}{HTML}{dff9fb}
+    \definecolor{LightGrey}{HTML}{c7ecee}
+    \definecolor{Grey}{HTML}{95afc0}
+    \definecolor{DarkGrey}{HTML}{535c68}
+    \definecolor{Black}{HTML}{130f40}
+    % Primary Colours
+    \definecolor{Red}{HTML}{eb4d4b}
+    \definecolor{LightRed}{HTML}{ff7979}
+
+    \definecolor{Yellow}{HTML}{f9ca24}
+    \definecolor{LightYellow}{HTML}{f6e58d}
+
+    \definecolor{Blue}{HTML}{4834d4}
+    \definecolor{LightBlue}{HTML}{686de0}
+    % tertiary Colours
+    \definecolor{Green}{HTML}{6ab04c}
+    \definecolor{LightGreen}{HTML}{badc58}
+
+    \definecolor{Orange}{HTML}{f0932b}
+    \definecolor{LightOrange}{HTML}{ffbe76}
+
+    \definecolor{Purple}{HTML}{be2edd}
+    \definecolor{LightPurple}{HTML}{e056fd}
+    % secondary+ Colours
+    \definecolor{Cyan}{HTML}{22a6b3}
+    \definecolor{LightCyan}{HTML}{7ed6df}
+}
+
+\newpalette{us}{
+    % Shades
+    \definecolor{LightGrey}{HTML}{dfe6e9}
+    \definecolor{Grey}{HTML}{b2bec3}
+    \definecolor{DarkGrey}{HTML}{636e72}
+    \definecolor{Black}{HTML}{2d3436}
+    % Primary Colours
+    \definecolor{Red}{HTML}{d63031}
+    \definecolor{LightRed}{HTML}{ff7675}
+
+    \definecolor{Yellow}{HTML}{fdcb6e}
+    \definecolor{LightYellow}{HTML}{ffeaa7}
+
+    \definecolor{Blue}{HTML}{0984e3}
+    \definecolor{LightBlue}{HTML}{74b9ff}
+    % tertiary Colours
+    \definecolor{Green}{HTML}{00b894}
+    \definecolor{LightGreen}{HTML}{55efc4}
+
+    \definecolor{Orange}{HTML}{e17055}
+    \definecolor{LightOrange}{HTML}{fab1a0}
+
+    \definecolor{Purple}{HTML}{6c5ce7}
+    \definecolor{LightPurple}{HTML}{a29bfe}
+    % secondary+ Colours
+    \definecolor{Cyan}{HTML}{00cec9}
+    \definecolor{LightCyan}{HTML}{81ecec}
+}
+
+\newpalette{uk}{
+    % Shades
+    \definecolor{White}{HTML}{f5f6fa}
+    \definecolor{LightGrey}{HTML}{dcdde1}
+    \definecolor{Grey}{HTML}{7f8fa6}
+    \definecolor{DarkGrey}{HTML}{718093}
+    \definecolor{Black}{HTML}{2f3640}
+    % Primary Colours
+    \definecolor{Red}{HTML}{e84118}
+    \definecolor{DarkRed}{HTML}{c23616}
+
+    \definecolor{Yellow}{HTML}{fbc531}
+    \definecolor{DarkYellow}{HTML}{e1b12c}
+
+    \definecolor{Blue}{HTML}{00a8ff}
+    \definecolor{DarkBlue}{HTML}{0097e6}
+    % tertiary Colours
+    \definecolor{Green}{HTML}{4cd137}
+    \definecolor{DarkGreen}{HTML}{44bd32}
+
+
+    \definecolor{Purple}{HTML}{9c88ff}
+    \definecolor{DarkPurple}{HTML}{8c7ae6}
+    % secondary+ Colours
+}
+
+\newpalette{ca}{
+    % Shades
+    \definecolor{LightGrey}{HTML}{c8d6e5}
+    \definecolor{Grey}{HTML}{8395a7}
+    \definecolor{DarkGrey}{HTML}{576574}
+    \definecolor{Black}{HTML}{222f3e}
+    % Primary Colours
+    \definecolor{Red}{HTML}{ee5253}
+    \definecolor{LightRed}{HTML}{ff6b6b}
+
+    \definecolor{Yellow}{HTML}{feca57}
+
+    \definecolor{Blue}{HTML}{2e86de}
+    \definecolor{LightBlue}{HTML}{54a0ff}
+    % tertiary Colours
+    \definecolor{Green}{HTML}{1dd1a1}
+    \definecolor{DarkGreen}{HTML}{10ac84}
+
+    \definecolor{Orange}{HTML}{ff9f43}
+
+    \definecolor{Purple}{HTML}{5f27cd}
+    \definecolor{LightPurple}{HTML}{aaaaaa}
+    \definecolor{DarkPurple}{HTML}{341f97}
+    % secondary+ Colours
+    \definecolor{Cyan}{HTML}{0abde3}
+    \definecolor{LightCyan}{HTML}{48dbfb}
+}
+
+\newpalette{cn}{
+    % Shades
+    \definecolor{White}{HTML}{ffffff}
+    \definecolor{LightGrey}{HTML}{a4b0be}
+    \definecolor{Grey}{HTML}{747d8c}
+    \definecolor{DarkGrey}{HTML}{57606f}
+    \definecolor{Black}{HTML}{2f3542}
+    % Primary Colours
+    \definecolor{Red}{HTML}{ff4757}
+    \definecolor{LightRed}{HTML}{ff6b81}
+
+    \definecolor{Yellow}{HTML}{eccc68}
+    \definecolor{DarkYellow}{HTML}{ffa502}
+
+    \definecolor{Blue}{HTML}{5352ed}
+    \definecolor{LightBlue}{HTML}{70a1ff}
+    % tertiary Colours
+    \definecolor{Green}{HTML}{2ed573}
+    \definecolor{LightGreen}{HTML}{7bed9f}
+
+    \definecolor{Orange}{HTML}{ff7f50}
+    \definecolor{DarkOrange}{HTML}{ff6348}
+
+    \definecolor{Purple}{HTML}{5352ed}
+    % secondary+ Colours
+    \definecolor{Cyan}{HTML}{1e90ff}
+}
+
+\newpalette{nl}{
+    % Primary Colours
+    \definecolor{Red}{HTML}{EA2027}
+
+    \definecolor{Yellow}{HTML}{FFC312}
+    \definecolor{DarkYellow}{HTML}{F79F1F}
+
+    \definecolor{Blue}{HTML}{0652DD}
+    \definecolor{DarkBlue}{HTML}{1B1464}
+    % tertiary Colours
+    \definecolor{Green}{HTML}{A3CB38}
+    \definecolor{LightGreen}{HTML}{C4E538}
+    \definecolor{DarkGreen}{HTML}{009432}
+
+    \definecolor{Orange}{HTML}{EE5A24}
+
+    \definecolor{Purple}{HTML}{9980FA}
+    \definecolor{LightPurple}{HTML}{D980FA}
+    \definecolor{DarkPurple}{HTML}{5758BB}
+    % secondary+ Colours
+    \definecolor{Cyan}{HTML}{1289A7}
+    \definecolor{LightCyan}{HTML}{12CBC4}
+    \definecolor{DarkCyan}{HTML}{006266}
+}
+
+\newpalette{fr}{
+    % Shades
+    \definecolor{Grey}{HTML}{3c6382}
+    \definecolor{DarkGrey}{HTML}{0a3d62}
+    % Primary Colours
+    \definecolor{Red}{HTML}{eb2f06}
+    \definecolor{LightRed}{HTML}{e55039}
+    \definecolor{DarkRed}{HTML}{b71540}
+
+    \definecolor{Yellow}{HTML}{f6b93b}
+    \definecolor{LightYellow}{HTML}{fad390}
+
+    \definecolor{Blue}{HTML}{1e3799}
+    \definecolor{LightBlue}{HTML}{4a69bd}
+    \definecolor{DarkBlue}{HTML}{0c2461}
+    % tertiary Colours
+    \definecolor{Green}{HTML}{78e08f}
+    \definecolor{LightGreen}{HTML}{b8e994}
+
+    \definecolor{Orange}{HTML}{fa983a}
+    \definecolor{LightOrange}{HTML}{f8c291}
+    \definecolor{DarkOrange}{HTML}{e58e26}
+
+    % secondary+ Colours
+    \definecolor{Cyan}{HTML}{38ada9}
+    \definecolor{DarkCyan}{HTML}{079992}
+}
+
+\newpalette{in}{
+    % Shades
+    \definecolor{White}{HTML}{F8EFBA}
+    \definecolor{Grey}{HTML}{CAD3C8}
+    \definecolor{Black}{HTML}{2C3A47}
+    % Primary Colours
+
+    \definecolor{DarkYellow}{HTML}{EAB543}
+
+    % tertiary Colours
+    \definecolor{Green}{HTML}{55E6C1}
+    \definecolor{LightGreen}{HTML}{9AECDB}
+    \definecolor{DarkGreen}{HTML}{58B19F}
+
+    \definecolor{Orange}{HTML}{F97F51}
+    \definecolor{LightOrange}{HTML}{FEA47F}
+
+    \definecolor{Purple}{HTML}{B33771}
+    \definecolor{LightPurple}{HTML}{82589F}
+    \definecolor{DarkPurple}{HTML}{6D214F}
+    % secondary+ Colours
+}
+
+\newpalette{ru}{
+    % Shades
+    \definecolor{Grey}{HTML}{596275}
+    \definecolor{DarkGrey}{HTML}{303952}
+    % Primary Colours
+    \definecolor{Red}{HTML}{e66767}
+    \definecolor{LightRed}{HTML}{ea8685}
+
+    \definecolor{Yellow}{HTML}{f5cd79}
+    \definecolor{LightYellow}{HTML}{f7d794}
+
+    \definecolor{Blue}{HTML}{546de5}
+    \definecolor{LightBlue}{HTML}{778beb}
+    % tertiary Colours
+
+    \definecolor{Orange}{HTML}{f19066}
+    \definecolor{LightOrange}{HTML}{f3a683}
+
+    \definecolor{Purple}{HTML}{574b90}
+    \definecolor{LightPurple}{HTML}{786fa6}
+    % secondary+ Colours
+    \definecolor{Cyan}{HTML}{3dc1d3}
+    \definecolor{LightCyan}{HTML}{63cdda}
+}
+
+\newpalette{es}{
+    % Shades
+    \definecolor{White}{HTML}{f7f1e3}
+    \definecolor{LightGrey}{HTML}{d1ccc0}
+    \definecolor{Grey}{HTML}{aaa69d}
+    \definecolor{DarkGrey}{HTML}{84817a}
+    % Primary Colours
+    \definecolor{LightRed}{HTML}{ff5252}
+    \definecolor{DarkRed}{HTML}{b33939}
+
+    \definecolor{Yellow}{HTML}{ffb142}
+    \definecolor{LightYellow}{HTML}{ffda79}
+    \definecolor{DarkYellow}{HTML}{cc8e35}
+
+    \definecolor{Blue}{HTML}{34ace0}
+    \definecolor{DarkBlue}{HTML}{227093}
+    % tertiary Colours
+    \definecolor{Green}{HTML}{33d9b2}
+    \definecolor{DarkGreen}{HTML}{218c74}
+
+    \definecolor{Orange}{HTML}{ff793f}
+    \definecolor{DarkOrange}{HTML}{cd6133}
+
+    \definecolor{Purple}{HTML}{474787}
+    \definecolor{LightPurple}{HTML}{706fd3}
+    \definecolor{DarkPurple}{HTML}{40407a}
+    % secondary+ Colours
+}
+
+\newpalette{se}{
+    % Shades
+    \definecolor{LightGrey}{HTML}{d2dae2}
+    \definecolor{Grey}{HTML}{808e9b}
+    \definecolor{DarkGrey}{HTML}{485460}
+    \definecolor{Black}{HTML}{1e272e}
+    % Primary Colours
+    \definecolor{Red}{HTML}{ff3f34}
+    \definecolor{LightRed}{HTML}{ff5e57}
+
+    \definecolor{Yellow}{HTML}{ffd32a}
+    \definecolor{LightYellow}{HTML}{ffdd59}
+
+    \definecolor{Blue}{HTML}{0fbcf9}
+    \definecolor{LightBlue}{HTML}{4bcffa}
+    \definecolor{DarkBlue}{HTML}{3c40c6}
+    % tertiary Colours
+    \definecolor{Green}{HTML}{05c46b}
+    \definecolor{LightGreen}{HTML}{0be881}
+
+    \definecolor{Orange}{HTML}{ffc048}
+    \definecolor{LightOrange}{HTML}{ffa801}
+
+    \definecolor{Purple}{HTML}{3c40c6}
+    % secondary+ Colours
+    \definecolor{Cyan}{HTML}{00d8d6}
+    \definecolor{LightCyan}{HTML}{34e7e4}
+}
+
+\newpalette{tr}{
+    % Shades
+    \definecolor{Grey}{HTML}{4b4b4b}
+    \definecolor{DarkGrey}{HTML}{3d3d3d}
+    % Primary Colours
+    \definecolor{Red}{HTML}{ff3838}
+    \definecolor{LightRed}{HTML}{ff4d4d}
+
+    \definecolor{Yellow}{HTML}{fff200}
+    \definecolor{LightYellow}{HTML}{fffa65}
+
+    \definecolor{Blue}{HTML}{17c0eb}
+    \definecolor{LightBlue}{HTML}{18dcff}
+    % tertiary Colours
+    \definecolor{Green}{HTML}{3ae374}
+    \definecolor{LightGreen}{HTML}{32ff7e}
+
+    \definecolor{Orange}{HTML}{ff9f1a}
+    \definecolor{LightOrange}{HTML}{ffaf40}
+
+    \definecolor{Purple}{HTML}{c56cf0}
+    \definecolor{LightPurple}{HTML}{cd84f1}
+    \definecolor{DarkPurple}{HTML}{7d5fff}
+    % secondary+ Colours
+    \definecolor{Cyan}{HTML}{67e6dc}
+    \definecolor{LightCyan}{HTML}{7efff5}
+}
+
+\usepalette{\bmc@palette}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  info bulle colours
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\colorlet{infoBulleBackground}{page!94!text}
+\colorlet{infoBulleText}{text}
+\colorlet{marginInfoBulleBackground}{page}
+\colorlet{marginInfoBulleText}{text}
+
+\colorlet{criticalColor}{Red}
+\colorlet{questionColor}{Purple}
+\colorlet{informationColor}{Green}
+\colorlet{checkColor}{Blue}
+\colorlet{warningColor}{Orange}
+\colorlet{tipsColor}{Purple}
+\colorlet{exampleColor}{Blue}
+\colorlet{mathematicalColor}{Orange}
+\colorlet{codeColor}{Grey}
+
+% set link colour
+\AtEndPreamble{
+	\ifbool{bmc@dark}{
+        \@ifundefined{\string\color@href}{\colorlet{href}{secondary}}{}
+        \@ifundefined{\string\color@inlinemath}{\colorlet{inlinemath}{tertiary!50!text}}{}
+	}{
+        \@ifundefined{\string\color@href}{\colorlet{href}{tertiary}}{}
+        \@ifundefined{\string\color@inlinemath}{\colorlet{inlinemath}{secondary!50!text}}{}
+	}
+}

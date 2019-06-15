@@ -1,0 +1,259 @@
+%══════════════════════════════════════════%
+%                                          %
+%                  BMC                     %
+%     A Bespoke, Multipurpose Class        %
+%        -- Fonts Functionality --         %
+%                 -~=~-                    %
+%          Authored by tecosaur            %
+%                                          %
+%══════════════════════════════════════════%
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{bmc-fonts}[2019/06/09 Fonts functionality used in the BMC class]
+
+\ifdefined\@bmc\else
+    \RequirePackage{kvoptions}
+    \SetupKeyvalOptions{family=bmc, prefix=bmc@}
+
+    \DeclareBoolOption{serif}
+    \DeclareBoolOption{sans}
+    \DeclareBoolOption{mono}
+    \DeclareStringOption[serif]{body} % serif, sans, or mono
+
+    \DeclareStringOption{math}[serif] % serif, sans, or mono
+
+    \DeclareBoolOption{headingsSerif}
+    \DeclareBoolOption{headingsSans}
+    \DeclareBoolOption{headingsMono}
+    \DeclareStringOption[sans]{headings} % serif, sans, or mono
+
+    % process values
+
+    \ifbool{bmc@serif}{
+        \renewcommand{\bmc@body}{serif}
+    }{}
+    \ifbool{bmc@sans}{
+        \renewcommand{\bmc@body}{sans}
+    }{}
+    \ifbool{bmc@mono}{
+        \renewcommand{\bmc@body}{mono}
+    }{}
+
+    \ifbool{bmc@headingsSerif}{
+        \renewcommand{\bmc@headings}{serif}
+    }{}
+    \ifbool{bmc@headingsSans}{
+        \renewcommand{\bmc@headings}{sans}
+    }{}
+    \ifbool{bmc@headingsMono}{
+        \renewcommand{\bmc@headings}{mono}
+    }{}
+
+    \newcommand{\ifdefstringx}[2]{%
+        \begingroup
+        \edef\x{#1}%
+        \ifdefstring{\x}{#2}{\endgroup\@firstoftwo}{\endgroup\@secondoftwo}%
+    }
+\fi
+
+% ================
+% Setup Font
+% ================
+
+\RequirePackage[T1]{fontenc}
+\RequirePackage[utf8]{inputenc}
+
+\RequirePackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true]{microtype} % ,factor=1100,stretch=15,shrink=15
+\microtypecontext{spacing=nonfrench}
+\RequirePackage{setspace}
+
+% Load fonts
+\ifdefempty{\bmc@math}{}{
+	\RequirePackage[utopia]{mathdesign}
+	\let\circledS\undefined % here - PS
+}
+
+\RequirePackage{plex-serif}
+\RequirePackage{plex-sans}
+\RequirePackage{plex-mono}
+
+\newcommand*{\ditto}{\enspace\ensuremath{\prime\prime}\enspace}
+
+% Math Font & Setup
+% =================
+
+% \setlength{\mathLetterPadding}{1mm}
+
+% 1mu padding
+
+\ifdefstringx{\bmc@math}{serif}{
+	\renewcommand{\familydefault}{\rmdefault}
+	\RequirePackage[basic,italic,symbolgreek]{mathastext}
+
+	%
+	% \@for\@tempa:=a,b,c,d,e,h,i,k,l,m,n,o,q,r,t,u,v,w\do{
+	% \MTsetmathskips{\@tempa}{0.5mu}{0.5mu}}
+	%
+
+
+	\MTsetmathskips{a}{-0.20mu}{1.50mu}
+	\MTsetmathskips{b}{-0.50mu}{1.50mu}
+	\MTsetmathskips{c}{-0.50mu}{1.70mu}
+	\MTsetmathskips{d}{-0.30mu}{1.70mu}
+	\MTsetmathskips{e}{-0.50mu}{1.70mu}
+	\MTsetmathskips{f}{2.40mu}{1.70mu}
+	\MTsetmathskips{g}{0.50mu}{1.60mu}
+	\MTsetmathskips{h}{-0.50mu}{1.00mu}
+	\MTsetmathskips{i}{-0.50mu}{1.80mu}
+	\MTsetmathskips{j}{2.20mu}{1.80mu}
+	\MTsetmathskips{k}{-0.50mu}{1.50mu}
+	\MTsetmathskips{l}{-0.80mu}{1.80mu}
+	\MTsetmathskips{m}{-0.40mu}{1.00mu}
+	\MTsetmathskips{n}{-0.40mu}{1.00mu}
+	\MTsetmathskips{o}{-0.20mu}{1.30mu}
+	\MTsetmathskips{p}{0.20mu}{1.50mu}
+	\MTsetmathskips{q}{-0.20mu}{1.30mu}
+	\MTsetmathskips{r}{-0.80mu}{1.80mu}
+	\MTsetmathskips{s}{0.10mu}{1.50mu}
+	\MTsetmathskips{t}{-1.00mu}{1.50mu}
+	\MTsetmathskips{u}{-1.10mu}{1.30mu}
+	\MTsetmathskips{v}{-1.10mu}{1.80mu}
+	\MTsetmathskips{w}{-1.00mu}{1.80mu}
+	\MTsetmathskips{x}{0.50mu}{1.70mu}
+	\MTsetmathskips{y}{1.20mu}{1.80mu}
+	\MTsetmathskips{z}{0.40mu}{1.30mu}
+
+	\MTsetmathskips{A}{1.40mu}{1.40mu}
+	\MTsetmathskips{B}{0.60mu}{1.70mu}
+	\MTsetmathskips{C}{-0.80mu}{1.50mu}
+	\MTsetmathskips{D}{0.50mu}{1.70mu}
+	\MTsetmathskips{E}{0.60mu}{1.60mu}
+	\MTsetmathskips{F}{0.60mu}{1.60mu}
+	\MTsetmathskips{G}{-1.00mu}{1.60mu}
+	\MTsetmathskips{H}{0.60mu}{1.70mu}
+	\MTsetmathskips{I}{0.60mu}{1.70mu}
+	\MTsetmathskips{J}{1.80mu}{1.70mu}
+	\MTsetmathskips{K}{0.50mu}{1.70mu}
+	\MTsetmathskips{L}{0.50mu}{1.60mu}
+	\MTsetmathskips{M}{0.60mu}{1.70mu}
+	\MTsetmathskips{N}{0.60mu}{1.70mu}
+	\MTsetmathskips{O}{-1.00mu}{1.70mu}
+	\MTsetmathskips{P}{0.30mu}{1.70mu}
+	\MTsetmathskips{Q}{-0.90mu}{1.70mu}
+	\MTsetmathskips{R}{0.20mu}{1.70mu}
+	\MTsetmathskips{S}{-0.20mu}{1.70mu}
+	\MTsetmathskips{T}{-1.30mu}{1.70mu}
+	\MTsetmathskips{U}{-1.80mu}{1.70mu}
+	\MTsetmathskips{V}{-1.30mu}{1.70mu}
+	\MTsetmathskips{W}{-1.30mu}{1.70mu}
+	\MTsetmathskips{X}{1.00mu}{1.70mu}
+	\MTsetmathskips{Y}{-1.00mu}{1.70mu}
+	\MTsetmathskips{Z}{1.00mu}{1.70mu}
+}{}
+\ifdefstringx{\bmc@math}{sans}{
+	\renewcommand{\familydefault}{\sfdefault}
+	\RequirePackage[basic,italic,symbolgreek]{mathastext}
+
+	%
+	% \@for\@tempa:=a,b,c,d,e,h,i,k,l,m,n,o,q,r,s,t,u,v,w,x\do{
+	% \MTsetmathskips{\@tempa}{0.5mu}{0.5mu}}
+	%
+
+	\MTsetmathskips{a}{0.00mu}{0.00mu}
+	\MTsetmathskips{b}{0.30mu}{0.00mu}
+	\MTsetmathskips{c}{0.00mu}{0.80mu}
+	\MTsetmathskips{d}{0.00mu}{1.00mu}
+	\MTsetmathskips{e}{0.00mu}{0.60mu}
+	\MTsetmathskips{f}{2.60mu}{1.00mu}
+	\MTsetmathskips{g}{1.30mu}{1.00mu}
+	\MTsetmathskips{h}{0.40mu}{-0.10mu}
+	\MTsetmathskips{i}{0.00mu}{1.00mu}
+	\MTsetmathskips{j}{2.90mu}{1.00mu}
+	\MTsetmathskips{k}{0.30mu}{0.90mu}
+	\MTsetmathskips{l}{0.00mu}{1.00mu}
+	\MTsetmathskips{m}{0.30mu}{-0.10mu}
+	\MTsetmathskips{n}{0.30mu}{-0.10mu}
+	\MTsetmathskips{o}{0.20mu}{0.10mu}
+	\MTsetmathskips{p}{1.20mu}{0.00mu}
+	\MTsetmathskips{q}{0.00mu}{0.30mu}
+	\MTsetmathskips{r}{0.30mu}{1.00mu}
+	\MTsetmathskips{s}{0.80mu}{0.30mu}
+	\MTsetmathskips{t}{-0.20mu}{1.00mu}
+	\MTsetmathskips{u}{-0.20mu}{0.30mu}
+	\MTsetmathskips{v}{-0.30mu}{1.00mu}
+	\MTsetmathskips{w}{-0.50mu}{1.00mu}
+	\MTsetmathskips{x}{1.70mu}{1.00mu}
+	\MTsetmathskips{y}{1.50mu}{1.00mu}
+}{}
+\ifdefstringx{\bmc@math}{mon}{
+	\renewcommand{\familydefault}{\ttdefault}
+	\RequirePackage[basic,italic,symbolgreek]{mathastext}
+}{}
+
+% Text Font
+% =========
+
+\linespread{1.15}
+
+\ifdefstringx{\bmc@body}{serif}{
+	\renewcommand{\familydefault}{\rmdefault}
+}{}
+\ifdefstringx{\bmc@body}{sans}{
+	\renewcommand{\familydefault}{\sfdefault}
+}{}
+\ifdefstringx{\bmc@body}{mono}{
+	\renewcommand{\familydefault}{\ttdefault}
+}{}
+
+% Section font
+% ============
+
+\ifdefstringx{\bmc@headings}{serif}{
+	\newcommand{\headingsFont}{\rmdefault}
+	\newcommand{\titleFont}{\rmdefault}
+}{}
+\ifdefstringx{\bmc@headings}{sans}{
+	\newcommand{\headingsFont}{\sfdefault}
+	\newcommand{\titleFont}{\sfdefault}
+}{}
+\ifdefstringx{\bmc@headings}{mono}{
+	\newcommand{\headingsFont}{\ttdefault}
+	\newcommand{\titleFont}{\ttdefault}
+}{}
+
+% Small Caps - source: https://tex.stackexchange.com/a/225078/167605
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\newlength\fake@f
+\newlength\fake@c
+\def\fakesc#1{%
+\begingroup%
+\xdef\fake@name{\csname\curr@fontshape/\f@size\endcsname}%
+\fontsize{\fontdimen8\fake@name}{\baselineskip}\selectfont%
+\uppercase{#1}%
+\endgroup%
+}
+
+
+\newcommand\fauxsc[1]{\fauxschelper#1 \relax\relax}
+\def\fauxschelper#1 #2\relax{%
+\fauxschelphelp#1\relax\relax%
+\if\relax#2\relax\else\ \fauxschelper#2\relax\fi%
+}
+\def\Hscale{.83}\def\Vscale{.72}\def\Cscale{1.00}
+\def\fauxschelphelp#1#2\relax{%
+\ifnum`#1>``\ifnum`#1<`\{\scalebox{\Hscale}[\Vscale]{\uppercase{#1}}\else%
+	\scalebox{\Cscale}[1]{#1}\fi\else\scalebox{\Cscale}[1]{#1}\fi%
+\ifx\relax#2\relax\else\fauxschelphelp#2\relax\fi}
+
+% Add colour to inline math
+\renewrobustcmd{\(}{\@ifstar\@inlinemath\@@inlinemath}
+\DeclareRobustCommand{\@inlinemath}{\relax\ifmmode\@badmath\else$\fi}
+\DeclareRobustCommand{\@@inlinemath}{\relax\ifmmode\@badmath\else$\fi\color{inlinemath}}
+
+% Roman Numerals
+\AtEndPreamble{
+	\providecommand*{\RN}[1]{\expandafter\@slowromancap\romannumeral #1@}
+	\providecommand*{\Rn}[1]{\romannumeral#1\relax}
+}

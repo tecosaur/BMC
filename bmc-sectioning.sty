@@ -1,0 +1,389 @@
+%══════════════════════════════════════════%
+%                                          %
+%                  BMC                     %
+%     A Bespoke, Multipurpose Class        %
+%     -- Sectioning Functionality --       %
+%                 -~=~-                    %
+%          Authored by tecosaur            %
+%                                          %
+%══════════════════════════════════════════%
+
+\ProvidesPackage{bmc-sectioning}[2019/06/09 Sectioning functionality used in the BMC class]
+\NeedsTeXFormat{LaTeX2e}
+
+\ifdefined\@bmc\else
+    \RequirePackage{kvoptions}
+    \SetupKeyvalOptions{family=bmc, prefix=bmc@}
+
+    % General
+    \DeclareBoolOption{solid}
+    \DeclareBoolOption{stripe}
+
+    \DeclareBoolOption{article}
+
+    \DeclareBoolOption{paragraph}
+
+    % color
+
+    \DeclareBoolOption{dark}
+
+    % other stuff
+
+    \DeclareBoolOption{serif}
+    \DeclareBoolOption{sans}
+    \DeclareBoolOption{mono}
+    \DeclareStringOption[serif]{body} % serif, sans, or mono
+
+    \DeclareBoolOption{headingsSerif}
+    \DeclareBoolOption{headingsSans}
+    \DeclareBoolOption{headingsMono}
+    \DeclareStringOption[sans]{headings} % serif, sans, or mono
+
+    % process values
+
+    \ifbool{bmc@serif}{
+        \renewcommand{\bmc@body}{serif}
+    }{}
+    \ifbool{bmc@sans}{
+        \renewcommand{\bmc@body}{sans}
+    }{}
+    \ifbool{bmc@mono}{
+        \renewcommand{\bmc@body}{mono}
+    }{}
+
+    \ifbool{bmc@headingsSerif}{
+        \renewcommand{\bmc@headings}{serif}
+    }{}
+    \ifbool{bmc@headingsSans}{
+        \renewcommand{\bmc@headings}{sans}
+    }{}
+    \ifbool{bmc@headingsMono}{
+        \renewcommand{\bmc@headings}{mono}
+    }{}
+
+    \newcommand{\ifdefstringx}[2]{%
+        \begingroup
+        \edef\x{#1}%
+        \ifdefstring{\x}{#2}{\endgroup\@firstoftwo}{\endgroup\@secondoftwo}%
+    }
+\fi
+
+% title formating
+\RequirePackage{titlesec}
+
+% Other Titling
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\ifbool{bmc@article}{
+}{
+
+\RequirePackage{titlesec}
+% Chapter format
+\titleformat{\chapter}[display]
+	{}
+	{\titleBackground\thispagestyle{empty}}
+	{4pt}
+	{
+		\begin{minipage}[t]{8.2cm-\leftmargin}
+			\mbox{}\\
+			\null\hfill\fontsize{6.5cm}{1ex}\selectfont{\ifbool{bmc@solid}{\color{page}}{\color{primary}}\thechapter}
+		\end{minipage}
+		\hspace*{-5mm}
+		\begin{minipage}[t]{\paperwidth-7cm-\leftmargin}
+			\mbox{}\\
+			\vspace*{-1.1cm}
+			\begin{flushleft}
+				\begin{spacing}{5}
+					\fontsize{1.7cm}{1em}
+					\fontseries{tx}
+					\selectfont
+					\ifbool{bmc@dark}{
+						\color{primaryVariant}
+					}{
+						\color{alternativePrimary}
+					}
+	}[\end{spacing}\end{flushleft}\end{minipage}]
+
+\titleformat{name=\chapter, numberless}[display]
+	{}
+	{\titleBackground\thispagestyle{empty}}
+	{0pt}
+	{
+		\fontsize{2cm}{1em}
+	}
+
+}
+
+
+\addtokomafont{section}{\Huge\color{primary}\bfseries\fontfamily{\headingsFont}\selectfont}
+\addtokomafont{subsection}{\huge\color{primary}\fontseries{sb}\fontfamily{\headingsFont}\selectfont}
+\addtokomafont{subsubsection}{\LARGE\color{primary}\fontseries{sb}\fontfamily{\headingsFont}\selectfont}
+\addtokomafont{paragraph}{\color{primary!70!text}\fontseries{mb}\fontfamily{\headingsFont}\selectfont}
+\addtokomafont{subparagraph}{\color{primary!70!text}\fontseries{mb}\fontfamily{\headingsFont}\selectfont}
+
+\renewcommand{\sectionformat}{
+    \bfseries\itshape\thesection\enspace
+}
+
+\renewcommand{\subsectionformat}{
+    \bfseries\itshape\thesubsection\enspace
+}
+
+\renewcommand{\subsubsectionformat}{
+    \bfseries\itshape\thesubsubsection\enspace
+}
+
+\ifbool{bmc@article}{
+	\renewcommand{\sectionlinesformat}[4]{
+		#4 \hfill #3
+		\vspace*{-.5\baselineskip}
+		\mbox{}
+		\textcolor{primary}{\rule{\textwidth}{.4pt}}\par\nobreak
+	}
+}{}
+
+\RedeclareSectionCommands[indent=0em]{section,subsection,subsubsection}
+
+% \titleformat
+% {\section} % command
+% {\huge} % format
+% {\hspace*{-3mm}\fontsize{3ex}{3.6ex}\sectionNumbers\selectfont\color{sectionNumbersColor}\raisebox{-1mm}{\thesection}}
+% % label
+% {-3mm} % sep
+% {\fontspec{Fira Sans Medium}\selectfont} % before
+% {}
+
+% \titleformat{\subsection}{\LARGE}{%
+% 	\hspace*{-3mm}\fontsize{3ex}{3.6ex}\selectfont\color{subsectionNumbersColor}%
+% 	\raisebox{-1mm}{\thesubsection}%
+% }{-3mm}{}{}
+
+
+	%Titling spacing
+% \titlespacing*{\chapter}{0mm}{0pt}{10pt}
+% \titlespacing*{name=\chapter,numberless}{0pt}{10pt}{0pt} %starred version of chapter default: 0pt, 50pt, 40pt
+% \titlespacing*{\section}{0mm}{4mm}{3mm}
+% \titlespacing*{\subsection}{0mm}{3mm}{2mm}
+% \titlespacing*{\subsubsection}{0mm}{2mm}{1.5mm}
+
+% Make parahraphs and subparagraphs more like sections (unless disabled)
+\ifbool{bmc@paragraph}{}{
+	\ifx\paragraph\undefined\else
+	\let\oldparagraph\paragraph
+	\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+	\fi
+	\ifx\subparagraph\undefined\else
+	\let\oldsubparagraph\subparagraph
+	\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+	\fi
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%		ToC and Mini-ToC
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\RequirePackage{titletoc}
+\RequirePackage{framed}
+\RequirePackage[absolute,overlay]{textpos}
+
+\newcommand{\fancytoc}{
+	\thispdfpagelabel{Contents}
+	% \titleBackground
+	{\hypersetup{linkcolor=text}
+		\setcounter{tocdepth}{0}
+		\begingroup
+			\let\clearpage\relax
+			\tableofcontents
+		\endgroup
+	}
+	\begin{textblock*}{5cm}(1.6cm,6cm) % {block width} (coords)
+		\fontsize{4cm}{2em}\selectfont
+		\rotatebox[origin=c]{90}{\color{primaryVariant}Contents}
+	\end{textblock*}
+	\newpage
+}
+
+%		ToC
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\ifbool{bmc@article}{
+	\renewcommand{\contentsname}{Contents}
+}{
+	\renewcommand{\contentsname}{}
+}
+
+\pretocmd{\tableofcontents}{\hypertarget{contents}{}}{}{}
+
+\newenvironment{tocChapterText}{
+	\def\FrameCommand{
+		\ifbool{bmc@notes}{
+			\hspace*{\dimexpr13.3cm-1\leftmargin\relax}
+		}{
+			\hspace*{\dimexpr9.7cm-1\leftmargin\relax}
+		}
+	}
+	\MakeFramed{
+		% \parshape 1 0cm .75\textwidth \relax\FrameRestore
+		\parshape 1 0cm 12.5cm \relax
+	}
+}{\endMakeFramed}
+\titlecontents{chapter}[0em]{\vspace*{1\baselineskip}}{
+	\parbox{7.5cm-\leftmargin}{\hfill{\ifbool{bmc@solid}{\hypersetup{linkcolor=contrastColour}}{\hypersetup{linkcolor=primary}}\fontsize{1.5cm}{1ex}\selectfont\color{page}\thecontentspage}\hspace*{3mm}}
+	\vspace*{-1.48cm}\fontfamily{\headingsFont}\selectfont\tocChapterText{\large\chaptertitlename~\thecontentslabel}
+	\\[-3mm]
+	\huge\fontfamily{\familydefault}\selectfont
+}{}{\endtocChapterText\vskip-5mm}
+
+%		Mini-ToC
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\printMiniToc}{
+	\vfill
+	\hspace*{\dimexpr-1\leftmargin+6.7cm\relax}\parbox[t]{\paperwidth-6.5cm-\leftmargin}{
+		\hspace*{-3mm}\raisebox{0.25mm}{\fontsize{0.6cm}{1ex}\selectfont\ifbool{bmc@solid}{\color{contrastColour}}{\color{primary}}\faList}
+		\ifstrequal{\bmc@body}{serif}{\hspace*{5.5mm}}{\hspace*{6.5mm}} {\fontfamily{\headingsFont}\fontseries{tx}\selectfont\huge{Summary}}
+		\vspace*{2mm}
+		\startcontents[chapters]
+		\hypersetup{linkcolor=text}
+		\begin{spacing}{1}
+			\printcontents[chapters]{p}{1}{\setcounter{tocdepth}{1}}
+		\end{spacing}
+	}
+	\vfill
+	\newpage
+}
+
+
+%Redefining toc style so that it dont get indented in partialTocs
+\titlecontents{psection}[3em]
+{} {\large{\ifbool{bmc@solid}{\color{contrastColour}}{\color{primary}}\bfseries\contentslabel{3.5em}}} {} {, \thecontentspage}
+
+\titlecontents{psubsection}[3em]
+{} {\large{\ifbool{bmc@solid}{\color{contrastColour}}{\color{primary}}\bfseries\contentslabel{3.5em}}} {} {, \thecontentspage} %\contentslabel{4.2em} to right-align
+
+\ifbool{bmc@solid}{
+	\newcommand{\titleBackground}{
+		\begin{tikzpicture}[remember picture, overlay]
+			\fill[fill=primary] (current page.south west) rectangle ++(7.5cm, \paperheight);
+		\end{tikzpicture}
+	}
+}{}
+
+\ifbool{bmc@stripe}{
+	\newcommand{\titleBackground}{
+		\begin{tikzpicture}[remember picture, overlay]
+			\fill[fill=primary] ([xshift=7.42cm]current page.south west) rectangle ++(1mm, \paperheight);
+		\end{tikzpicture}
+	}
+}{}
+
+\ifboolexpr{not bool {bmc@solid} and not bool {bmc@stripe}}{
+	\newcommand{\titleBackground}{}
+}{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%		Links
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\RequirePackage[pdfa]{hyperref}
+\RequirePackage{hyperxmp}
+\AtEndPreamble{
+	\hypersetup{
+		pdftoolbar=false,
+		pdfmenubar=true,
+		pdffitwindow=false,
+		pdfborder={1 1 0},
+		pdftitle={\@title},
+		pdfauthor={\@author},
+		pdfsubject={\@subtitle},
+		pdfcreator=pdfLaTeX,
+		% pdfkeywords={{a}{b}},
+		colorlinks=true,
+		linkcolor=href,
+		linktoc=all,
+		urlcolor=href,
+		citecolor=href,
+		filecolor=href,
+		breaklinks=true
+	}
+}
+\urlstyle{same}
+
+%%%%%%%%%%%%%%%%%%
+
+% Automatically add to \chapter
+
+% \let\oldscr@@startchapter\scr@@startchapter
+% \def\scr@@startchapter#1[#2]#3{%
+% 	\oldscr@@startchapter{#1}[#2]{#3}%
+% 	% \newgeometry{right=2.7cm, marginparwidth=0cm, marginparsep=0mm}
+% 	\printMiniToc
+% 	% \restoregeometry
+% }
+
+% \xpretocmd{\scr@@startchapter}{}{}{}
+\xapptocmd{\scr@@startchapter}{\printMiniToc}{}{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%      Header and Footer
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\ifdraft{
+	\AfterPackage*{scrlayer-scrpage}{%
+    \DeclareNewLayer[
+      head,
+      height=0pt,
+      foreground,
+      contents=\textcolor{text!60!page}{\layercontentsmeasure}
+    ]{head.ruler}
+    \DeclareNewLayer[
+      foot,
+      height=0pt,
+      addvoffset=\footheight-\dp\strutbox,
+      background,
+      contents=\textcolor{text!60!page}{\layercontentsmeasure}
+    ]{foot.ruler}
+    \AddLayersAtBeginOfPageStyle{scrheadings}{head.ruler,foot.ruler}
+    \AddLayersAtBeginOfPageStyle{plain.scrheadings}{head.ruler,foot.ruler}
+  }
+}{
+
+	\clearpairofpagestyles
+	\cfoot*{\hyperlink{contents}{\pagemark}}
+
+	\ifbool{bmc@article}{
+		\chead{\hypersetup{allcolors=.}\hyperlink{section.\arabic{section}}{\headmark}}
+	}{
+		\chead{\hypersetup{allcolors=.}\hyperlink{chapter.\arabic{chapter}}{\headmark}}
+	}
+
+	\addtokomafont{pagehead}{\fontfamily{\headingsFont}\selectfont\bfseries\upshape\ifbool{bmc@solid}{\color{contrastColour}}{\color{primary}}}
+	\addtokomafont{pagenumber}{\fontfamily{\headingsFont}\fontseries{sb}\selectfont\color{primary}}
+
+	% shift the predefined head layers
+	\ForEachLayerOfPageStyle*{scrheadings}{%
+	\ifstrstart{#1}{scrheadings.head.}
+		{\ModifyLayer[addvoffset=-.5in-.5\voffset-.5\topmargin]{#1}}
+		{}%
+	}
+	\ForEachLayerOfPageStyle*{plain.scrheadings}{%
+	\ifstrstart{#1}{plain.scrheadings.head.}
+		{\ModifyLayer[addvoffset=-.5in-.5\voffset-.5\topmargin]{#1}}
+		{}%
+	}
+
+	% Defining the Layer
+	\DeclareLayer[
+		background,
+		topmargin,
+		addheight=\headheight,
+		contents={%
+			\ifbool{bmc@solid}{\color{primary}}{\color{page}}
+			\rule{\layerwidth}{\layerheight}%
+		}%
+	]{my.head.background}
+
+	%Adding the Layer to the pagestyles
+	\AddLayersAtBeginOfPageStyle{scrheadings}{my.head.background}
+	\AddLayersAtBeginOfPageStyle{plain.scrheadings}{my.head.background}
+
+}
