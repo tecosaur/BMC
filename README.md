@@ -11,6 +11,8 @@ It is currently a work-in-progress, and will likely remain such until I am happy
 If anybody out there happens to like this and use it, good for you :smiley:.
 Furthermore (as unlikely as this may be), if anybody does so and has an idea for, or even implements an improvement do be sure to give me a shout or open a PR. I'd really appreciate it :grin:
 
+![demo-img](documentation/bmc-demo-img.png)
+
 ## Installation
 
 ### Method one
