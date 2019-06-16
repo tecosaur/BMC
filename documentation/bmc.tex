@@ -1,7 +1,7 @@
 \documentclass[solid,math,chem,code,plot]{bmc}
 
 \titlehead{Bespoke Multipurpose Class}
-\title{BMC \hfill \fontsize{1.35cm}{1.35cm}\fontseries{t}\selectfont \emph{v}0.1}
+\title{\texorpdfstring{BMC \hfill \fontsize{1.35cm}{1.35cm}\fontseries{t}\selectfont \emph{v}0.2}{BMC v0.2}}
 \subtitle{Pretentiousness Given Form}
 \author{tecosaur \footnotesize \newline Of Github}
 
@@ -9,11 +9,14 @@
 \renewcommand{\thefootnote}{\fnsymbol{footnote}}
 \usepackage[normalem]{ulem}
 
+\newcommand*{\fullref}[1]{\hyperref[{#1}]{\ref*{#1} \nameref*{#1}}}
+
 \begin{document}
 
-\maketitle{}
+\maketitle
 
-\section*{Preamble}
+\thispdfpagelabel{Preface}
+\section*{Preface}
 
 \vspace{1cm}
 
@@ -76,7 +79,7 @@ I wanted a selection where serif, sans, and mono all mix well.
 Ideally with a few weight variants.
 Additionally I wanted a typographic style that meshed well with the
 large class of documents I indented to use this for. IBM Plex seems like a good fit
-(For more info see \autoref{sec:why-typefaces}). For all three of these a linespread of 1.15 is used.
+(For more info see \fullref{sec:why-typefaces}). For all three of these a linespread of 1.15 is used.
 
 \newcommand\setrow[1]{\gdef\rowmac{#1}#1\ignorespaces}
 \newcommand\clearrow{\global\let\rowmac\relax}
@@ -187,10 +190,8 @@ nice colour themes may be found at \url{https://flatuicolors.com}.
 These shades do not use the pretentious names listed, we just call them what they are
 (e.g.\ nephritis \(*\to \) green). Instead of overwriting the pre-existing colour, these colours
 have been differentiated by capitalisation, i.e.\ ``Green'' instead of `green'.
-
-\subsection{Functional Colours}
-This package has a few special colours that describe a particular aspect of a document,
-such as \verb|href| and \verb|inlinemath|. For more information see \autoref{subsec:config-colours}.
+The default colour palette is shown below, however you can easily switch to another
+--- see \fullref{subsec:palettes} for more information.
 
 \begin{multicols}{2}
     \centering
@@ -203,6 +204,10 @@ such as \verb|href| and \verb|inlinemath|. For more information see \autoref{sub
     \colorBox{Purple} \qquad \colorBox{LightPurple} \colorBox{DarkPurple} \\[-0.7mm]
     \colorBox{Cyan} \qquad \colorBox{LightCyan} \colorBox{DarkCyan}
 \end{multicols}
+
+\subsection{Functional Colours}
+This package has a few special colours that describe a particular aspect of a document,
+such as \verb|href| and \verb|inlinemath|. For more information see \fullref{subsec:config-colours}.
 
 \section{Mathematics}
 
@@ -270,7 +275,10 @@ This class adds an optional parameter to change the alignment,
 \paragraph{\rlap{Deliminators}\hspace*{8em}}
 \begin{tabular}{p{4.2em}>{\(*\to\quad \)}p{4em}}
     \mintinline{tex}{\abs{x}} & \(*\abs{x} \) \\
-    \mintinline{tex}{\norm{x}} & \(*\norm{x}\)
+    \mintinline{tex}{\norm{x}} & \(*\norm{x}\) \\
+    \mintinline{tex}{\ceil{x}} & \(*\ceil{x}\) \\
+    \mintinline{tex}{\floor{x}} & \(*\floor{x}\) \\
+    \mintinline{tex}{\round{x}} & \(*\round{x}\) \\
 \end{tabular}
 
 \footnotetext[2]{Can also be used outside of math mode.\label{fn:1}}
@@ -281,6 +289,8 @@ This class adds an optional parameter to change the alignment,
     \mintinline{tex}{\ZZ} & \ZZ & \mintinline{tex}{\ZZ[n]} & \ZZ[n] \\
     \mintinline{tex}{\QQ} & \QQ & \mintinline{tex}{\QQ[n]} & \QQ[n] \\
     \mintinline{tex}{\CC}& \CC & \mintinline{tex}{\CC[n]} & \CC[n] \\
+    \mintinline{tex}{\PP} & \PP & \mintinline{tex}{\PP[n]} & \PP[n] \\
+    \mintinline{tex}{\HH} & \HH & \mintinline{tex}{\HH[n]} & \HH[n] \\
 \end{tabular}
 
 \paragraph{\rlap{Differential d}\hspace*{8em}}
@@ -334,10 +344,12 @@ When the \mintinline{tex}{chem} option is used, \mintinline{tex}{mhchem}
 is loaded with the configuration, however \mintinline{tex}{chemfig}
 undergos a few modifications to make the results look cleaner.
 
-\chemfig{*6(-=-(-COOH)=-=)}
-\chemfig{X-[1]=^[-1]-[1]-[-1]-[1]-[-1]=^[1]-[-1]}
-\qquad
-\chemfig{-[1](=[3]O)-[-1]}
+\begin{center}
+    \chemfig{*6(-=-(-COOH)=-=)}
+    \chemfig{X-[1]=^[-1]-[1]-[-1]-[1]-[-1]=^[1]-[-1]}
+    \qquad
+    \chemfig{-[1](=[3]O)-[-1]}
+\end{center}
 
 \begin{minted}[firstnumber=310]{tex}
 	\setchemfig{
@@ -363,9 +375,20 @@ This allows you to jump all over the document in just a few clicks.
 The hyperxmp package is rather handy for setting a few fields of pdf metadata.
 Using the \mintinline{tex}{\title}, \mintinline{tex}{\author}, and \mintinline{tex}{\subtitle}
 attributes it sets the relevant metadata fields.
-\enlargethispage{\baselineskip}
 
 \chapter{Boring Info}
+
+\section{Implementation}
+
+While originally one giant class file, each major component has now been split off
+into a \mintinline{tex}{.sty} file that can also operate as a standalone package.
+Currently, the following packages exist:
+\begin{itemize}
+    \item bmc-color
+    \item bmc-fonts
+    \item bmc-maths
+    \item bmc-sectioning
+\end{itemize}
 
 \section{Class Options}
 
@@ -386,23 +409,13 @@ Use \mintinline{tex}{scrartcl} class instead of \mintinline{tex}{scrrept}
 Move the margins to make room for notes
 
 \subsection{Fonts}
-\subsubsection{Body Text}
+\paragraph{Body Text}
+Use \mintinline{tex}{[body=<variant>]}, where variant is one of  \mintinline{tex}{serif}, \mintinline{tex}{sans}, or \mintinline{tex}{mono}.
+\\The default is \mintinline{tex}{serif}.
 
-\paragraph{\ttfamily serif}
-{\rmfamily Use serif font as main}
-\paragraph{\ttfamily sans}
-{\sffamily Use sans font as main}
-\paragraph{\ttfamily mono}
-{\ttfamily Use mono font as main}
-
-\subsubsection{Math}
-
-\paragraph{\ttfamily math-serif}
-Same as with math option but forcing a serif font
-\paragraph{\ttfamily math-sans}
-Same as with math option but forcing a sans font
-\paragraph{\ttfamily math-mono}
-Same as with math option but forcing a mono font
+\paragraph{Math}
+Use \mintinline{tex}{[math=<variant>]}, where variant is one of  \mintinline{tex}{serif}, \mintinline{tex}{sans}, or \mintinline{tex}{mono}.
+\\The default is \mintinline{tex}{serif}.
 
 \subsection{Headings}
 
@@ -413,13 +426,8 @@ These options set the style of the following components
     \item Caption labels
 \end{itemize}
 
-\paragraph{\ttfamily headings-serif}
-Not a default.
-\paragraph{\ttfamily headings-sans}
-Default when either \mintinline{tex}{serif}
-or \mintinline{tex}{sans} options are given.
-\paragraph{\ttfamily headings-mono}
-Default when either \mintinline{tex}{mono} option is given.
+Use \mintinline{tex}{[headings=<variant>]}, where variant is one of  \mintinline{tex}{serif}, \mintinline{tex}{sans}, or \mintinline{tex}{mono}.
+\\The default is \mintinline{tex}{sans}.
 
 \subsection{Package Related}
 
@@ -443,28 +451,21 @@ Load and configure some mathematical packages, and set font to match main text f
 \begin{center}
     \small
     \setlength{\tabcolsep}{0pt}
-    \begin{tabular}{>{\hspace{3pt}\normalsize}l>{\hspace{5pt}}*{5}{p{7.9em}}}
+    \begin{tabular}{>{\hspace{3pt}\normalsize}l>{\hspace{5pt}}*{5}{p{7.9em}}l}
         \toprule
         Category & \multicolumn{5}{l}{\normalsize Packages} \\
         \midrule
         General & \hyperref[par:etoolbox]{etoolbox} & \hyperref[par:xpatch]{xpatch} & \hyperref[par:Silence]{Silence} & \hyperref[par:ifdraft]{ifdraft} & \hyperref[par:geometry]{geometry}  \\
-        & \hyperref[par:titlesec]{titlesec} & \hyperref[par:titletoc]{titletoc} &\hyperref[par:framed]{framed} & \hyperref[par:textpos]{textpos} & \hyperref[par:calc]{calc} \\
+        & \hyperref[par:titlesec]{titlesec} & \hyperref[par:titletoc]{titletoc} & \hyperref[par:framed]{framed} & \hyperref[par:textpos]{textpos} & \hyperref[par:calc]{calc} \\
          & \hyperref[par:xcolor]{xcolor} & \hyperref[par:tikz]{tikz} & \hyperref[par:hyperref]{hyperref} & \hyperref[par:hyperxmp]{hyperxmp} & \hyperref[par:scrlayer-scrpage]{scrlayer-scrpage} \\
-         \arrayrulecolor{page}\midrule
-        Text & \hyperref[par:microtype]{microtype} & \hyperref[par:setspace]{setspace} & \hyperref[par:plex-serif]{plex-serif} & \hyperref[par:plex-sans]{plex-sans} & \hyperref[par:plex-mono]{plex-mono} \\
+        Text & \hyperref[par:microtype]{microtype} & \hyperref[par:setspace]{setspace} & \hyperref[par:plex-serif]{plex-serif} & \hyperref[par:plex-sans]{plex-sans} & \hyperref[par:plex-mono]{plex-mono} \\[4pt]
         & \hyperref[par:multicol]{multicol} & \\
-         \midrule
-         Table & \hyperref[par:booktabs]{booktabs} & \hyperref[par:tabularx]{tabularx} & \hyperref[par:longtable]{longtable}  \\
-         \midrule
-         Graphics & \hyperref[par:graphicx]{graphicx} & \hyperref[par:grffile]{grffile} & \hyperref[par:subcaption]{subcaption} & \hyperref[par:caption]{caption} \\
-         \midrule
-         infoBulle & \hyperref[par:infoBulle]{infoBulle} & \hyperref[par:marginInfoBulle]{marginInfoBulle} & \hyperref[par:fontawesome5]{fontawesome5}\\
-         \midrule
-         Chemistry & \hyperref[par:mhchem]{mhchem} & \hyperref[par:chemfig]{chemfig} \\
-         \midrule
-         Code & \hyperref[par:minted]{minted} & \hyperref[par:tcolorbox]{tcolorbox} \\
-         \midrule\arrayrulecolor{text}
-         Math & \hyperref[par:amssymb]{amsmath} & \hyperref[par:amssymb]{amssymb} & \hyperref[par:mathdesign]{mathdesign} & \hyperref[par:xfrac]{xfrac} & \hyperref[par:cancel]{cancel} \\
+         Table & \hyperref[par:booktabs]{booktabs} & \hyperref[par:tabularx]{tabularx} & \hyperref[par:longtable]{longtable}  \\[4pt]
+         Graphics & \hyperref[par:graphicx]{graphicx} & \hyperref[par:grffile]{grffile} & \hyperref[par:subcaption]{subcaption} & \hyperref[par:caption]{caption} \\[4pt]
+         infoBulle & \hyperref[par:infoBulle]{infoBulle} & \hyperref[par:marginInfoBulle]{marginInfoBulle} & \hyperref[par:fontawesome5]{fontawesome5}\\[4pt]
+         Chemistry & \hyperref[par:mhchem]{mhchem} & \hyperref[par:chemfig]{chemfig} \\[4pt]
+         Code & \hyperref[par:minted]{minted} & \hyperref[par:tcolorbox]{tcolorbox} \\[4pt]
+         Math & \hyperref[par:amssymb]{amsmath} & \hyperref[par:amssymb]{amssymb} & \hyperref[par:mathdesign]{mathdesign} & \hyperref[par:xfrac]{xfrac} & \hyperref[par:cancel]{cancel} \\[4pt]
          & \hyperref[par:mathtools]{mathtools} & \hyperref[par:mathastext]{mathastext} & \hyperref[par:pgfplots]{pgfplots} \\
          \bottomrule
     \end{tabular}
@@ -660,9 +661,9 @@ Loaded by the \mintinline{tex}{plot} option.
     \toprule
     \setrow{\scriptsize} Name & Default (Light) & Default (Dark) \clearrow \\
     \midrule
-    \setrow{\scriptsize} \hspace{1em}\vdots & \hspace{1em}\vdots & \hspace{1em}\vdots \clearrow \\
+    \multicolumn{1}{c}{\scriptsize\vdots} & \multicolumn{1}{c}{\scriptsize\vdots} & \multicolumn{1}{c}{\scriptsize\vdots} \\
     \endhead
-    \setrow{\scriptsize} \hspace{1em}\vdots & \hspace{1em}\vdots & \hspace{1em}\vdots \clearrow \\
+    \multicolumn{1}{c}{\scriptsize\vdots} & \multicolumn{1}{c}{\scriptsize\vdots} & \multicolumn{1}{c}{\scriptsize\vdots} \\
     % \midrule
     \bottomrule
     \endfoot
@@ -675,6 +676,7 @@ Loaded by the \mintinline{tex}{plot} option.
     \mintinline{tex}{inlinemath} & secondary\linebreak[0]!50!text & tertiary\linebreak[0]!50!text \\
     \rowcolor{tableheadcolor}
     \multicolumn{2}{l}{\fontseries{l}\selectfont infoBulle} & \\
+    \hiderowcolors
     \mintinline{tex}{infoBulleBackground} & page!90!text & \ditto \\
     \mintinline{tex}{infoBulleText} & text & \ditto \\
     \mintinline{tex}{marginInfoBulleBackground} & page & \ditto \\
@@ -690,7 +692,126 @@ Loaded by the \mintinline{tex}{plot} option.
     \mintinline{tex}{codeColor} & Grey & \ditto \\
 \end{longtable}
 
-\chapter{The Whys}
+\subsection{Palettes}
+\label{subsec:palettes}
+The module \mintinline{tex}{bmc-color} has a few inbuilt pallets
+sourced from \url{https://flatuicolors.com}.
+Using the relevant country code (see website) you can select a palette two ways:
+\begin{enumerate}
+    \item Passing the palette as an option when loading, \mintinline{tex}{[palette=<palette code>]}
+    \item Setting the palette via \mintinline{tex}{\usepalette{<palette code>}}
+\end{enumerate}
+The second method can be employed anywhere in the document.
+
+\subsubsection{Creating Your Own Palette}
+
+Palettes can be created with the command \mintinline{tex}{\newpalette{<palette code>}{<color definitions>}}.
+The `color definitions' simply consist of any \mintinline{tex}{xcolor} commands that define the colour.
+You may wonder why not just define your own macro for your colours ---
+this method provides two minor features that may prove useful depending on the situation.
+\begin{itemize}
+    \item `Main' colours (e.g.\ Red, Green\dots) not provided are populated from a default (\texttt{de})
+    \item `Derived' colours (e.g.\ LightRed, DarkGreen) are mixed from main colours if not given
+\end{itemize}
+It is a good idea to provide colours from the following list, however you can provide as many or as few
+colours as you like.
+
+\begin{center}
+    % \em
+    \fontseries{tx}\selectfont
+    \textcolor{Black!50!text}{Black},
+    \textcolor{White!50!text}{White},
+    \textcolor{Cream!50!text}{Cream},
+    \textcolor{Grey!50!text}{Grey},
+    \textcolor{Red!50!text}{Red},
+    \textcolor{Yellow!50!text}{Yellow},
+    \textcolor{Blue!50!text}{Blue},
+    \textcolor{Green!50!text}{Green},
+    \textcolor{Orange!50!text}{Orange},
+    \textcolor{Purple!50!text}{Purple},
+    \textcolor{Cyan!50!text}{Cyan}.
+    \\[0.5ex]
+    \fontseries{l}\selectfont
+    \upshape\scriptsize\slshape
+    Note: All except for Black, White, and Cream have the
+    accompanying Light and Dark variants.
+\end{center}
+
+\newpage
+\subsubsection{Default Pallets}
+\newcommand{\colorBoxSmallBW}{\begin{tikzpicture}[baseline=0.6ex,x=2.5em,y=2.5em]
+    \fill[Black] (0,0) -- (0.15,0.5) -- (0.75,0.5) -- (0.35,0) -- cycle;
+    \fill[White] (0.35,0) -- (0.75,0.5) -- (1.15,0.5) -- (1,0) -- cycle;
+    \node[text width=2] at (0.28,0.3) {\tiny\color{White}\textsf{B}};
+	\node[text width=2] at (0.75,0.2) {\tiny\color{Black}\textsf{W}};
+\end{tikzpicture}%
+\hspace{-0.375em}}
+% \newcommand{\triag}{%
+%     \begin{tikzpicture}[baseline=0.6ex,x=2.5em,y=2.5em]
+%     \end{tikzpicture}%
+%     \hspace{-1.5em}}
+\newcommand{\colorBoxSmallLD}[2][]{%
+    \hspace{-0.75em}%
+    \begin{tikzpicture}[baseline=0.6ex,x=2.5em,y=2.5em]
+    \fill[White] (-0.75,-0.4) -- (-0.45,0.5) -- (1.15, 0.5) -- (0.8875, -0.4) -- cycle;
+    \if1#1\fill[page] (-0.75,-0.4) -- (-0.62,0) -- (-0.12, -0.4) -- cycle;\fi
+    \fill [#2] (0, 0) rectangle (1, 0.5);
+    \fill[Light#2] (0,0) -- (0.15,0.5)-- (0,0.5) -- (-0.15,0) -- cycle;
+    \fill[Dark#2] (1,0.5) -- (0.85,0) -- (1,0) -- (1.15,0.5) -- cycle;
+	\node[text width=2,align=center] at (0.2,-0.2) {\tiny\color{#2}\textsf{\fontseries{tx}\selectfont#2}};
+\end{tikzpicture}}
+
+\newcommand{\colorBoxSmallLDs}[2][]{%
+    \begin{tikzpicture}[baseline=0.6ex,x=2.5em,y=2.5em]
+        \fill [#2] (0, 0) rectangle (1, 0.5);
+        \fill[Light#2] (0,0) -- (0.4,0) -- (0,0.25) -- cycle;
+        \fill[Dark#2] (1,0.5) -- (0.6,0.5) -- (1,0.25) -- cycle;
+	\node[text width=2,align=center] at (0.2,-0.2) {\tiny\color{#2}\textsf{\fontseries{tx}\selectfont#2}};
+\end{tikzpicture}}
+
+\newcommand{\demoPalette}[2][]{
+    \vspace{-1.8ex}
+    \usepalette{#2}
+    \paragraph{\rlap{\texttt{#2}}\hspace*{3em}}
+    \colorBoxSmallBW{}
+    \colorBoxSmallLD[1]{Grey}%
+    % \triag%
+    \colorBoxSmallLD{Red}%
+    \colorBoxSmallLD{Blue}%
+    \colorBoxSmallLD{Green}%
+    \colorBoxSmallLD{Yellow}%
+    \colorBoxSmallLD{Orange}%
+    \colorBoxSmallLD{Purple}%
+    \colorBoxSmallLD{Cyan} \\[-1.8ex]
+    {\scriptsize\sffamily #1}
+    \vspace{-1ex}
+}
+\vspace{2ex}
+\demoPalette[German \fontseries{l}\selectfont (default)]{de}
+\demoPalette[FlatUI]{fui}
+\demoPalette[Australian]{au}
+\demoPalette[American]{us}
+\demoPalette[British]{uk}
+\demoPalette[Canadian]{ca}
+\demoPalette[Chinese]{cn}
+\demoPalette[Dutch]{nl}
+\demoPalette[French]{fr}
+\demoPalette[Indian]{in}
+\demoPalette[Russian]{ru}
+\demoPalette[Spanish]{es}
+\demoPalette[Swedish]{se}
+\demoPalette[Turkish]{tr}
+
+{\color{primary}\rule{\textwidth}{.2mm}}
+
+\demoPalette[Solarized]{sol}
+\demoPalette[Monokai]{mon}
+
+\demoPalette{test}
+
+\usepalette{de}
+
+\chapter{Reasoning}
 
 \section{Layout}
 \section{Typefaces}
