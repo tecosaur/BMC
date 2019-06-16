@@ -42,6 +42,9 @@
 	\definecolor{text}{HTML}{000000} % black
 }
 
+\pagecolor{page}
+\color{text}
+
 \definecolor{primary}{HTML}{019875} % emerald
 % \definecolor{primaryVariant}{HTML}{1CBE77} % emerald mixed with lighter green
 \AtEndPreamble{
@@ -113,7 +116,7 @@
     \@ifundefined{\string\color@DarkRed}{\colorlet{DarkRed}{Red!80!Black}}{}
 
     \@ifundefined{\string\color@Yellow}{\definecolor{Yellow}{HTML}{f7b731}}{}
-    \@ifundefined{\string\color@LightYellow}{\colorlet{LightYellow}{Yellow!90!White}}{}
+    \@ifundefined{\string\color@LightYellow}{\colorlet{LightYellow}{Yellow!75!White}}{}
     \@ifundefined{\string\color@DarkYellow}{\colorlet{DarkYellow}{Yellow!90!Black}}{}
 
     \@ifundefined{\string\color@Blue}{\definecolor{Blue}{HTML}{3867d6}}{}
@@ -125,7 +128,7 @@
     \@ifundefined{\string\color@DarkGreen}{\colorlet{DarkGreen}{Green!85!Black}}{}
 
     \@ifundefined{\string\color@Orange}{\definecolor{Orange}{HTML}{fa8231}}{}
-    \@ifundefined{\string\color@LightOrange}{\colorlet{LightOrange}{Orange!90!White}}{}
+    \@ifundefined{\string\color@LightOrange}{\colorlet{LightOrange}{Orange!85!White}}{}
     \@ifundefined{\string\color@DarkOrange}{\colorlet{DarkOrange}{Orange!90!Black}}{}
 
     \@ifundefined{\string\color@Purple}{\definecolor{Purple}{HTML}{8854d0}}{}
@@ -539,6 +542,42 @@
     \definecolor{Cyan}{HTML}{67e6dc}
     \definecolor{LightCyan}{HTML}{7efff5}
 }
+
+% End FUI paletes
+
+\newpalette{sol}{
+        % Shades
+        \definecolor{White}{HTML}{fdf6e3}
+        \definecolor{Cream}{HTML}{eee8d5}
+        \definecolor{LightGrey}{HTML}{93a1a1}
+        \definecolor{Grey}{HTML}{586e75}
+        \definecolor{DarkGrey}{HTML}{073642}
+        \definecolor{Black}{HTML}{002b36}
+        % Primary Colours
+        \definecolor{Red}{HTML}{dc322f}
+        \definecolor{Yellow}{HTML}{b58900}
+        \definecolor{Blue}{HTML}{268bd2}
+        % tertiary Colours
+        \definecolor{Green}{HTML}{859900}
+        \definecolor{Orange}{HTML}{cb4b16}
+        \definecolor{Purple}{HTML}{6c71c4}
+        % secondary+ Colours
+        \definecolor{Cyan}{HTML}{2aa198}
+}
+
+\newpalette{mon}{
+    % Primary Colours
+    \definecolor{Red}{HTML}{FA6287}
+    \definecolor{Yellow}{HTML}{FDD76C}
+    \definecolor{Blue}{HTML}{7EDBE7}
+    % tertiary Colours
+    \definecolor{Green}{HTML}{AADB79}
+    \definecolor{Orange}{HTML}{F89769}
+    \definecolor{Purple}{HTML}{A99CF0}
+    % secondary+ Colours
+}
+
+\newpalette{test}{}
 
 \usepalette{\bmc@palette}
 
