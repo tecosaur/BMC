@@ -49,6 +49,8 @@
 
 \DeclareBoolOption{paragraph}
 
+\DeclareBoolOption{landscape}
+
 % extras
 \DeclareBoolOption{notes}
 \DeclareBoolOption{chem}
@@ -423,6 +425,9 @@
 	\setlength{\rightmargin}{2.7cm}
 	\PassOptionsToPackage{marginparwidth=0cm, marginparsep=0mm}{geometry}
 }
+\ifbool{bmc@landscape}{
+	\PassOptionsToPackage{landscape}{geometry}
+}{}
 \RequirePackage[a4paper, ignoreheadfoot, left=\leftmargin, right=\rightmargin, top=2cm, bottom=3.5cm, headsep=1cm]{geometry}
 
 \setlength{\skip\footins}{1cm}
