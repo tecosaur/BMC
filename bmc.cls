@@ -659,7 +659,7 @@
 				% }{
 						\color{primary!60!contrastColour}
 				% }
-				\expandafter\fauxsc\expandafter{\@titlehead}
+				\expandafter\textsc\expandafter{\@titlehead}
 				%
 			\end{center}
 		}

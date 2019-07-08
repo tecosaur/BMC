@@ -224,6 +224,13 @@
 % Small Caps - source: https://tex.stackexchange.com/a/225078/167605
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+% have \textsc use \fauxsc if \scshape not avalible
+\let\textsc\relax
+\DeclareRobustCommand{\textsc}[1]{%
+  \sbox0{x\xdef\testA{\the\font}}%
+  \sbox0{\scshape x\xdef\testB{\the\font}}%
+  \ifx\testA\testB\fauxsc{#1}\else{\scshape #1}\fi
+}
 
 \newlength\fake@f
 \newlength\fake@c

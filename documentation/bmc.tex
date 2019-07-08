@@ -1,7 +1,7 @@
 \documentclass[solid,math,chem,code,plot]{bmc}
 
 \titlehead{Bespoke Multipurpose Class}
-\title{\texorpdfstring{BMC \hfill \fontsize{1.35cm}{1.35cm}\fontseries{t}\selectfont \emph{v}0.2}{BMC v0.2}}
+\title{\texorpdfstring{BMC \hfill \fontsize{1.35cm}{1.35cm}\fontseries{t}\selectfont \emph{v}0.2*}{BMC v0.2*}}
 \subtitle{Pretentiousness Given Form}
 \author{tecosaur \footnotesize \newline Of Github}
 
@@ -133,19 +133,31 @@ to produce \Rn{1978}.
         \providecommand*{\Rn}[1]{\romannumeral#1\relax}
 \end{minted}
 
-\subsection{Fake Small Caps}
+\subsection{Faux Small Caps}
 Some fonts (such as IBM Plex) are not kind enough to provide small caps.
 Simply using downscaled capitals is a barbaric and decidedly inferior solution.
 So \mintinline{tex}{\fauxsc{}} is defined which, while not as nice as \emph{true}
 small caps, is a darn sight better than just reducing the font size.
+\mintinline{tex}{\fauxsc{}} is \emph{automatically} used when \mintinline{tex}{\textsc{}}
+is called if the current font does not have small caps.
 \vspace{-6pt}
 \begin{center}
     \parbox{0cm}{
         \begin{tabbing}
-            Barbaric Solution:\quad \= S{\footnotesize MALL} C{\footnotesize APS} \\
-            \texttt{\textbackslash fauxsc{}}: \> \fauxsc{Small Caps}
+            \texttt{\small \textbackslash textsc} using \texttt{\small \textbackslash fauxsc}:\quad \= \textsc{Small Caps} \\
+            Barbaric Solution: \> S{\footnotesize MALL} C{\footnotesize APS}
         \end{tabbing}}
 \end{center}
+\warningInfo{Usage Warning for Small Caps}{
+    If using this in macros or the like,
+    you may get errors such as
+    {\ttfamily\small ``Improper alphabetic constant''},
+    {\ttfamily\small ``Missing = inserted for \texttt{\small \textbackslash ifnum}''},
+    and {\ttfamily\small ``Missing number, treated \\ as zero''}.
+
+    Here you will likely need to use
+    \texttt{\small \textbackslash expandafter\textbackslash textsc\textbackslash expandafter} instead.
+}
 
 \subsection{Penalties}
 The class sets new penalties.
