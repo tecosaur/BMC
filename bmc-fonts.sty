@@ -245,14 +245,26 @@
 
 \newcommand\fauxsc[1]{\fauxschelper#1 \relax\relax}
 \def\fauxschelper#1 #2\relax{%
-\fauxschelphelp#1\relax\relax%
-\if\relax#2\relax\else\ \fauxschelper#2\relax\fi%
+  \fauxschelphelp#1\relax\relax
+  \if\relax#2\relax\else\ \fauxschelper#2\relax\fi
 }
 \def\Hscale{.83}\def\Vscale{.72}\def\Cscale{1.00}
 \def\fauxschelphelp#1#2\relax{%
-\ifnum`#1>``\ifnum`#1<`\{\scalebox{\Hscale}[\Vscale]{\uppercase{#1}}\else%
-	\scalebox{\Cscale}[1]{#1}\fi\else\scalebox{\Cscale}[1]{#1}\fi%
-\ifx\relax#2\relax\else\fauxschelphelp#2\relax\fi}
+  \ifnum`#1>``\ifnum`#1<`\{\scalebox{\Hscale}[\Vscale]{\fauxfontheavier\uppercase{#1}}\else
+    \scalebox{\Cscale}[1]{#1}\fi\else\scalebox{\Cscale}[1]{#1}\fi
+  \ifx\relax#2\relax\else\fauxschelphelp#2\relax\fi}
+
+\newcommand\fauxfontheavier{%
+    \sbox0{x\xdef\testF{\the\font}}%
+    \sbox0{\fontseries{sb}\selectfont x\xdef\testFsb{\the\font}}%
+    \sbox0{\fontseries{mb}\selectfont x\xdef\testFmb{\the\font}}%
+    \sbox0{\fontseries{tx}\selectfont x\xdef\testFtx{\the\font}}%
+    \sbox0{\fontseries{m}\selectfont x\xdef\testFm{\the\font}}%
+    \ifx\testF\testFsb\fontseries{b}\selectfont\fi
+    \ifx\testF\testFmb\fontseries{sb}\selectfont\fi
+    \ifx\testF\testFtx\fontseries{mb}\selectfont\fi
+    \ifx\testF\testFm\fontseries{tx}\selectfont\fi
+}
 
 % Add colour to inline math
 \renewrobustcmd{\(}{\@ifstar\@inlinemath\@@inlinemath}
