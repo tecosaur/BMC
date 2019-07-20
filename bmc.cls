@@ -612,6 +612,10 @@
 }
 
 \rowcolors{1}{tableheadcolor}{tableheadcolor}
+
+\AtBeginDocument{
+	\setbox0=\hbox{\begin{tabular}{l}\hiderowcolors\end{tabular}}
+}
 % endregion headerfill
 
 
