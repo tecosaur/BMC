@@ -68,49 +68,33 @@
     }
 \fi
 
-% title formating
-\RequirePackage{titlesec}
-
-% Other Titling
+% Titling
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \ifbool{bmc@article}{
 }{
 
-\RequirePackage{titlesec}
-% Chapter format
-\titleformat{\chapter}[display]
-	{}
-	{\titleBackground\thispagestyle{empty}}
-	{4pt}
-	{
-		\begin{minipage}[t]{8.2cm-\leftmargin}
-			\mbox{}\\
-			\null\hfill\fontsize{6.5cm}{1ex}\selectfont{\ifbool{bmc@solid}{\color{page}}{\color{primary}}\thechapter}
-		\end{minipage}
-		\hspace*{-5mm}
-		\begin{minipage}[t]{\paperwidth-7cm-\leftmargin}
-			\mbox{}\\
-			\vspace*{-1.1cm}
-			\begin{flushleft}
-				\begin{spacing}{5}
-					\fontsize{1.7cm}{1em}
-					\fontseries{tx}
-					\selectfont
-					\ifbool{bmc@dark}{
-						\color{primaryVariant}
-					}{
-						\color{alternativePrimary}
-					}
-	}[\end{spacing}\end{flushleft}\end{minipage}]
+\addtokomafont{chapter}{%
+	\fontfamily{\headingsFont}\fontsize{1.7cm}{1.4cm}\fontseries{tx}\selectfont%
+	\ifbool{bmc@dark}{\color{primaryVariant}}{\color{alternativePrimary}}%
+}
 
-\titleformat{name=\chapter, numberless}[display]
-	{}
-	{\titleBackground\thispagestyle{empty}}
-	{0pt}
-	{
-		\fontsize{2cm}{1em}
-	}
+\renewcommand\chapterformat{%
+\fontseries{m}\fontsize{6.5cm}{1ex}\selectfont%
+\ifbool{bmc@solid}{\color{page}}{\color{primary}}%
+\thechapter
+}
+
+\renewcommand{\chapterlinesformat}[3]{%
+	% TODO: find way to combine \newgeometry and \thispagestyle
+	% \newgeometry{right=2.7cm, marginparwidth=0cm, marginparsep=0mm}
+	\thispagestyle{empty}
+	\begin{tikzpicture}[remember picture, overlay]
+		  \titleBackground
+		  \node[anchor=east] at ([yshift=-7.5cm, xshift=8.7cm] current page.north west) {#2};
+		  \node[anchor=north west,text width=\paperwidth-7cm-\leftmargin] at ([yshift=-4.8cm, xshift=7.7cm] current page.north west) {\raggedright #3};
+	\end{tikzpicture}
+}
 
 }
 
@@ -143,28 +127,6 @@
 }{}
 
 \RedeclareSectionCommands[indent=0em]{section,subsection,subsubsection}
-
-% \titleformat
-% {\section} % command
-% {\huge} % format
-% {\hspace*{-3mm}\fontsize{3ex}{3.6ex}\sectionNumbers\selectfont\color{sectionNumbersColor}\raisebox{-1mm}{\thesection}}
-% % label
-% {-3mm} % sep
-% {\fontspec{Fira Sans Medium}\selectfont} % before
-% {}
-
-% \titleformat{\subsection}{\LARGE}{%
-% 	\hspace*{-3mm}\fontsize{3ex}{3.6ex}\selectfont\color{subsectionNumbersColor}%
-% 	\raisebox{-1mm}{\thesubsection}%
-% }{-3mm}{}{}
-
-
-	%Titling spacing
-% \titlespacing*{\chapter}{0mm}{0pt}{10pt}
-% \titlespacing*{name=\chapter,numberless}{0pt}{10pt}{0pt} %starred version of chapter default: 0pt, 50pt, 40pt
-% \titlespacing*{\section}{0mm}{4mm}{3mm}
-% \titlespacing*{\subsection}{0mm}{3mm}{2mm}
-% \titlespacing*{\subsubsection}{0mm}{2mm}{1.5mm}
 
 % Make parahraphs and subparagraphs more like sections (unless disabled)
 \ifbool{bmc@paragraph}{}{
@@ -238,7 +200,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newcommand{\printMiniToc}{
-	\vfill
+	\vspace*{12cm}
 	\hspace*{\dimexpr-1\leftmargin+6.7cm\relax}\parbox[t]{\paperwidth-6.5cm-\leftmargin}{
 		\hspace*{-3mm}\raisebox{0.25mm}{\fontsize{0.6cm}{1ex}\selectfont\ifbool{bmc@solid}{\color{contrastColour}}{\color{primary}}\faList}
 		\ifstrequal{\bmc@body}{serif}{\hspace*{5.5mm}}{\hspace*{6.5mm}} {\fontfamily{\headingsFont}\fontseries{tx}\selectfont\huge{Summary}}
@@ -249,8 +211,6 @@
 			\printcontents[chapters]{p}{1}{\setcounter{tocdepth}{1}}
 		\end{spacing}
 	}
-	\vfill
-	\newpage
 }
 
 
@@ -263,17 +223,13 @@
 
 \ifbool{bmc@solid}{
 	\newcommand{\titleBackground}{
-		\begin{tikzpicture}[remember picture, overlay]
-			\fill[fill=primary] (current page.south west) rectangle ++(7.5cm, \paperheight);
-		\end{tikzpicture}
+		\fill[fill=primary] (current page.south west) rectangle ++(7.5cm, \paperheight);
 	}
 }{}
 
 \ifbool{bmc@stripe}{
 	\newcommand{\titleBackground}{
-		\begin{tikzpicture}[remember picture, overlay]
-			\fill[fill=primary] ([xshift=7.42cm]current page.south west) rectangle ++(1mm, \paperheight);
-		\end{tikzpicture}
+		\fill[fill=primary] ([xshift=7.42cm]current page.south west) rectangle ++(1mm, \paperheight);
 	}
 }{}
 
@@ -326,17 +282,7 @@
 %%%%%%%%%%%%%%%%%%
 
 % Automatically add to \chapter
-
-% \let\oldscr@@startchapter\scr@@startchapter
-% \def\scr@@startchapter#1[#2]#3{%
-% 	\oldscr@@startchapter{#1}[#2]{#3}%
-% 	% \newgeometry{right=2.7cm, marginparwidth=0cm, marginparsep=0mm}
-% 	\printMiniToc
-% 	% \restoregeometry
-% }
-
-% \xpretocmd{\scr@@startchapter}{}{}{}
-\xapptocmd{\scr@@startchapter}{\printMiniToc}{}{}
+\xapptocmd{\scr@@startchapter}{\printMiniToc\vfill\newpage}{}{}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %      Header and Footer
