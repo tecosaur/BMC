@@ -1,4 +1,4 @@
-# Bespoke, Multifunctional Class
+# <img src="documentation/bmc.svg" height="24px"> Bespoke, Multifunctional Class
 
 #### [Documentation / Demo](documentation/bmc.pdf)
 
