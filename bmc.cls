@@ -119,9 +119,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \ifbool{bmc@article}{
-	\LoadClass[usegeometry,pointlessnumbers]{scrartcl}
+	\LoadClass[numbers=noenddot]{scrartcl}
 }{
-	\LoadClass[usegeometry,pointlessnumbers]{scrreprt}
+	\LoadClass[numbers=noenddot]{scrreprt}
 }
 
 % Ignore Certain Warnings
@@ -718,6 +718,7 @@
 	\pagecolor{page}
 }
 
+\RequirePackage{scrhack}
 
 \AtBeginDocument{%
 	\color{text}

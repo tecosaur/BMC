@@ -201,7 +201,8 @@
 
 \newcommand{\printMiniToc}{
 	\vspace*{12cm}
-	\hspace*{\dimexpr-1\leftmargin+6.7cm\relax}\parbox[t]{\paperwidth-6.5cm-\leftmargin}{
+	\hspace*{\dimexpr-1\leftmargin+6.7cm\relax}
+	\parbox[t]{\paperwidth-7cm-\leftmargin}{
 		\hspace*{-3mm}\raisebox{0.25mm}{\fontsize{0.6cm}{1ex}\selectfont\ifbool{bmc@solid}{\color{contrastColour}}{\color{primary}}\faList}
 		\ifstrequal{\bmc@body}{serif}{\hspace*{5.5mm}}{\hspace*{6.5mm}} {\fontfamily{\headingsFont}\fontseries{tx}\selectfont\huge{Summary}}
 		\vspace*{2mm}
@@ -244,7 +245,7 @@
 	pdfa,
 	unicode=true, % loads with unicode support
 	%a4paper=true, %
-	pdftex=true, %
+	pdftex, %
 	backref, %
 	pagebackref=false, % creates backward references too
 	bookmarks=true, % generate bookmarks in PDF files
