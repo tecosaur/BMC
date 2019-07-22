@@ -243,7 +243,7 @@
 }
 
 
-\newcommand\fauxsc[1]{\fauxschelper#1 \relax\relax}
+\newcommand\fauxsc[1]{\protect\fauxschelper#1 \relax\relax}
 \def\fauxschelper#1 #2\relax{%
   \fauxschelphelp#1\relax\relax
   \if\relax#2\relax\else\ \fauxschelper#2\relax\fi

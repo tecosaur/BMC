@@ -56,6 +56,7 @@
 \DeclareBoolOption{chem}
 \DeclareBoolOption{code}
 \DeclareBoolOption{plot}
+\DeclareBoolOption{gloss}
 \DeclareBoolOption{externalise}
 
 % text font
@@ -725,3 +726,50 @@
 	\pagecolor{page}
 }
 
+% at the end because of \endofdump
+\ifbool{bmc@gloss}{
+	\AtEndPreamble{
+		% \endofdump if using mylatexformat
+		\ifcsname endofdump\endcsname
+			\endofdump
+		\fi
+
+		\usepackage[automake, smallcaps, numberedsection=nolabel, style=long3col]{glossaries}
+		\makeglossaries
+
+		\newglossarystyle{mylist}{%
+		\setglossarystyle{long3col}
+
+		\newlength\glsnamewidth
+		\setlength{\glsnamewidth}{0.28\textwidth}
+		\setlength{\glsdescwidth}{0.64\textwidth}
+		\setlength{\glspagelistwidth}{0.08\textwidth}
+
+		\renewenvironment{theglossary}%
+			{\begin{longtable}{>{\raggedright}p{\glsnamewidth}>{\raggedright}p{\glsdescwidth}>{\raggedright}p{\glspagelistwidth}}}%
+			{\end{longtable}}%
+		\renewcommand*{\glossentry}[2]{%
+		\normalfont\fontseries{m}\selectfont\slshape \glsentryitem{##1}%
+			\glstarget{##1}{\glossentryname{##1}} &%
+			\glossentrydesc{##1}\glspostdescription & ##2%
+			\tabularnewline[1ex]}%
+		}
+		\setglossarystyle{mylist}
+
+		\renewcommand{\acronymfont}[1]{\protect\scalebox{.94}[.9]{\protect\fauxfontheavier#1}}
+
+		\newcommand{\newdefinedacronym}[4]{
+			\newglossaryentry{#1}{
+				text={#2},
+				long={#3},
+				name={#3 (\acronymfont{#2})},
+				first={#3 (\acronymfont{#2})},
+				plural={#2\glspluralsuffix},
+				firstplural={#3\glspluralsuffix{} (\acronymfont{#2}\protect\scalebox{0.9}{\protect\fauxfontheavier\glspluralsuffix})},
+				description={#4}
+			}
+		}
+
+		% \setglossarysection{chapter}
+	}
+}{}

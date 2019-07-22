@@ -1,7 +1,7 @@
-\documentclass[solid,math,chem,code,plot]{bmc}
+\documentclass[solid,math,chem,code,plot,gloss]{bmc}
 
 \titlehead{Bespoke Multipurpose Class}
-\title{\texorpdfstring{BMC \hfill \fontsize{1.35cm}{1.35cm}\fontseries{t}\selectfont \emph{v}0.2*}{BMC v0.2*}}
+\title{\texorpdfstring{BMC \hfill \fontsize{1.35cm}{1.35cm}\fontseries{t}\selectfont \emph{v}0.2.1}{BMC v0.2.1}}
 \subtitle{Pretentiousness Given Form}
 \author{tecosaur \footnotesize \newline Of Github}
 
@@ -179,6 +179,16 @@ When captions flow beyond a single line, ragged right alignment is used.
     \captionsetup{justification=raggedright,singlelinecheck=true}
 \end{minted}
 
+\subsection{Terms and Acronyms}
+With the \mintinline{tex}{gloss} option, this class loads and configures the
+\mintinline{tex}{glossaries} package. Three things are changed
+\newacronym{bmc}{BMC}{Bespoke Multipurpose Class}
+\begin{enumerate}
+    \item Acronyms are typeset in a slightly shrunken font (halfway to smallcaps), e.g. \acrshort{bmc}
+    \item The glossary style in configured to a variant of \mintinline{tex}{long3col}
+    \item A new command \mintinline{tex}{\newdefinedacronym{label}{short}{long}{description}} is added
+\end{enumerate}
+
 \section{Colour}
 \subsection{Theme Colours}
 \newcommand{\colorBox}[2][page]{\begin{tikzpicture}
@@ -294,7 +304,7 @@ This class adds an optional parameter to change the alignment,
 \end{tabular}
 
 \footnotetext[2]{Can also be used outside of math mode.\label{fn:1}}
-\paragraph{\rlap{Sets\footref{fn:1}}\hspace*{8em}}
+\paragraph{\rlap{Sets\textsuperscript{\rmfamily\mbox{\ref{fn:1}}}}\hspace*{8em}}
 \begin{tabular}{p{4.2em}>{\(*\to\quad \)}p{4em}p{4em}>{\(*\to\quad \)}p{4em}} % chktex 21
     \mintinline{tex}{\RR} & \RR & \mintinline{tex}{\RR[n]} & \RR[n] \\
     \mintinline{tex}{\NN} & \NN & \mintinline{tex}{\NN[n]} & \NN[n] \\
