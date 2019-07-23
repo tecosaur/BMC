@@ -9,3 +9,13 @@
 *.pygtex
 *.synctex.gz
 *.fdb_latexmk
+*.glg
+*.glo
+*.gls
+*.glsdefs
+*.ist
+*.bbl
+*.bcf
+*.blg
+*.run.xml
+testing/
