@@ -727,6 +727,7 @@
 }
 
 % at the end because of \endofdump
+\newcommand{\acr}[1]{\protect\scalebox{.91}[.84]{\textls*[70]{\protect\fauxfontheavier#1}}}
 \ifbool{bmc@gloss}{
 	\AtEndPreamble{
 		% \endofdump if using mylatexformat
@@ -756,7 +757,7 @@
 		}
 		\setglossarystyle{mylist}
 
-		\renewcommand{\acronymfont}[1]{\protect\scalebox{.94}[.9]{\protect\fauxfontheavier#1}}
+		\renewcommand{\acronymfont}[1]{\acr{#1}}
 
 		\newcommand{\newdefinedacronym}[4]{
 			\newglossaryentry{#1}{
