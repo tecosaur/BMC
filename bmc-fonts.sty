@@ -12,6 +12,7 @@
 \ProvidesPackage{bmc-fonts}[2019/06/09 Fonts functionality used in the BMC class]
 
 \ifdefined\@bmc\else
+	\RequirePackage{etoolbox}
     \RequirePackage{kvoptions}
     \SetupKeyvalOptions{family=bmc, prefix=bmc@}
 
@@ -69,13 +70,22 @@
 
 % Load fonts
 \ifdefempty{\bmc@math}{}{
-	\RequirePackage[utopia]{mathdesign}
+	\DeclareMathAlphabet{\mathcal}{OMS}{cmsy}{m}{n}
+	% \ifdefstringx{\bmc@math}{sans}{
+	% 	\PassOptionsToPackage{sansmath}{libertinust1math}
+	% }{}
+	% \RequirePackage{libertinust1math}
 	\let\circledS\undefined % here - PS
 }
+
+% semibold is nicer as standard bold
+\renewcommand\bfdefault{sb}
 
 \RequirePackage{plex-serif}
 \RequirePackage{plex-sans}
 \RequirePackage{plex-mono}
+
+\RequirePackage{fontawesome5}
 
 \newcommand*{\ditto}{\enspace\ensuremath{\prime\prime}\enspace}
 
@@ -194,6 +204,9 @@
 % =========
 
 \linespread{1.15}
+% See Bringhurst (2004) ¶ 2.4.1
+\lefthyphenmin=2
+\righthyphenmin=3
 
 \ifdefstringx{\bmc@body}{serif}{
 	\renewcommand{\familydefault}{\rmdefault}
@@ -265,6 +278,17 @@
     \ifx\testF\testFtx\fontseries{mb}\selectfont\fi
     \ifx\testF\testFm\fontseries{tx}\selectfont\fi
 }
+
+% Slant Box
+\newsavebox\theslantbox
+\newcommand{\fauxsl}[2][.2]{\mbox{%
+        \sbox{\theslantbox}{#2}%
+        \hskip\wd\theslantbox
+        \pdfsave
+        \pdfsetmatrix{1 0 #1 1}%
+        \llap{\usebox{\theslantbox}}%
+        \pdfrestore
+}}
 
 % Add colour to inline math
 \renewrobustcmd{\(}{\@ifstar\@inlinemath\@@inlinemath}

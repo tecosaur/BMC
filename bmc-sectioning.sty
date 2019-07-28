@@ -238,48 +238,6 @@
 	\newcommand{\titleBackground}{}
 }{}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%		Links
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\RequirePackage[
-	pdfa,
-	unicode=true, % loads with unicode support
-	%a4paper=true, %
-	pdftex, %
-	backref, %
-	pagebackref=false, % creates backward references too
-	bookmarks=true, % generate bookmarks in PDF files
-	bookmarksopen=false, % when starting with AcrobatReader, the Bookmarkcolumn is opened
-	pdfpagemode=UseNone,% UseNone, UseOutlines, UseThumbs, FullScreen
-	pdftoolbar=false,
-	pdfmenubar=true,
-	pdffitwindow=false,
-	pdfdisplaydoctitle,
-	pdfborder={1 1 0},
-]{hyperref}
-\RequirePackage{hyperxmp}
-\AtEndPreamble{
-	\hypersetup{
-		pdftitle={\@title},
-		pdfauthor={\@author},
-		pdfsubject={\@subtitle},
-		pdfcreator=pdfLaTeX,
-		pdfproducer={\@author},
-		% pdfkeywords={{a}{b}},
-		linktoc=all,
-		colorlinks=true,
-		linkcolor=href,
-		anchorcolor=href,
-		citecolor=href,
-		menucolor=primary,
-		runcolor=href,
-		urlcolor=href,
-		filecolor=href,
-		breaklinks=true
-	}
-}
-\urlstyle{same}
-
 %%%%%%%%%%%%%%%%%%
 
 % Automatically add to \chapter

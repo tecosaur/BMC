@@ -220,8 +220,8 @@
 \RequirePackage[hypcap=true]{caption}
 
 \RequirePackage{fontawesome5}
-\RequirePackage{infoBulle}
-\RequirePackage{marginInfoBulle}
+\RequirePackage{bmc-boxes}
+% \RequirePackage{marginInfoBulle}
 
 % \RequirePackage[check=warning]{widows-and-orphans} % wait till texlive 2019
 
@@ -731,9 +731,7 @@
 \ifbool{bmc@gloss}{
 	\AtEndPreamble{
 		% \endofdump if using mylatexformat
-		\ifcsname endofdump\endcsname
-			\endofdump
-		\fi
+		\ifdefined\endofdump\endofdump\fi
 
 		\usepackage[automake, smallcaps, numberedsection=nolabel, style=long3col]{glossaries}
 		\makeglossaries
@@ -774,3 +772,5 @@
 		% \setglossarysection{chapter}
 	}
 }{}
+
+\RequirePackage{bmc-ref}
