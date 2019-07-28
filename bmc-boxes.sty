@@ -89,7 +89,7 @@
 }
 
 \DeclareDocumentCommand{\faAbstractIcon}{m m O{text=infoBulleBackground}}{%
-	\begin{tikzpicture}[inner sep=0mm, baseline={([yshift=-1pt]iconText.base)}]%
+	\begin{tikzpicture}[inner sep=0mm, baseline=(iconText.base)]%
 		\coordinate (iconCenter) at (0,0);
 		\pgfkeys{/infoBulle/icon/shapeCommand={iconCenter}{\pgfkeysvalueof{/infoBulle/icon/radius}}{#1}}
 		\draw (iconCenter) node[text width=.6cm, anchor=center, align=center, font=\fontsize{.35cm}{.42cm}, #3] (iconText) {#2};
