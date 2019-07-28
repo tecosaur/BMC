@@ -78,12 +78,14 @@
 	\let\circledS\undefined % here - PS
 }
 
-% semibold is nicer as standard bold
-\renewcommand\bfdefault{sb}
-
 \RequirePackage{plex-serif}
 \RequirePackage{plex-sans}
 \RequirePackage{plex-mono}
+
+% semibold is nicer as standard bold
+\def\bfseries@rm{sb}
+\def\bfseries@sf{sb}
+\def\bfseries@tt{sb}
 
 \RequirePackage{fontawesome5}
 
