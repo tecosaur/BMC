@@ -124,9 +124,20 @@ large class of documents I indented to use this for. IBM Plex seems like a good 
         \setrow{\ttfamily\itshape}Plex Mono & Words & Words & Words & Words & Words & Words & Words & Words \\
         \bottomrule
     \end{tabular}
-    % \caption{Font Styles}
+    \caption{IBM Plex; Font Styles and Weights}
     \label{table:font-styles}
 \end{table}
+
+\begin{info}[][Some Typeface Considerations][tf-consid]
+    While this is the default, you can still load another font as
+    usual in the preamble, e.g.
+    \mintinline{tex}{\usepackage{lmodern}}
+    to switch to Latin Modern.
+    Bear in mind that varying font weights are using throughout
+    this class, so a font without the \mintinline{tex}{sb},
+    \mintinline{tex}{tx}, etc.\ weights will report warnings
+    along the lines of \mintinline{text}{Font shape `T1/FONT_HERE/STYLE/n' undefined}.
+\end{info}
 
 \subsection{Roman Numerals}
 
@@ -157,7 +168,8 @@ is called if the current font does not have small caps.
             Barbaric Solution: \> S{\footnotesize MALL} C{\footnotesize APS}
         \end{tabbing}}
 \end{center}
-\warningInfo{Usage Warning for Small Caps}{
+
+\begin{warning}[Small Caps][Usage Warning][sc-usage]
     If using this in macros or the like,
     you may get errors such as
     {\ttfamily\small ``Improper alphabetic constant''},
@@ -166,7 +178,7 @@ is called if the current font does not have small caps.
 
     Here you will likely need to use
     \texttt{\small \textbackslash expandafter\textbackslash textsc\textbackslash expandafter} instead.
-}
+\end{warning}
 
 \subsection{Penalties}
 The class sets new penalties.
@@ -255,8 +267,8 @@ A decent variety of environments are already defined (see \autoref{table:boxed-e
         & \ttfamily\small  check & Check & \ttfamily\small check:\\
         \faAbstractIcon{warningColor}{\faExclamation} \faAbstractIcon{page}{\faExclamation}[warningColor!70!page]
         & \ttfamily\small  warning & Warning & \ttfamily\small warn:\\
-        \faAbstractIcon{tipsColor}{\faLightbulb} \faAbstractIcon{page}{\faLightbulb}[tipsColor!70!page]
-        & \ttfamily\small  tip & Tip & \ttfamily\small tips:\\
+        \faAbstractIcon{tipColor}{\faLightbulb} \faAbstractIcon{page}{\faLightbulb}[tipColor!70!page]
+        & \ttfamily\small  tip & Tip & \ttfamily\small tip:\\
         \faAbstractIcon{mathematicalColor}{\bmcBoxMathIcon} \faAbstractIcon{page}{\bmcBoxMathIcon}[mathematicalColor!70!page]
         & \small (maths environments) \\
         \bottomrule
@@ -405,7 +417,7 @@ This class adds an optional parameter to change the alignment,
     \mintinline{tex}{\round{x}} & \(*\round{x}\) \\
 \end{tabular}
 
-\footnotetext[2]{Can also be used outside of math mode.\label{fn:1}}
+\footnotetext[2]{Can also be used outside of maths mode.\label{fn:1}}
 \paragraph{\rlap{Sets\textsuperscript{\rmfamily\mbox{\ref{fn:1}}}}\hspace*{8em}}
 \begin{tabular}{p{4.2em}>{\(*\to\quad \)}p{4em}p{4em}>{\(*\to\quad \)}p{4em}} % chktex 21
     \mintinline{tex}{\RR} & \RR & \mintinline{tex}{\RR[n]} & \RR[n] \\
@@ -491,7 +503,7 @@ undergos a few modifications to make the results look cleaner.
 \def\soutt{\bgroup \ULdepth=-.45ex \ULset}
 Both the \mintinline{tex}{hyperref} and \mintinline{tex}{hyperxmp} packages are used.
 The widely used hyperref package of course provides hyperlinks.
-This is \soutt{abused} used to add a few extra links; specificly
+This is \soutt{ab}used to add a few extra links; specificly
 every page number is a link to the TOC, and the text of every header
 links to the relevant chapter page.
 This allows you to jump all over the document in just a few clicks.
@@ -500,6 +512,13 @@ The hyperxmp package is rather handy for setting a few fields of pdf metadata.
 Using the \mintinline{tex}{\title}, \mintinline{tex}{\author}, and \mintinline{tex}{\subtitle}
 attributes it sets the relevant metadata fields.
 
+\begin{critical}[Missing Author and Title][Compilation Error]
+    Because \mintinline{tex}{\title} and \mintinline{tex}{\author}
+    are used in the metadata, they are required, and the document
+    \emph{will not compile} without them being set.
+    A future update will probably resolve this by providing default values.
+\end{critical}
+
 \chapter{Boring Info}
 
 \section{Implementation}
@@ -507,12 +526,16 @@ attributes it sets the relevant metadata fields.
 While originally one giant class file, each major component has now been split off
 into a \mintinline{tex}{.sty} file that can also operate as a standalone package.
 Currently, the following packages exist:
-\begin{itemize}
-    \item bmc-color
-    \item bmc-fonts
-    \item bmc-maths
-    \item bmc-sectioning
-\end{itemize}
+\begin{multicols}{2}
+    \begin{itemize}
+        \item bmc-boxes
+        \item bmc-color
+        \item bmc-fonts
+        \item bmc-maths
+        \item bmx-ref
+        \item bmc-sectioning
+    \end{itemize}
+\end{multicols}
 
 \section{Class Options}
 
@@ -572,9 +595,11 @@ Load and configure some mathematical packages, and set font to match main text f
 
 \subsection{Overview}
 
-\begin{center}
+\begin{table}[!htb]
+    \centering
     \small
     \setlength{\tabcolsep}{0pt}
+    \renewcommand{\arraystretch}{1.3}
     \begin{tabular}{>{\hspace{3pt}\normalsize}l>{\hspace{5pt}}*{5}{p{7.9em}}l}
         \toprule
         Category & \multicolumn{5}{l}{\normalsize Packages} \\
@@ -593,7 +618,9 @@ Load and configure some mathematical packages, and set font to match main text f
          & \hyperref[par:mathtools]{mathtools} & \hyperref[par:mathastext]{mathastext} & \hyperref[par:pgfplots]{pgfplots} \\
          \bottomrule
     \end{tabular}
-\end{center}
+    \caption{All Packages Used by This Class}
+    \label{table:all-packages}
+\end{table}
 
 \subsection{General Packages}
 
@@ -686,12 +713,12 @@ Makes loading images (\mintinline{tex}{includegraphics}) work well.
 \paragraph{\ttfamily grffile}\label{par:grffile}
 This fixes the fix allowed filenames of graphicx.
 \paragraph{\ttfamily caption}\label{par:caption}
-Povides many ways to customise the captions in floating environments like figure and table,
+Provides many ways to customise the captions in floating environments like figure and table,
 and cooperates with many other packages.
 Facilities include rotating captions, sideways captions, continued captions (for tables or figures that come in several parts).
 Loaded with option \mintinline{tex}{hypcap=true}
 \paragraph{\ttfamily subcaption}\label{par:subcaption}
-Allows for typeseting of sub-figures and sub-tables.
+Allows for typesetting of sub-figures and sub-tables.
 
 \subsection{infoBulle}
 
@@ -711,49 +738,49 @@ Useful for chemical diagrams.
 
 \paragraph{\ttfamily minted}\label{par:minted}
 Configured as follows,
-\begin{minted}[firstnumber=534]{tex}
-    \setminted{
-        frame=none,
-        % framesep=2mm,
-        baselinestretch=1.2,
-        fontsize=\footnotesize,
-        highlightcolor=page!95!text!80!primary,
-        linenos,
-        breakanywhere=true,
-        breakautoindent=true,
-        breaklines=true,
-        tabsize=4,
-        xleftmargin=3em,
-        autogobble=true,
-        obeytabs=true,
-        python3=true,
-        texcomments=true,
-        framesep=2mm,
-        breakbefore=\\\.+,
-        breakafter=\,
-    }
+\begin{minted}[firstnumber=456]{tex}
+\setminted{
+    frame=none,
+    % framesep=2mm,
+    baselinestretch=1.2,
+    fontsize=\footnotesize,
+    highlightcolor=page!95!text!80!primary,
+    linenos,
+    breakanywhere=true,
+    breakautoindent=true,
+    breaklines=true,
+    tabsize=4,
+    xleftmargin=3.5em,
+    autogobble=true,
+    obeytabs=true,
+    python3=true,
+    % texcomments=true,
+    framesep=2mm,
+    breakbefore=\\\.+,
+    breakafter=\,
+}
 \end{minted}
 
 \paragraph{\ttfamily tcolorbox}\label{par:tcolorbox}
 Used for prettifying the \mintinline{tex}{minted} environment.
 Loaded with option \mintinline{tex}{many}
 
-\subsection{Math Related}
+\subsection{Maths Related}
 These packages are loaded by the \mintinline{tex}{math}
 option (or one of its derivatives).
 
 \paragraph{\ttfamily amsmath,amssymb}\label{par:amssymb}
-Extends the math commands and symbols in latex.
+Extends the maths commands and symbols in latex.
 \paragraph{\ttfamily mathdesign}\label{par:mathdesign}
-To use the Utopia font for math symbols.
+To use the Utopia font for maths symbols.
 \paragraph{\ttfamily xfrac}\label{par:xfrac}
 Allows split level fractions \(*\sfrac{a}{b}\) better than \mintinline{tex}{{}^{a}/{}_{b}} can produce.
 \paragraph{\ttfamily cancel}\label{par:cancel}
-Allows for easy canceling within math like so ---
+Allows for easy cancelling within math like so ---
 \(*\cancel{\eta}\) and \(*\cancelto{0}{\eta}\).
 Loaded with option \mintinline{tex}{makeroom}
 \paragraph{\ttfamily mathtools}\label{par:mathtools}
-Provides a varienty of enhancements to make math \emph{even} better.
+Provides a variety of enhancements to make maths \emph{even} better.
 \begin{itemize}
     \item Extensible symbols, such as brackets, arrows, harpoons, etc.;
     \item Various symbols such as \mintinline{tex}{\coloneqq} (\(*\coloneqq\));
@@ -763,7 +790,7 @@ Provides a varienty of enhancements to make math \emph{even} better.
     \item Starred versions of the amsmath matrix environments for specifying the column alignment;
     \item More building blocks: multlined, cases-like environments, new gathered environments;
     \item Maths versions of \mintinline{tex}{\makebox}, \mintinline{tex}{\llap}, \mintinline{tex}{\rlap} etc.;
-    \item Cramped math styles; and more\dots
+    \item Cramped maths styles; and more\dots
 \end{itemize}
 \paragraph{\ttfamily mathastext}\label{par:mathastext}
 Uses relevant plex font for maths letters.
@@ -810,7 +837,7 @@ Loaded by the \mintinline{tex}{plot} option.
     \mintinline{tex}{informationColor} & Green & \ditto \\
     \mintinline{tex}{checkColor} & Blue & \ditto \\
     \mintinline{tex}{warningColor} & Orange & \ditto \\
-    \mintinline{tex}{tipsColor} & Purple & \ditto \\
+    \mintinline{tex}{tipColor} & Purple & \ditto \\
     \mintinline{tex}{exampleColor} & Blue & \ditto \\
     \mintinline{tex}{mathematicalColor} & Orange & \ditto \\
     \mintinline{tex}{codeColor} & Grey & \ditto \\
@@ -829,8 +856,8 @@ The second method can be employed anywhere in the document.
 
 \subsubsection{Creating Your Own Palette}
 
-Palettes can be created with the command \mintinline{tex}{\newpalette{<palette code>}{<color definitions>}}.
-The `color definitions' simply consist of any \mintinline{tex}{xcolor} commands that define the colour.
+Palettes can be created with the command \mintinline{tex}{\newpalette{<palette code>}{<colour definitions>}}.
+The `colour definitions' simply consist of any \mintinline{tex}{xcolor} commands that define the colour.
 You may wonder why not just define your own macro for your colours ---
 this method provides two minor features that may prove useful depending on the situation.
 \begin{itemize}
