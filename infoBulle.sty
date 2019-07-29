@@ -126,7 +126,7 @@
 \definecolor{informationColor}{RGB}{139, 195, 74}
 \definecolor{checkColor}{RGB}{3, 169, 244}
 \definecolor{warningColor}{RGB}{255, 165, 0}
-\definecolor{tipsColor}{RGB}{142, 68, 173}
+\definecolor{tipColor}{RGB}{142, 68, 173}
 \definecolor{exampleColor}{RGB}{156, 39, 176}
 \definecolor{mathematicalColor}{RGB}{230, 126, 34}
 \colorlet{codeColor}{Grey}
@@ -306,14 +306,14 @@
 	{\end{@infoBulleSkeletonEnv}}
 
 
-% tipsInfo
+% tipInfo
 %-------------------------------------------------------------------------------
-\newcommand{\tipsIcon}{%
-	\infoBulleAbstractIcon{tipsColor}{\faLightbulb}
+\newcommand{\tipIcon}{%
+	\infoBulleAbstractIcon{tipColor}{\faLightbulb}
 }
-\DeclareDocumentCommand{\tipsInfo}{m +m}{\@infoBulleSkeleton{tipsColor}{\tipsIcon}{#1}{#2}}
-\NewDocumentEnvironment{TipsInfo}{m}
-{\begin{@infoBulleSkeletonEnv}{tipsColor}{\tipsIcon}{#1}}
+\DeclareDocumentCommand{\tipInfo}{m +m}{\@infoBulleSkeleton{tipColor}{\tipIcon}{#1}{#2}}
+\NewDocumentEnvironment{TipInfo}{m}
+{\begin{@infoBulleSkeletonEnv}{tipColor}{\tipIcon}{#1}}
 	{\end{@infoBulleSkeletonEnv}}
 
 % codeInfo

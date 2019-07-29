@@ -117,12 +117,12 @@
 	{\marginInfoAbstract{\faInfo}{informationColor}{\GetTranslation{info}}{#2}{#3}}%
 }
 
-% marginTips
+% marginTip
 %-------------------------------------------------------------------------------
-\DeclareDocumentCommand{\marginTips}{s o m}{%
+\DeclareDocumentCommand{\marginTip}{s o m}{%
 	\IfBooleanTF{#1}
-	{\marginInfoAbstract*{\faLightbulb}{tipsColor}{\GetTranslation{tips}}{#2}{#3}}
-	{\marginInfoAbstract{\faLightbulb}{tipsColor}{\GetTranslation{tips}}{#2}{#3}}%
+	{\marginInfoAbstract*{\faLightbulb}{tipColor}{\GetTranslation{tip}}{#2}{#3}}
+	{\marginInfoAbstract{\faLightbulb}{tipColor}{\GetTranslation{tip}}{#2}{#3}}%
 }
 
 % marginQuestion
