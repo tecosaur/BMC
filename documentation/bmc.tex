@@ -204,6 +204,93 @@ With the \mintinline{tex}{gloss} option, this class loads and configures the
     \item A new command \mintinline{tex}{\newdefinedacronym{label}{short}{long}{description}} is added
 \end{enumerate}
 
+\section{Boxes}
+
+A collection of boxed environments are defined using \mintinline{tex}{tcolorbox},
+there have been two so far: \autoref{info:tf-consid} and \autoref{warn:sc-usage}.
+You can use these environments like so:
+\begin{minted}{tex}
+    \begin{example}
+        This is an example. The next one is \autoref{eg:box-demo}.
+    \end{example}
+\end{minted}
+\begin{example}
+    This is an example. The next one is \autoref{eg:box-demo}.
+\end{example}
+These environments also accept three optional arguments.
+\begin{enumerate}
+    \item The subtitle. This appears after the bold title ({\sffamily\fontseries{sb}\selectfont Example N}).
+    \item The title, if this is set the counter value is shown in the right corner,
+    as seen in the example below.
+    \item The label suffix, defaulting to the counter value.
+    The full label is \mintinline{tex}{<prefix>:<suffix>}.
+\end{enumerate}
+\begin{minted}{tex}
+    \begin{example}[sub-title][title][box-demo]
+        This is another example, following up from \autoref{eg:1}.
+    \end{example}
+\end{minted}
+\begin{example}[sub-title][title][box-demo]
+    This is another example, following up from \autoref{eg:1}.
+\end{example}
+
+A decent variety of environments are already defined (see \autoref{table:boxed-envs} and \autoref{table:boxed-envs-maths}).
+
+\begin{table}[!htb]
+    \centering
+    \begin{tabular}{clll}
+        \toprule
+        Icon & Environment Name & Title & Label Prefix \\
+        \midrule
+        \renewcommand{\arraystretch}{1.5}
+        \faAbstractIcon{exampleColor}{\faClipboard} \faAbstractIcon{page}{\faClipboard}[exampleColor!70!page]
+        & \ttfamily\small  example & Example & \ttfamily\small eg:\\
+        \faAbstractIcon{criticalColor}{\faTimes} \faAbstractIcon{page}{\faTimes}[criticalColor!70!page]
+        & \ttfamily\small  critical & Critical & \ttfamily\small crit:\\
+        \faAbstractIcon{questionColor}{\faQuestion} \faAbstractIcon{page}{\faQuestion}[questionColor!70!page]
+        & \ttfamily\small  question & Question & \ttfamily\small qu:\\
+        \faAbstractIcon{informationColor}{\faInfo} \faAbstractIcon{page}{\faInfo}[informationColor!70!page]
+        & \ttfamily\small  info & Information & \ttfamily\small info:\\
+        \faAbstractIcon{checkColor}{\faCheck} \faAbstractIcon{page}{\faCheck}[checkColor!70!page]
+        & \ttfamily\small  check & Check & \ttfamily\small check:\\
+        \faAbstractIcon{warningColor}{\faExclamation} \faAbstractIcon{page}{\faExclamation}[warningColor!70!page]
+        & \ttfamily\small  warning & Warning & \ttfamily\small warn:\\
+        \faAbstractIcon{tipsColor}{\faLightbulb} \faAbstractIcon{page}{\faLightbulb}[tipsColor!70!page]
+        & \ttfamily\small  tip & Tip & \ttfamily\small tips:\\
+        \faAbstractIcon{mathematicalColor}{\bmcBoxMathIcon} \faAbstractIcon{page}{\bmcBoxMathIcon}[mathematicalColor!70!page]
+        & \small (maths environments) \\
+        \bottomrule
+    \end{tabular}
+    \caption{Boxed Environments}
+    \label{table:boxed-envs}
+\end{table}
+
+\begin{table}[!htb]
+    \centering
+    \begin{tabular}{ll}
+        \toprule
+        Maths Environment & Label Prefix \\
+        \midrule
+        \ttfamily\small proof & \ttfamily\small prf: \\
+        \ttfamily\small theorem & \ttfamily\small thr: \\
+        \ttfamily\small lemma & \ttfamily\small lem: \\
+        \ttfamily\small corollary & \ttfamily\small cor: \\
+        \ttfamily\small definition & \ttfamily\small def: \\
+        \ttfamily\small axiom & \ttfamily\small axi: \\
+        \ttfamily\small proposition & \ttfamily\small prop: \\
+        \bottomrule
+    \end{tabular}
+    \caption{Boxed Mathematics Environments}
+    \label{table:boxed-envs-maths}
+\end{table}
+
+In addition to those provided, you can also define your own using the same
+helper function:
+\begin{minted}{tex}
+    \newBmcBox{<env name>}{<colour>}{<title name>}[<reference prefix>][<icon>]
+\end{minted}
+
+
 \section{Colour}
 \subsection{Theme Colours}
 \newcommand{\colorBox}[2][page]{\begin{tikzpicture}
