@@ -70,6 +70,24 @@
     \undefinepalette
     \csname palette#1\endcsname
     \ensurepalettecomplete
+    \reloadBoxColours
+}
+
+\newcommand{\reloadBoxColours}{
+    \colorlet{infoBulleBackground}{page!96!text}
+    \colorlet{infoBulleText}{text}
+    \colorlet{marginInfoBulleBackground}{page}
+    \colorlet{marginInfoBulleText}{text}
+
+    \colorlet{criticalColor}{Red}
+    \colorlet{questionColor}{Purple}
+    \colorlet{informationColor}{Green}
+    \colorlet{checkColor}{Blue}
+    \colorlet{warningColor}{Orange}
+    \colorlet{tipsColor}{Purple}
+    \colorlet{exampleColor}{Blue}
+    \colorlet{mathematicalColor}{Orange}
+    \colorlet{codeColor}{Grey}
 }
 
 \newcommand{\undefinepalette}{
@@ -578,25 +596,6 @@
 }
 
 \usepalette{\bmc@palette}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%  info bulle colours
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\colorlet{infoBulleBackground}{page!94!text}
-\colorlet{infoBulleText}{text}
-\colorlet{marginInfoBulleBackground}{page}
-\colorlet{marginInfoBulleText}{text}
-
-\colorlet{criticalColor}{Red}
-\colorlet{questionColor}{Purple}
-\colorlet{informationColor}{Green}
-\colorlet{checkColor}{Blue}
-\colorlet{warningColor}{Orange}
-\colorlet{tipsColor}{Purple}
-\colorlet{exampleColor}{Blue}
-\colorlet{mathematicalColor}{Orange}
-\colorlet{codeColor}{Grey}
 
 % set link colour
 \AtEndPreamble{

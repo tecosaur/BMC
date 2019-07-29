@@ -480,7 +480,7 @@
 			overlay={\fill[page!90!text] (frame.south west) rectangle ([xshift=2.8em]frame.north west);},
 			colback=page!95!text,
 			colframe=page!95!text, % make frame colour same as background
-			breakable=unlimited,% Allow page breaks
+			breakable,% Allow page breaks
 			arc=0pt,outer arc=0pt,sharp corners, % sharp corners
 			boxsep=0pt,left=0pt,right=0pt,top=0pt,bottom=0pt % no margin/paddding
 		]

@@ -47,7 +47,7 @@
         bottom=4pt,
         left=8pt,
         right=6pt,
-        breakable=unlimited,
+        breakable,
     },
     bmcboxtitle/.style 2 args={
         extras middle and last={%
@@ -96,21 +96,24 @@
 	\end{tikzpicture}
 }
 
-\DeclareDocumentCommand{\newBmcBox}{m m m O{box} O{AngleRight}}{
-    \DeclareTColorBox[auto counter]{#1}{o O{\thetcbcounter} o}{
+\DeclareDocumentCommand{\newBmcBox}{m m m O{box} O{\faAngleRight}}{
+    \DeclareTColorBox[auto counter]{#1}{O{} O{} O{\thetcbcounter}}{
         bmcbox={#2},bmcboxtitle={#2}{%
-            \faAbstractIcon{infoBulleBackground}{#5}[#2!70!page]%
+            \faAbstractIcon{infoBulleBackground}{#5}[text=#2!70!page]%
             \color{text!50!page}\small\fontfamily{\headingsFont}\fontseries{mb}\selectfont%
-            \IfNoValueTF{##3}{#3 \thetcbcounter}{##3}%
+            \ifstrempty{##2}{#3~\thetcbcounter}{##2}%
             \fontseries{tx}\selectfont%
-            \IfNoValueTF{##1}{}{: ##1}\itshape\enspace continued},
+            \ifstrempty{##1}{}{\ifstrempty{##2}{}{: ##1}}%
+            \itshape\enspace continued%
+            \ifstrempty{##2}{}{\hfill\color{text!50!page}\thetcbcounter}},
         title={%
             \faAbstractIcon{#2}{#5}~%
-            \IfNoValueTF{##3}{#3 \thetcbcounter}{##3}%
-            \IfNoValueTF{##1}{}{: \fontseries{tx}\selectfont##1}},
-        label=#4:##2,
+            \ifstrempty{##2}{#3~\thetcbcounter}{##2}%
+            \ifstrempty{##1}{}{: \fontseries{tx}\selectfont##1}%
+            \ifstrempty{##2}{}{\hfill\color{text!50!page}\thetcbcounter}},
+        label=#4:##3,
     }
-    \expandafter\newcommand\csname tcb@cnt@#1autorefname\endcsname{#1}
+    \expandafter\newcommand\csname tcb@cnt@#1autorefname\endcsname{#3}
 }
 
 % \newBmcBox{<env name>}{<colour>}{<title name>}[<ref prefix>][<fa icon name>]
@@ -120,7 +123,7 @@
 \newBmcBox{info}{informationColor}{Information}[info][\faInfo]
 \newBmcBox{check}{checkColor}{Check}[check][\faCheck]
 \newBmcBox{warning}{warningColor}{Warning}[warn][\faExclamation]
-\newBmcBox{tips}{tipsColor}{Tips}[tip][\faLightbulb]
+\newBmcBox{tip}{tipsColor}{Tip}[tip][\faLightbulb]
 
 \newcommand{\bmcBoxMathIcon}{\fontsize{.6cm}{.72cm}\selectfont$\pi$}
 \newBmcBox{proof}{mathematicalColor}{Proof}[prf][\bmcBoxMathIcon]
