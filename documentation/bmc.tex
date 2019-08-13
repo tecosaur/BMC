@@ -1,7 +1,7 @@
 \documentclass[solid,math,chem,code,plot,gloss]{bmc}
 
 \titlehead{Bespoke Multipurpose Class}
-\title{\texorpdfstring{BMC \hfill \fontsize{1.35cm}{1.35cm}\fontseries{t}\selectfont \emph{v}0.2.1*}{BMC v0.2.1*}}
+\title{\texorpdfstring{BMC \hfill \fontsize{1.35cm}{1.35cm}\fontseries{t}\selectfont \emph{v}0.2.2}{BMC v0.2.2}}
 \subtitle{Pretentiousness Given Form}
 \author{tecosaur \footnotesize \newline Of Github}
 
@@ -429,9 +429,12 @@ This class adds an optional parameter to change the alignment,
     \mintinline{tex}{\HH} & \HH & \mintinline{tex}{\HH[n]} & \HH[n] \\
 \end{tabular}
 
-\paragraph{\rlap{Differential d}\hspace*{8em}}
+\paragraph{\rlap{Differentials\textsuperscript{\rmfamily\mbox{\ref{fn:1}}}}\hspace*{8em}}
 \begin{tabular}{p{4.2em}>{\(*\to\quad \)}p{4em}}
-\mintinline{tex}{\dd}\footref{fn:1} & \(*\dd \) % chktex 21
+\mintinline{tex}{\dd} & \(*\dd \) \\ % chktex 21
+\mintinline{tex}{\dv{t}{y}} & \(*\dv{t} \) \\[2pt]
+\mintinline{tex}{\dv{x}{y}} & \(*\dv{x}{y} \) \\
+\mintinline{tex}{\pdv{f}{x}} & \(*\pdv{f}{x} \)
 \end{tabular}
 
 \paragraph{\rlap{Stats Operators}\hspace*{8em}}
