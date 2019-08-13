@@ -50,7 +50,23 @@
   \endgroup
 }
 \newcommand{\dd}[1][]{\ensuremath{\mathop{}\!\ifstrempty{#1}{\slantedromand\@ifnextchar^{\hspace{0.2ex}}{\hspace{0.1ex}}}{\slantedromand\hspace{0.2ex}^{#1}}}}
-\providecommand*{\dv}[3][]{\ifstrempty{#1}{\frac{\dd #2}{\dd #3}}{\frac{\dd^{#1} #2}{\dd #3^{#1}}}}
+\ProvideDocumentCommand\dv{o m g}{%
+  \ensuremath{%
+    \IfValueTF{#3}{%
+      \IfNoValueTF{#1}{%
+        \frac{\dd #2}{\dd #3}%
+      }{%
+        \frac{\dd^{#1} #2}{\dd #3^{#1}}%
+      }%
+    }{%
+      \IfNoValueTF{#1}{%
+        \frac{\dd}{\dd #2}%
+      }{%
+        \frac{\dd}{\dd #2^{#1}}%
+      }%
+    }%
+  }%
+}
 \providecommand*{\pdv}[3][]{\frac{\partial^{#1}#2}{\partial#3^{#1}}}
 %  - others
 \DeclareMathOperator{\Lap}{\mathcal{L}}
