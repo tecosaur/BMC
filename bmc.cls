@@ -636,86 +636,133 @@
 % \newcommand\subtitle[1]{\renewcommand\@foo{#1}}
 % \newcommand\@subtitle{\@latex@error{No \noexpand\subtitle given}\@ehc}
 
-\renewcommand{\maketitle}{
-	\thispdfpagelabel{Cover}
-
-	\ifbool{bmc@solid}{
-		\pagecolor{primary}
-	}{
-		\pagecolor{page}
-	}
-
-	\begin{titlepage}
-		\newgeometry{left=4cm,right=2.7cm, top=1.5cm}
-
-		\ifbool{bmc@solid}{
-			\ifbool{bmc@dark}{
-				\color{page}
-			}{
-				\color{contrastColour}
-			}
-		}{
-			\color{primary}
-		}
-
-		\fontfamily{\titleFont}\selectfont
-
-		\ifdefempty{\@titlehead}{}{
-			\begin{center}
-				\LARGE
-				% \ifbool{bmc@solid}{
-				% 	\color{alternativePrimary}
-				% }{
-						\color{primary!60!contrastColour}
-				% }
-				\expandafter\textsc\expandafter{\@titlehead}
-				%
-			\end{center}
-		}
-
-		\vspace*{3.5cm}
-
-		\fontsize{2cm}{4em}\fontseries{sb}\selectfont
-		\@title
-		\vspace{-1.1cm}
-
-		\noindent\makebox[\linewidth]{
-			\hspace{2.64cm}
+\ifbool{bmc@article}{
+	\renewcommand{\maketitle}{
+		\thispagestyle{plain}
+		\begin{centering}
 			\ifbool{bmc@solid}{
 				\ifbool{bmc@dark}{
-					\color{contrastColour}
+					\color{page}
 				}{
-					\color{alternativePrimary}
+					\color{contrastColour}
 				}
 			}{
-				\color{primaryVariant}
+				\color{primary}
 			}
-			\rule{\paperwidth-2.64cm}{2pt}
+			\fontfamily{\titleFont}\selectfont
+
+			\vspace*{-1cm}
+			{
+				\fontseries{m}\selectfont\Large
+				\ifdefempty{\@titlehead}{}{%
+					\expandafter\textsc\expandafter{\@titlehead}%
+				}%
+				\hfill
+				\@date
+			}
+			\vspace{0.3cm}
+
+			\fontsize{1.4cm}{1.2cm}\fontseries{sb}\selectfont
+			\@title
+
+			\ifdefempty{\@subtitle}{}{
+				\fontseries{m}\selectfont\huge\@subtitle
+			}
+
+			\vspace{0.2cm}
+
+			\fontseries{l}\selectfont
+			\LARGE
+			\@author
+
+			% @\subject
+
+			% \@publishers
+			\vspace{0.4cm}
+		\end{centering}
+	}
+}{
+	\renewcommand{\maketitle}{
+		\thispdfpagelabel{Cover}
+
+		\ifbool{bmc@solid}{
+			\pagecolor{primary}
+		}{
+			\pagecolor{page}
 		}
 
-		\hspace*{-0.25mm}\fontseries{m}\selectfont\huge\@subtitle
+		\begin{titlepage}
+			\newgeometry{left=4cm,right=2.7cm, top=1.5cm}
 
-		\vspace{2.5cm}
+			\ifbool{bmc@solid}{
+				\ifbool{bmc@dark}{
+					\color{page}
+				}{
+					\color{contrastColour}
+				}
+			}{
+				\color{primary}
+			}
 
-		\fontseries{l}\selectfont
-		\@author
+			\fontfamily{\titleFont}\selectfont
 
-		\vfill
+			\ifdefempty{\@titlehead}{}{
+				\begin{center}
+					\LARGE
+					% \ifbool{bmc@solid}{
+					% 	\color{alternativePrimary}
+					% }{
+							\color{primary!60!contrastColour}
+					% }
+					\expandafter\textsc\expandafter{\@titlehead}
+					%
+				\end{center}
+			}
 
-		% @\subject
+			\vspace*{3.5cm}
 
-		\vspace{1.5cm}
+			\fontsize{2cm}{4em}\fontseries{sb}\selectfont
+			\@title
+			\vspace{-1.1cm}
 
-		% \@publishers
+			\noindent\makebox[\linewidth]{
+				\hspace{2.64cm}
+				\ifbool{bmc@solid}{
+					\ifbool{bmc@dark}{
+						\color{contrastColour}
+					}{
+						\color{alternativePrimary}
+					}
+				}{
+					\color{primaryVariant}
+				}
+				\rule{\paperwidth-2.64cm}{2pt}
+			}
 
-		\fontseries{m}\selectfont\Large
-		\@date
+			\hspace*{-0.25mm}\fontseries{m}\selectfont\huge\@subtitle
 
-		\restoregeometry
-	\end{titlepage}
+			\vspace{2.5cm}
 
-	\newpage
-	\pagecolor{page}
+			\fontseries{l}\selectfont
+			\@author
+
+			\vfill
+
+			% @\subject
+
+			\vspace{1.5cm}
+
+			% \@publishers
+
+			\fontseries{m}\selectfont\Large
+			\@date
+
+			\restoregeometry
+		\end{titlepage}
+
+		\newpage
+		\pagecolor{page}
+	}
 }
 
 \RequirePackage{scrhack}
