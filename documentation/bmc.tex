@@ -1,7 +1,7 @@
 \documentclass[solid,math,chem,code,plot,gloss]{bmc}
 
 \titlehead{Bespoke Multipurpose Class}
-\title{\texorpdfstring{BMC \hfill \fontsize{1.35cm}{1.35cm}\fontseries{t}\selectfont \emph{v}0.2.2}{BMC v0.2.2}}
+\title{\texorpdfstring{BMC \hfill \fontsize{1.35cm}{1.35cm}\fontseries{t}\selectfont \emph{v}0.2.2*}{BMC v0.2.2*}}
 \subtitle{Pretentiousness Given Form}
 \author{tecosaur \footnotesize \newline Of Github}
 
@@ -33,8 +33,8 @@ Like with most things I didn't start out with the intent to end up this way.
 Initially I had a slowly growing template that I used for most documents;
 every so often I'd discover a package that did something I liked,
 or a setting that I preferred to be non-default.
-\emph{Every} time that happened I'd want to go through the current documents I was working on
-and apply the latest revelations.
+\emph{Every} time that happened I'd want to go through the current documents
+I was working on and apply the latest revelations.
 Then when revisiting old documents I'd want to get them `up to scratch'.
 There would always be the odd document I forgot about, or line missed,
 and so I quickly became tired of this process.
@@ -49,7 +49,7 @@ While I try to keep things general it is very much built around my particular pe
 As such it is reasonable to think that to the community as a whole the
 self-importance in the name is a tad exaggerated or undeserved.
 Considering that is also designed to not just convey information but also
-designed to visually impress, the tagline ``Pretentiousness given form''
+designed to visually impress, the tagline `Pretentiousness given form''
 seems somewhat appropriate.
 
 I'm pleased to say that I consider this a project a success (in those respects).
@@ -88,7 +88,8 @@ I wanted a selection where serif, sans, and mono all mix well.
 Ideally with a few weight variants.
 Additionally I wanted a typographic style that meshed well with the
 large class of documents I indented to use this for. IBM Plex seems like a good fit
-(For more info see \fullref{sec:why-typefaces}). For all three of these a linespread of 1.15 is used.
+(For more info see \fullref{sec:why-typefaces}). For all three of these a linespread
+of 1.15 is used.
 
 \newcommand\setrow[1]{\gdef\rowmac{#1}#1\ignorespaces}
 \newcommand\clearrow{\global\let\rowmac\relax}
@@ -211,7 +212,7 @@ With the \mintinline{tex}{gloss} option, this class loads and configures the
         \item Scales the text vertically by a factor of 0.84, and horizontally by 0.91
         \item Increases \gls{tracking} by 7\acr{M}/100\footnote{See \P~2.1.6 of~\cite{Bringhurst_2004}}
     \end{enumerate}
-    \item Acronyms are typeset in the style of \mintinline{tex}{\acr}, e.g. \acrshort{bmc}
+    \item Acronyms are typeset in the style of \mintinline{tex}{\acr}, e.g. \gls{bmc}
     \item The glossary style in configured to a variant of \mintinline{tex}{long3col}
     \item A new command \mintinline{tex}{\newdefinedacronym{label}{short}{long}{description}} is added
 \end{enumerate}
@@ -325,7 +326,7 @@ While xcolor and latex do already come with some `nice' shades,
 nice colour themes may be found at \url{https://flatuicolors.com}.
 These shades do not use the pretentious names listed, we just call them what they are
 (e.g.\ nephritis \(*\to \) green). Instead of overwriting the pre-existing colour, these colours
-have been differentiated by capitalisation, i.e.\ ``Green'' instead of `green'.
+have been differentiated by capitalisation, i.e.\ `Green' instead of `green'.
 The default colour palette is shown below, however you can easily switch to another
 --- see \fullref{subsec:palettes} for more information.
 
@@ -965,34 +966,84 @@ colours as you like.
 \section{Typefaces}
 \label{sec:why-typefaces}
 
+\subsection{Studies}
 Unfortunately large type studies on UI/UX and typography
 seem to be exclusive to large companies that care about this
 (e.g.\ microsoft, google, etc.) and don't seem to publish their results.
 
-It has long been known that there is a relationship between the reader's judged aesthetic pleasingness of text, and the legibility
-(\cite{Tinker_Paterson_1942}).
-Regardless of the underlying mechanisms, this provides strong justification for putting in the effort to make a document
-have good content, \emph{and} good aesthetics.
+It has long been known that there is a relationship between the reader's judged
+aesthetic pleasingness of text, and the legibility (\cite{Tinker_Paterson_1942}).
+Regardless of the underlying mechanisms, this provides strong justification for
+putting in the effort to make a document have good content, \emph{and} good aesthetics.
 
-A study by \cite{kaspar2015matter} presented subjects with research papers in serif and sans-serif fonts.
-They found that sans-serif fonts increase reading speed. While this was not a focus of the study, it is apparently
-in line with previous research.
+A study by \cite{kaspar2015matter} presented subjects with research papers in
+serif and sans-serif fonts. They found that sans-serif fonts increase reading speed.
+While this was not a focus of the study, it is apparently in line with previous research.
 A 2005 study by~\cite{Gasser_Boeke_Haffernan_Tan_2005} found that
 sans-serif founts produced 9\% improvement in recall (\(N=149\), \(p=0.05\)).
 
 While~\cite{kaspar2015matter} found that while sans-serif fonts are read faster,
-in every category tested, sans-serif fonts performed better. Specially serifs were found to improve:
+in every category tested, sans-serif fonts performed better. Specially serifs were
+found to improve:
 \begin{itemize}
     \item Comprehension
     \item Interest in paper and appeal of abstract
     \item Perceived quality and importance
 \end{itemize}
 
-More generally,~\cite{larson2007measuring} identified two measures that successfully indicate aesthetic difference. Performance of creative cognitive tasks after reading a document, and subconscious activation of the facial muscle responsible for frowning.
-For both measures a method that had \(p=0.04\) was yielded.
-It is rather interesting that they found that improved typography reduced frowning and and improved creative cognitive task performance.
+More generally,~\cite{larson2007measuring} identified two measures that
+successfully indicate aesthetic difference. Performance of creative cognitive tasks
+after reading a document, and subconscious activation of the facial muscle
+responsible for frowning. For both measures a method that had \(p=0.04\) was yielded.
+It is rather interesting that they found that improved typography reduced frowning
+and and improved creative cognitive task performance.
 
-Semantic associations between the typeface chosen and the content also seem to be important. \cite{web_chooserightfont} appears to give a good overview of this.
+Semantic associations between the typeface chosen and the content also seem to be
+important. \cite{web_chooserightfont} appears to give a good overview of this.
+
+\subsection{The Elements of Typographic Style}
+While, as demonstrated previously, there are \textit{some} studies about typefaces,
+they are few and far between, done on a small scale, and rarely reproduced.
+Hence one of the best resources for typographic guidances is eminent publications
+on the matter. \citetitle{Bringhurst_2004} is one of the foremost books, widely held
+in high esteem. Reading through it there a several useful suggestions which I have
+tried to implement here.
+
+\paragraph{Conclusions from \P~3.2.2}
+With some acronyms each letter is pronounced individually (such as the \acr{ISO}
+or \acr{GNU}). To achieve this effect typographically spaced small caps are very
+useful. They are also useful in a variety of other situations, for example:
+\begin{center}
+    \acr{WWII} formally ended at 12:00 \acr{AM} on 8 May nineteen forty-five \acr{AD}. \\
+    WWII formally ended at 12:00 AM on 8 May nineteen forty-five AD\@.
+\end{center}
+The general rule given is --- \emph{`For abbreviations and acronyms in the midst of normal
+text, use spaced small caps'}.
+
+\paragraph{Conclusions from \P~4.4.1}
+With regard to tables
+\begin{enumerate}
+    \item Avoid shrinking font size
+    \item Minimise `furniture' (rules,boxes,dots, etc.)
+    \item Rules / tint blocks, when absolutely necessary, should run in the
+    reading direction
+    \item Rules along the (vertical) outside of the table are useless
+    \item Ensure sufficient white space is maintained
+\end{enumerate}
+
+\paragraph{Conclusions from \P~4.5.1}
+Short texts, such as research papers generally don't benefit from much padding
+at the start and end. The same does \emph{not} apply to books.
+As such \gls{bmc} implements two \mintinline{tex}{\maketitle}s.
+The default full page one seen on this document, and a shorter one used when the
+\mintinline{tex}{article} option is passed to the class.
+
+\paragraph{Conclusions from \P~5.1.3}
+Use the ampersand (\&) in heads and titles.
+
+\paragraph{Conclusions from \P~5.1.4}
+Line-end hyphens best lie in the right margin. This is achieved by use of the
+\mintinline{tex}{factor=2000} option with the microtype package.
 
 \section{Colour}
 
