@@ -537,7 +537,6 @@
 \renewcommand{\today}{
 \ifnum\number\day<10 0\fi \number\day%
 \ifnum\number\day>3 \textsuperscript{th} \else\ifnum\number\day=3 \textsuperscript{rd} \else\ifnum\number\day=2 \textsuperscript{nd} \else\ifnum\number\day=1 \textsuperscript{st} \fi\fi\fi\fi %
-\space%
 \ifcase \month \or January\or February\or March\or April\or May%
 \or June\or July\or August\or September\or October\or November\or December\fi%
 \space%
