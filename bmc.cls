@@ -662,7 +662,7 @@
 			}
 			\vspace{0.3cm}
 
-			\fontsize{1.4cm}{1.2cm}\fontseries{sb}\selectfont
+			\fontsize{1.4cm}{1.4cm}\fontseries{sb}\selectfont
 			\@title
 
 			\ifdefempty{\@subtitle}{}{
