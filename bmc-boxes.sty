@@ -49,13 +49,14 @@
         right=6pt,
         breakable,
     },
-    bmcboxtitle/.style 2 args={
+    bmcboxtitle/.style n args=3{
         extras middle and last={%
             top=20pt,
             overlay={%
                 \draw[line width=2.5pt,#1] (frame.north west)--(frame.south west);
                 % \draw[line width=0.5pt,dashed,#1] (frame.north west)--(frame.north east);
                 \draw[] {([yshift=-12pt,xshift=4.5pt]frame.north west)} node[anchor=west] {#2};
+                \draw[] {([yshift=-12pt,xshift=-4.5pt]frame.north east)} node[anchor=east] {#3};
             }
         },
     }
@@ -105,12 +106,13 @@
             \fontseries{tx}\selectfont%
             \ifstrempty{##1}{}{\ifstrempty{##2}{}{: ##1}}%
             \itshape\enspace continued%
-            \ifstrempty{##2}{}{\hfill\color{text!50!page}\thetcbcounter}},
+        }{\ifstrempty{##2}{}{\small\fontfamily{\headingsFont}\fontseries{tx}\selectfont\itshape%
+            \hfill\textcolor{text!50!page}{\thetcbcounter}}},
         title={%
             \faAbstractIcon{#2}{#5}~%
             \ifstrempty{##2}{#3~\thetcbcounter}{##2}%
             \ifstrempty{##1}{}{: \fontseries{tx}\selectfont##1}%
-            \ifstrempty{##2}{}{\hfill\color{text!50!page}\thetcbcounter}},
+            \ifstrempty{##2}{}{\hfill\textcolor{text!50!page}{\thetcbcounter}}},
         label=#4:##3,
     }
     \expandafter\newcommand\csname tcb@cnt@#1autorefname\endcsname{#3}
