@@ -125,11 +125,12 @@
 	\LoadClass[numbers=noenddot]{scrreprt}
 }
 
-% Ignore Certain Warnings
-\RequirePackage{silence}
-\WarningFilter{microtype}{You are using the `ragged2e' package}
-\WarningFilter{mathdesign}{Package 'amsfonts' shouldn't be used in conjonction with package mdput}
-\WarningFilter{mathdesign}{Package 'amssymb' shouldn't be used in conjonction with package mdput}
+% comment out till issue reolved: https://tex.stackexchange.com/questions/507911/hyperref-silence-inline-maths-doesnt-compile
+% % Ignore Certain Warnings
+% \RequirePackage{silence}
+% \WarningFilter{microtype}{You are using the `ragged2e' package}
+% \WarningFilter{mathdesign}{Package 'amsfonts' shouldn't be used in conjonction with package mdput}
+% \WarningFilter{mathdesign}{Package 'amssymb' shouldn't be used in conjonction with package mdput}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %		Some nice packages
