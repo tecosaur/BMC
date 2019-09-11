@@ -66,6 +66,7 @@
 \DeclareStringOption[serif]{body} % serif, sans, or mono
 
 \DeclareStringOption{math}[serif] % serif, sans, or mono
+\DeclareStringOption{maths}[serif] % alias
 
 \DeclareBoolOption{headingsSerif}
 \DeclareBoolOption{headingsSans}
@@ -93,6 +94,10 @@
   \begingroup
   \edef\x{#1}%
   \ifdefstring{\x}{#2}{\endgroup\@firstoftwo}{\endgroup\@secondoftwo}%
+}
+
+\ifdefempty{\bmc@maths}{}{
+	\def\bmc@math{\bmc@maths}
 }
 
 \ifbool{bmc@serif}{
