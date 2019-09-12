@@ -21,6 +21,8 @@
 \RequirePackage[
 	pdfa,
 	unicode=true, % loads with unicode support
+	pdfencoding=unicode,
+	psdextra,
 	%a4paper=true, %
 	pdftex, %
 	backref, %
@@ -34,6 +36,78 @@
 	pdfdisplaydoctitle,
 	pdfborder={1 1 0},
 ]{hyperref}
+
+\pdfstringdefDisableCommands{%
+  \def\({}%
+  \def\){}%
+  \def\acr#1{#1}%
+  \def\qopname#1#2#3{#3}%
+  \def\kern #1{}%
+  % brackets
+  \def\left{}%
+  \def\right{}%
+  \def\vert{|}%
+  \def\lvert{|}%
+  \def\rvert{|}%
+  \def\|{∥}%
+  \def\Vert{∥}%
+  \def\lVert{∥}%
+  \def\rVert{∥}%
+  \def\lfloor{⌊}%
+  \def\rfloor{⌋}%
+  \def\lceil{⌈}%
+  \def\rceil{⌉}%
+  \def\backslash{\textbackslash}%
+  % constructs
+  \def\frac#1#2{#1/#2}%
+  \def\sqrt#1{√#1}%
+  \def\overline#1{#1}%
+  \def\underline#1{#1}%
+  \def\widehat#1{#1}%
+  \def\widetilde#1{#1}%
+  \def\overrightarrow#1{#1}%
+  \def\overleftarrow#1{#1}%
+  \def\binom#1#2{#1𝑪#2}%
+  % variable size symbols
+  \def\coprod{∐}%
+  \def\biguplus{⨄}%
+  \def\bigcup{⋃}%
+  \def\bigoplus{⨁}%
+  \def\bigotimes{⨂}%
+  \def\bigodot{⨀}%
+  \def\bigvee{⋁}%
+  \def\bigwedge{⋀}%
+  \def\bigsqcup{⨆}%
+  % accents
+  \def\dot#1{\.#1}%
+  \def\ddot#1{\"#1}%
+  \def\tilde#1{\~#1}%
+  \def\acute#1{\'#1}%
+  \def\grave#1{\`#1}%
+  \def\hat#1{\^#1}%
+  \def\check#1{\v#1}%
+  \def\breve#1{\u#1}%
+  \def\bar#1{\=#1}%
+  \def\vec#1{#1}%
+  % ams extra greek characters
+  \def\varepsilon{ε}%
+  \def\vartheta{ϑ}%
+  \def\varpi{ϖ}%
+  \def\varsigma{ς}%
+  \def\varphi{φ}%
+  \def\varGamma{Γ}%
+  \def\varDelta{∆}%
+  \def\varTheta{Θ}%
+  \def\varLambda{Λ}%
+  \def\varXi{Ξ}%
+  \def\varPi{Π}%
+  \def\varSigma{Σ}%
+  \def\varUpsilon{Υ}%
+  \def\varPhi{Φ}%
+  \def\varPsi{Ψ}%
+  \def\varOmega{Ω}%
+}
+
 \RequirePackage{hyperxmp}
 \AtEndPreamble{
 	\hypersetup{
