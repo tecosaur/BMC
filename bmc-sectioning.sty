@@ -76,7 +76,8 @@
 
 \addtokomafont{chapter}{%
 	\fontfamily{\headingsFont}\fontsize{1.7cm}{1.4cm}\fontseries{tx}\selectfont%
-	\ifbool{bmc@dark}{\color{primaryVariant}}{\color{alternativePrimary}}%
+	\ifbool{bmc@dark}{\color{primaryVariant}\colorlet{inlinemath}{primaryVariant}}
+	{\color{alternativePrimary}\colorlet{inlinemath}{alternativePrimary}}%
 }
 
 \renewcommand\chapterformat{%
@@ -99,11 +100,16 @@
 }
 
 
-\addtokomafont{section}{\Huge\color{primary}\bfseries\fontfamily{\headingsFont}\selectfont}
-\addtokomafont{subsection}{\huge\color{primary}\fontseries{sb}\fontfamily{\headingsFont}\selectfont}
-\addtokomafont{subsubsection}{\LARGE\color{primary}\fontseries{sb}\fontfamily{\headingsFont}\selectfont}
-\addtokomafont{paragraph}{\color{primary!70!text}\fontseries{mb}\fontfamily{\headingsFont}\selectfont}
-\addtokomafont{subparagraph}{\color{primary!70!text}\fontseries{mb}\fontfamily{\headingsFont}\selectfont}
+\addtokomafont{section}{\color{primary}\colorlet{inlinemath}{primary}%
+	\Huge\bfseries\fontfamily{\headingsFont}\selectfont}
+\addtokomafont{subsection}{\color{primary}\colorlet{inlinemath}{primary}%
+	\huge\fontseries{sb}\fontfamily{\headingsFont}\selectfont}
+\addtokomafont{subsubsection}{\color{primary}\colorlet{inlinemath}{primary}%
+	\LARGE\fontseries{sb}\fontfamily{\headingsFont}\selectfont}
+\addtokomafont{paragraph}{\color{primary!70!text}\colorlet{inlinemath}{primary!70!text}%
+	\fontseries{mb}\fontfamily{\headingsFont}\selectfont}
+\addtokomafont{subparagraph}{\color{primary!70!text}\colorlet{inlinemath}{primary!70!text}%
+	\fontseries{mb}\fontfamily{\headingsFont}\selectfont}
 
 \renewcommand{\sectionformat}{
     \bfseries\itshape\thesection\enspace
@@ -276,7 +282,8 @@
 		\chead{\hypersetup{allcolors=.}\hyperlink{chapter.\arabic{chapter}}{\headmark}}
 	}
 
-	\addtokomafont{pagehead}{\fontfamily{\headingsFont}\selectfont\bfseries\upshape\ifbool{bmc@solid}{\color{contrastColour}}{\color{primary}}}
+	\addtokomafont{pagehead}{\fontfamily{\headingsFont}\selectfont\bfseries\upshape%
+		\ifbool{bmc@solid}{\color{contrastColour}\colorlet{inlinemath}{contrastColour}}{\color{primary}\colorlet{inlinemath}{primary}}}
 	\addtokomafont{pagenumber}{\fontfamily{\headingsFont}\fontseries{sb}\selectfont\color{primary}}
 
 	% shift the predefined head layers
