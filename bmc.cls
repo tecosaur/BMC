@@ -195,8 +195,8 @@
 		every tick label/.append style={font=\fontfamily{\sfdefault}\selectfont},
 		xlabel near ticks,
 		ylabel near ticks,
-		% -- COLOURS
-		cycle list={quaternary\\secondary\\primary\\tertiary\\},
+		% -- COLOURS / STYLES
+		cycle multi list={solid,{dotted,mark options={solid}}\nextlist quaternary,secondary,primary,tertiary},
 		%
 		every axis plot/.append style={
 			very thick,
