@@ -101,7 +101,7 @@
     \DeclareTColorBox[auto counter]{#1}{O{} O{} O{\thetcbcounter}}{
         bmcbox={#2},bmcboxtitle={#2}{%
             \faAbstractIcon{infoBulleBackground}{#5}[text=#2!70!page]%
-            \colorlet{inlinemath}{text}%
+            \colorlet{inlinemath}{text!50!page}%
             \color{text!50!page}\small\fontfamily{\headingsFont}\fontseries{mb}\selectfont%
             \ifstrempty{##2}{#3~\thetcbcounter}{##2}%
             \fontseries{tx}\selectfont%
