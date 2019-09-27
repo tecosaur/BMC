@@ -3,7 +3,7 @@
 \titlehead{Bespoke Multipurpose Class}
 \title{\texorpdfstring{BMC \hfill \fontsize{1.35cm}{1.35cm}\fontseries{t}\selectfont \emph{v}0.2.2*}{BMC v0.2.2*}}
 \subtitle{Pretentiousness Given Form}
-\author{tecosaur \footnotesize \newline Of Github}
+\author{tecosaur \footnotesize \newline of GitHub}
 
 \usepackage[symbol*]{footmisc}
 \renewcommand{\thefootnote}{\fnsymbol{footnote}}
@@ -57,7 +57,7 @@ As I have largely drawn upon snippets of LaTeX floating around online
 I though the least I could do is give others that same opportunity.
 As such here you have an overview of my personal class
 designed to work for all of the documents I produce.
-In other words a \emph{bespoke, multipurpose class} --- or BMC for short.
+In other words a \emph{bespoke, multipurpose class} --- or \acr{BMC} for short.
 
 \vspace{1cm}
 
@@ -149,7 +149,7 @@ To get upper case roman numerals use \mintinline{tex}{\RN{1978}}
 to produce \RN{1978}, and \mintinline{tex}{\Rn{1978}}
 to produce \Rn{1978}.
 
-\begin{minted}[firstnumber=1037]{tex}
+\begin{minted}[firstnumber=304]{tex}
         \providecommand*{\RN}[1]{\expandafter\@slowromancap\romannumeral #1@}
         \providecommand*{\Rn}[1]{\romannumeral#1\relax}
 \end{minted}
@@ -183,11 +183,11 @@ is called if the current font does not have small caps.
 
 \subsection{Penalties}
 The class sets new penalties.
-\begin{minted}[firstnumber=482]{tex}
+\begin{minted}[firstnumber=209]{tex}
     \@beginparpenalty=10000 % don't like it when a paragraph title is on a different page to the start of the content
     \hyphenpenalty=500 % not a huge fan of hyphens, but they are worthwhile
-    \righthyphenmin=4 % min letters post-hyphen
-    \lefthyphenmin=4 % min letters pre-hyphen
+    \lefthyphenmin=2
+    \righthyphenmin=3
 \end{minted}
 
 \subsection{Captions}
@@ -195,7 +195,7 @@ Caption labels are made to be upright sans-serif in the `text' style,
 while captions are italic in the style of the body.
 When captions flow beyond a single line, ragged right alignment is used.
 
-\begin{minted}[firstnumber=520]{tex}
+\begin{minted}[firstnumber=464]{tex}
     \setkomafont{caption}{\itshape\color{text}}
     \setkomafont{captionlabel}{\fontfamily{\headingsFont}\fontseries{tx}\selectfont\upshape\color{text}}
     \captionsetup{justification=raggedright,singlelinecheck=true}
@@ -314,7 +314,7 @@ helper function:
 This class makes use of the following defined colours.
 
 \begin{center}
-    \colorBox{primary}\colorBox{secondary}\colorBox{tertiary}\colorBox{quatrinary}
+    \colorBox{primary}\colorBox{secondary}\colorBox{tertiary}\colorBox{quaternary}
 \quad
 \colorBox{alternativePrimary}\colorBox{primaryVariant}\colorBox[text]{contrastColour}
 \end{center}
@@ -375,7 +375,7 @@ in the preamble like so \mintinline{tex}{\colorlet{inlinemath}{text}}
 For once-offs I've defined a stared variant \mintinline{tex}{\(* a^x + bx + c\)}
 which produces the normal \(*ax^2 + bx + c\).
 
-\begin{minted}[firstnumber=1030]{tex}
+\begin{minted}[firstnumber=296]{tex}
     \renewrobustcmd{\(}{\@ifstar\@inlinemath\@@inlinemath}
     \DeclareRobustCommand{\@inlinemath}{\relax\ifmmode\@badmath\else$\fi}
     \DeclareRobustCommand{\@@inlinemath}{\relax\ifmmode\@badmath\else$\fi\color{inlinemath}}
@@ -642,7 +642,7 @@ To make it easy to change things up a bit more than usual for draft mode.
 To allow for those lovely headers and footers.
 \paragraph{\ttfamily geometry}\label{par:geometry}
 Loaded with options,
-\begin{minted}[firstnumber=507]{tex}
+\begin{minted}[firstnumber=452]{tex}
     a4paper, ignoreheadfoot, left=\leftmargin, right=\rightmargin, top=2cm, bottom=3.5cm, headsep=1cm
 \end{minted}
 \paragraph{\ttfamily titlesec}\label{par:titlesec}
@@ -681,8 +681,8 @@ Always good to have. It simply makes text look better, specificity it applies th
     \item Letterspacing
 \end{itemize}
 Configured with,
-\begin{minted}[firstnumber=215]{tex}
-activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true
+\begin{minted}[firstnumber=67]{tex}
+activate={true,nocompatibility}, final, tracking=true, kerning=true, spacing=true, factor=2000
 \end{minted}
 \paragraph{\ttfamily plex-serif}\label{par:plex-serif}
 \paragraph{\ttfamily plex-sans}\label{par:plex-sans}
@@ -735,7 +735,7 @@ Useful for chemical diagrams.
 
 \paragraph{\ttfamily minted}\label{par:minted}
 Configured as follows,
-\begin{minted}[firstnumber=456]{tex}
+\begin{minted}[firstnumber=476]{tex}
 \setminted{
     frame=none,
     % framesep=2mm,
