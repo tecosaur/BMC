@@ -196,11 +196,12 @@
 		xlabel near ticks,
 		ylabel near ticks,
 		% -- COLOURS / STYLES
-		cycle multi list={solid,{dotted,mark options={solid}}\nextlist quaternary,secondary,primary,tertiary},
+		cycle multi list={solid,{dotted,mark options={solid}},{dashed,mark options={solid}}\nextlist quaternary,secondary,primary,tertiary},
 		%
 		every axis plot/.append style={
 			very thick,
 		},
+		samples=100
 		% every inner x axis line/.append style={|->},
 		% every patch/.append style={line join=round,line cap=round}
 		% every axis/.append style={axis line style={<->}}

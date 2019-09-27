@@ -452,6 +452,35 @@ This class adds an optional parameter to change the alignment,
     \mintinline{tex}{\Lap} & \(*\Lap \)
 \end{tabular}
 
+\subsection{Plotting}
+
+Plot are nice, hence some effort has been put into making them look nice.
+
+\begin{minted}{tex}
+    \begin{tikzpicture}
+        \begin{axis}[domain=0:pi]
+            \addplot+{x^2/8};
+            \addplot+{(x-1)/(x+1)};
+            \addplot+{sin(deg(x))};
+            \addplot+{cos(deg(x))};
+            \pgfplotsinvokeforeach{2,...,5}{
+                \addplot+{1/#1*sin(#1*deg(x))};}
+        \end{axis}
+    \end{tikzpicture}
+\end{minted}
+\begin{center}
+    \begin{tikzpicture}
+        \begin{axis}[domain=0:pi]
+            \addplot+{x^2/8};
+            \addplot+{(x-1)/(x+1)};
+            \addplot+{sin(deg(x))};
+            \addplot+{cos(deg(x))};
+            \pgfplotsinvokeforeach{2,...,5}{
+                \addplot+{1/#1*sin(#1*deg(x))};}
+        \end{axis}
+    \end{tikzpicture}
+\end{center}
+
 \section{Code}
 
 This package spends a few lines tweaking
