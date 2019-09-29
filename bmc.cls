@@ -205,6 +205,28 @@
 		samples=100,
 		enlargelimits={abs=0.6pt}, % prevent clipping of plot lines
 		inner axis line style={shorten >=0.6pt, shorten <=0.6pt},
+		% -- ASYMPTOTES
+		asym gap/.initial=0.02,
+		v asym/.style={unbounded coords=jump,
+			/utils/exec={\foreach \aympX [count=\asympcount] in {#1} {
+				\ifnum\asympcount=1
+					\xdef\bmc@plotasymfilter{abs(x-\aympX)<\pgfkeysvalueof{/pgfplots/asym gap}}
+				\else
+					\xdef\bmc@plotasymfilter{\bmc@plotasymfilter || abs(x-\aympX)<\pgfkeysvalueof{/pgfplots/asym gap}}
+				\fi}},
+			y filter/.expression = {\bmc@plotasymfilter ? inf:y},
+			execute at end plot visualization={
+				\foreach \aympX in {#1}
+				{\draw[current plot style,densely dashed,thin]
+					({rel axis cs:0,0} -| {axis cs:\aympX,0}) -- ({rel axis cs:0,1} -| {axis cs:\aympX,0});}
+			}
+		},
+		h asym/.style={unbounded coords=jump,
+			execute at end plot visualization/.append={
+				\draw[current plot style,densely dashed,thin]
+				({rel axis cs:0,0} |- {axis cs:0,#1}) -- ({rel axis cs:1,0} |- {axis cs:0,#1});
+			}
+		},
 		% tick label style = {font=\small},
 		% every axis label = {font=\sffamily},
 		% legend style = {font=\sffamily},
