@@ -192,7 +192,7 @@
 		tick align=outside,
 		% -- LABELS
 		yticklabel style={/pgf/number format/fixed},
-		every tick label/.append style={font=\fontfamily{\sfdefault}\selectfont},
+		every tick label/.append style={font=\fontfamily{\headingsFont}\selectfont},
 		xlabel near ticks,
 		ylabel near ticks,
 		% -- COLOURS / STYLES
@@ -200,16 +200,15 @@
 		%
 		every axis plot/.append style={
 			very thick,
+			line cap=round
 		},
-		samples=100
-		% every inner x axis line/.append style={|->},
-		% every patch/.append style={line join=round,line cap=round}
-		% every axis/.append style={axis line style={<->}}
-		% tick label style = {font=\large},
+		samples=100,
+		enlargelimits={abs=0.6pt}, % prevent clipping of plot lines
+		inner axis line style={shorten >=0.6pt, shorten <=0.6pt},
+		% tick label style = {font=\small},
 		% every axis label = {font=\sffamily},
 		% legend style = {font=\sffamily},
-		% label style = {font=\sffamily},
-		% small,
+		% label style = {font=\headingsFont},
 	}
 }{}
 
