@@ -180,9 +180,32 @@
 		legend cell align={left},
 		% -- AXIS
 		axis lines=middle,
-		inner axis line style={-Latex[round]}, % TODO: improve look of arrow
 		axis on top,
-		% -- TICKS
+		% -- AXIS ARROWS
+		inner axis line style={-},
+		clip mode=individual,
+		execute at end axis={
+			\path[tips=proper] let \p1=($(rel axis cs:1,1)-(axis cs:0,0)$),
+			\p2=($(axis cs:0,0)-(rel axis cs:0,0)$)
+			in %\pgfextra{\typeout{\x1,\x2,\y1,\y2}}
+			\ifdim\x1>0.61pt
+				(axis cs:0,0) edge[-{Latex[round,length=2mm]}]
+				($({rel axis cs:1,0} |- {axis cs:0,0})+($(1.5mm,0)-(0,0)$)$)
+			\fi
+			\ifdim\x2>0.61pt
+				(axis cs:0,0) edge[-{Latex[round,length=2mm]}]
+				($({rel axis cs:0,0} |- {axis cs:0,0})+($(-1.5mm,0)-(0,0)$)$)
+			\fi
+			\ifdim\y1>0.61pt
+				(axis cs:0,0) edge[-{Latex[round,length=2mm]}]
+				($({rel axis cs:0,1} -| {axis cs:0,0})+($(0,1.5mm)-(0,0)$)$)
+			\fi
+			\ifdim\y2>0.61pt
+				(axis cs:0,0) edge[-{Latex[round,length=2mm]}]
+				($({rel axis cs:0,0} -| {axis cs:0,0})+($(0,-1.5mm)-(0,0)$)$)
+			\fi;
+        },
+		% % -- TICKS
 		minor x tick num=1,
 		% xtick pos=left,
 		% ytick pos=left,
