@@ -111,16 +111,16 @@
 \addtokomafont{subparagraph}{\color{primary!70!text}\colorlet{inlinemath}{primary!70!text}%
 	\fontseries{mb}\fontfamily{\headingsFont}\selectfont}
 
-\renewcommand{\sectionformat}{
-    \bfseries\itshape\thesection\enspace
+\renewcommand{\sectionformat}{%
+	\fontseries{sb}\selectfont\itshape\thesection\autodot\enskip
 }
 
-\renewcommand{\subsectionformat}{
-    \bfseries\itshape\thesubsection\enspace
+\renewcommand{\subsectionformat}{%
+    \fontseries{sb}\selectfont\itshape\thesubsection\autodot\enskip
 }
 
-\renewcommand{\subsubsectionformat}{
-    \bfseries\itshape\thesubsubsection\enspace
+\renewcommand{\subsubsectionformat}{%
+    \fontseries{sb}\selectfont\itshape\thesubsubsection\autodot\enskip
 }
 
 \ifbool{bmc@article}{

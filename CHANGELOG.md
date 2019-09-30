@@ -26,6 +26,7 @@
 -   Silence + hyperref + inline maths doesn't mix well
 -   inline math color for continued box title
 -   spelling of "quaternary"
+-   remove unwanted space before numbered ((sub?)sub?)sections
 
 ## [0.2.2] — 2019-08-13
 
