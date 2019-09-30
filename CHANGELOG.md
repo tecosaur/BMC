@@ -19,6 +19,7 @@
 -   Improve pgfplot line style variation and more tweaks
 -   'smart' axis arrows for pgfplots
 -   Move code that should be in bmc-font from bmc
+-   (Vertically) spaced out mini-toc a bit more
 
 ### Fixed
 

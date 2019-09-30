@@ -211,10 +211,10 @@
 	\parbox[t]{\paperwidth-7cm-\leftmargin}{
 		\hspace*{-3mm}\raisebox{0.25mm}{\fontsize{0.6cm}{1ex}\selectfont\ifbool{bmc@solid}{\color{contrastColour}}{\color{primary}}\faList}
 		\ifstrequal{\bmc@body}{serif}{\hspace*{5.5mm}}{\hspace*{6.5mm}} {\fontfamily{\headingsFont}\fontseries{tx}\selectfont\huge{Summary}}
-		\vspace*{2mm}
+		\vspace*{3mm}
 		\startcontents[chapters]
 		\hypersetup{linkcolor=text}
-		\begin{spacing}{1}
+		\begin{spacing}{1.1}
 			\printcontents[chapters]{p}{1}{\setcounter{tocdepth}{1}}
 		\end{spacing}
 	}
