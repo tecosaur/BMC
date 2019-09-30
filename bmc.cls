@@ -860,5 +860,20 @@
 		% \setglossarysection{chapter}
 	}
 }{}
+\ifbool{bmc@article}{}{
+	\AtEndPreamble{
+		\@ifpackageloaded{biblatex}{
+			\defbibenvironment{bibliography}{%
+				\ifboolexpr{bool {bmc@solid} or bool {bmc@stripe}}{\newpage}{\vspace*{2cm}}
+				\list{}{%
+					\setlength{\leftmargin}{\bibhang}%
+					\setlength{\itemindent}{-\leftmargin}%
+					\setlength{\itemsep}{\bibitemsep}%
+					\setlength{\parsep}{\bibparsep}}}
+				{\endlist}
+				{\item}
+		}{}
+	}
+}
 
 \RequirePackage{bmc-ref}

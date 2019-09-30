@@ -20,6 +20,7 @@
 -   'smart' axis arrows for pgfplots
 -   Move code that should be in bmc-font from bmc
 -   (Vertically) spaced out mini-toc a bit more
+-   Prevent unsightly overlap (solid colour panel, or stripe) with bibliography contents
 
 ### Fixed
 
