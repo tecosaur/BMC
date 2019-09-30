@@ -367,7 +367,7 @@ The less than or equal, and greater than or equal symbols are changed as such:
 \paragraph{Inline math colour}
 After interspersing maths and text a fair bit I've begun to think there's some
 merit to the Beamer `make all maths a different colour' approach.
-So I've redefined the LaTeX inline math command such that
+So I've redefined the LaTeX inline maths command such that
 \mintinline{tex}{\(a^x + bx + c\)} now becomes \(ax^2 + bx + c\).
 Avoiding this is easy, just change the colour of \mintinline{tex}{inlinemath}
 in the preamble like so \mintinline{tex}{\colorlet{inlinemath}{text}}
@@ -547,7 +547,7 @@ For example:
 \section{Chemistry}
 When the \mintinline{tex}{chem} option is used, \mintinline{tex}{mhchem}
 is loaded with the configuration, however \mintinline{tex}{chemfig}
-undergos a few modifications to make the results look cleaner.
+undergoes a few modifications to make the results look cleaner.
 
 \begin{center}
     \chemfig{*6(-=-(-COOH)=-=)}
@@ -572,7 +572,7 @@ undergos a few modifications to make the results look cleaner.
 \def\soutt{\bgroup \ULdepth=-.45ex \ULset}
 Both the \mintinline{tex}{hyperref} and \mintinline{tex}{hyperxmp} packages are used.
 The widely used hyperref package of course provides hyperlinks.
-This is \soutt{ab}used to add a few extra links; specificly
+This is \soutt{ab}used to add a few extra links; specifically
 every page number is a link to the TOC, and the text of every header
 links to the relevant chapter page.
 This allows you to jump all over the document in just a few clicks.
@@ -676,7 +676,7 @@ Load and configure some mathematical packages, and set font to match main text f
          infoBulle & \hyperref[par:infoBulle]{infoBulle} & \hyperref[par:marginInfoBulle]{marginInfoBulle} & \hyperref[par:fontawesome5]{fontawesome5}\\[4pt]
          Chemistry & \hyperref[par:mhchem]{mhchem} & \hyperref[par:chemfig]{chemfig} \\[4pt]
          Code & \hyperref[par:minted]{minted} & \hyperref[par:tcolorbox]{tcolorbox} \\[4pt]
-         Math & \hyperref[par:amssymb]{amsmath} & \hyperref[par:amssymb]{amssymb} & \hyperref[par:mathdesign]{mathdesign} & \hyperref[par:xfrac]{xfrac} & \hyperref[par:cancel]{cancel} \\[4pt]
+         Maths & \hyperref[par:amssymb]{amsmath} & \hyperref[par:amssymb]{amssymb} & \hyperref[par:mathdesign]{mathdesign} & \hyperref[par:xfrac]{xfrac} & \hyperref[par:cancel]{cancel} \\[4pt]
          & \hyperref[par:mathtools]{mathtools} & \hyperref[par:mathastext]{mathastext} & \hyperref[par:pgfplots]{pgfplots} \\
          \bottomrule
     \end{tabular}
@@ -761,7 +761,7 @@ Split text into multiple columns (up to 10).
 \subsection{Table-related}
 
 \paragraph{\ttfamily booktabs}\label{par:booktabs}
-Contribues different width \mintinline{tex}{\hline} variants.
+Contributes different width \mintinline{tex}{\hline} variants.
 \paragraph{\ttfamily tabularx}\label{par:tabularx}
 Adds the \mintinline{tex}{tabularx} environment which has its width explicitly set,
 \mintinline{tex}{X} column type which automatically determines its width based on its contents.
@@ -838,7 +838,7 @@ To use the Utopia font for maths symbols.
 \paragraph{\ttfamily xfrac}\label{par:xfrac}
 Allows split level fractions \(*\sfrac{a}{b}\) better than \mintinline{tex}{{}^{a}/{}_{b}} can produce.
 \paragraph{\ttfamily cancel}\label{par:cancel}
-Allows for easy cancelling within math like so ---
+Allows for easy cancelling within maths like so ---
 \(*\cancel{\eta}\) and \(*\cancelto{0}{\eta}\).
 Loaded with option \mintinline{tex}{makeroom}
 \paragraph{\ttfamily mathtools}\label{par:mathtools}
@@ -850,7 +850,7 @@ Provides a variety of enhancements to make maths \emph{even} better.
     \item Showing equation numbers only for referenced equations;
     \item Extensible arrows, harpoons and hookarrows;
     \item Starred versions of the amsmath matrix environments for specifying the column alignment;
-    \item More building blocks: multlined, cases-like environments, new gathered environments;
+    \item More building blocks: multilined, cases-like environments, new gathered environments;
     \item Maths versions of \mintinline{tex}{\makebox}, \mintinline{tex}{\llap}, \mintinline{tex}{\rlap} etc.;
     \item Cramped maths styles; and more\dots
 \end{itemize}
@@ -1116,4 +1116,3 @@ Line-end hyphens best lie in the right margin. This is achieved by use of the
 \printglossary
 
 \end{document}
-
