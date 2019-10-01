@@ -1113,6 +1113,89 @@ Line-end hyphens best lie in the right margin. This is achieved by use of the
 
 \section{Colour}
 
+It seems that emotional colour associations are not universal (\cite{Laurence1991}),
+and it seems like much of the clamour about colour psychology which is presented
+authoritatively, really has little factual basis, as covered by~\cite{OConnnor2011}.
+however I mainly care about the western european perspective, which I think is
+the most heavily studied, so we should be alright.
+
+Looking online I saw a lot of self-professed ``colour-gurus'', the first
+respectable-looking page which seemed to provide a nice summary
+(i.e.\ wasn't just red vs.\ green etc.) is~\cite{web_colour} — you may recognise the
+author from the previous section on fonts.
+His page acknowledges complexity in the situation, and cites a bunch of articles,
+which I consider to be a good sign.
+The conclusions were summarised in a table, a copy of which you can find below.
+
+\begin{table}[!htb]
+    \newcommand{\high}{\color{Green!70!text}\faChevronUp}
+    \newcommand{\low}{\color{Red!70!text}\faChevronDown}
+    \newcommand{\yep}{\faCheck}
+    \centering
+    \caption{Colour Associations (from Nick Kolenda)}
+    \begin{tabular}{
+        >{\fontseries{mb}\selectfont}l
+        l
+        >{\color{Red!70!text}}c
+        >{\color{Orange!70!text}}c
+        >{\color{Yellow!70!text}}c
+        >{\color{Green!70!text}}c
+        >{\color{Blue!70!text}}c
+        >{\color{Purple!70!text}}c
+        >{\color{pink!70!text}}c
+        >{\color{Brown!70!text}}c
+        >{\color{Black!70!text}}c
+        >{\color{White!70!text}}c
+        cc}
+        \toprule
+        & & \multicolumn{10}{c}{Hue} & S & L \\
+        & & \cellcolor{Red}\hspace{4mm} & \cellcolor{Orange}\hspace{4mm} & \cellcolor{Yellow}\hspace{4mm} & \cellcolor{Green}\hspace{4mm}
+        & \cellcolor{Blue}\hspace{4mm} & \cellcolor{Purple}\hspace{4mm} & \cellcolor{pink}\hspace{4mm} & \cellcolor{Brown}\hspace{4mm} & \cellcolor{Black}\hspace{4mm} & \cellcolor{White}\hspace{4mm}
+        & & \\
+        \midrule
+        Arousal
+        & Relaxed & & & & \yep & \yep & \yep & & & & \yep & \high & \low \\
+        & Exited & \yep & \yep & \yep &  & & & & & \yep &  & \low & \high \\
+        \midrule
+        Processing
+        & Systematic & & & & \yep & \yep & \yep && & & \yep  & \high & \low \\
+        & Heuristic & \yep & \yep & \yep  & & & & & & \yep & & \low & \high \\
+        \midrule
+        Selling
+        & Auction & \yep & \yep & \yep  & &&&& & \yep & & \low & \high \\
+        & Negotiation & & & & \yep  & \yep  & \yep  & & & & \yep  & \high & \low \\
+        \midrule
+        Traits
+        & Competence & & & & & \yep & & & & \yep  & & & \high \\
+        & Excitement & \yep & \yep & \yep  & & & & & & & & \low & \high \\
+        & Ruggedness & & & & \yep  & & & & \yep  & & & \low & \high \\
+        & Sincerity & & & \yep & & & & \yep  & & & \yep  & \high & \low \\
+        & Sophistication & & & & & & \yep  & & & & \yep  & \high & \\
+        \midrule
+        Goal
+        & Attention & \yep & \yep  & \yep  & & & & & & & & \high &\low \\
+        & Action & \yep & \yep & \yep & & & & & & & & \low & \high \\
+        & Liking & & & & \yep  & \yep & \yep & & & & & \high & \\
+        \midrule
+        Type
+        & Utilitarian & & & & & \yep & \yep & & & \yep  & & & \\
+        & Hedonic & \yep & & \yep & & & \yep & \yep & & & & & \\
+        \midrule
+        Message
+        & Prevention & \yep \\
+        & Gain & & & & & \yep \\
+        \midrule
+        Gender
+        & Male & & & & \yep & \yep \\
+        & Female & \yep & & \yep & & \yep & \yep & \yep & & & & \low & \low \\
+        \bottomrule
+    \end{tabular}
+    \label{table:nick-colour-associations}
+\end{table}
+
+While \autoref{table:nick-colour-associations} is nice, it isn't terribly useful for
+providing a holistic view of colour in design.
+
 \printbibliography
 \printglossary
 
