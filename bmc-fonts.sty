@@ -244,9 +244,11 @@
 % have \textsc use \fauxsc if \scshape not avalible
 \let\textsc\relax
 \DeclareRobustCommand{\textsc}[1]{%
-  \sbox0{x\xdef\testA{\the\font}}%
-  \sbox0{\scshape x\xdef\testB{\the\font}}%
-  \ifx\testA\testB\fauxsc{#1}\else{\scshape #1}\fi
+  \ifcsname \f@encoding/\f@family/\f@series/sc\endcsname
+     {\scshape #1}%
+  \else
+    \fauxsc{#1}%
+  \fi
 }
 
 \newlength\fake@f
