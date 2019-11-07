@@ -567,6 +567,21 @@ undergoes a few modifications to make the results look cleaner.
 	\renewcommand*\printatom[1]{\small\ensuremath{\mathsf{#1}}}
 \end{minted}
 
+We also grabbed some nice code for a custom arrow type \mintinline{tex}{X}
+from a stackexchange answer so now we can do this:
+\begin{minted}{tex}
+    \schemestart
+    A
+    \arrow{-X>[1][2][3][4][5][6]}
+    B
+    \schemestop
+\end{minted}
+\begin{center}
+    \schemestart
+    A \arrow{-X>[1][2][3][4][5][6]} B
+    \schemestop
+\end{center}
+
 \section{Links and Metadata}
 \renewcommand{\ULthickness}{1pt}
 \def\soutt{\bgroup \ULdepth=-.45ex \ULset}

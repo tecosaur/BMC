@@ -50,6 +50,7 @@
 \DeclareBoolOption{paragraph}
 
 \DeclareBoolOption{landscape}
+\DeclareBoolOption{print}
 
 % extras
 \DeclareBoolOption{notes}
@@ -130,8 +131,8 @@
 	\LoadClass[numbers=noenddot]{scrreprt}
 }
 
-% comment out till issue reolved: https://tex.stackexchange.com/questions/507911/hyperref-silence-inline-maths-doesnt-compile
 % % Ignore Certain Warnings
+% comment out till issue reolved: https://tex.stackexchange.com/questions/507911/hyperref-silence-inline-maths-doesnt-compile
 % \RequirePackage{silence}
 % \WarningFilter{microtype}{You are using the `ragged2e' package}
 % \WarningFilter{mathdesign}{Package 'amsfonts' shouldn't be used in conjonction with package mdput}
@@ -141,21 +142,29 @@
 %		Some nice packages
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\RequirePackage{morewrites}
 \RequirePackage{ifdraft}
 \RequirePackage[automark,draft=false,headwidth=textwithmarginpar,footwidth=head]{scrlayer-scrpage}
 \RequirePackage{calc}
 \ifdraft{
 	\PassOptionsToPackage{gray}{xcolor}
-}{}
-\RequirePackage[usenames,dvipsnames,svgnames,table]{xcolor}
+}{
+    \ifbool{bmc@print}{
+        \PassOptionsToPackage{cmyk}{xcolor}
+    }{
+        \PassOptionsToPackage{natural}{xcolor}
+    }
+}
+\RequirePackage[dvipsnames,svgnames,table,hyperref]{xcolor}
 
 \RequirePackage{tikz}
 \ifbool{bmc@externalise}{
 	\usetikzlibrary{external}
 	\tikzexternalize[
 		prefix=tikz/,
-		% mode=list and make,
-		only named=true
+		mode=list and make,
+		only named=true,
+		optimize=false
 	]
 	% \tikzset{external/system call={pdflatex \tikzexternalcheckshellescape
 	% 	-halt-on-error -interaction=batchmode -jobname "\image" "\texsource"}
@@ -165,7 +174,7 @@
 	\RequirePackage{pgfplots}
 	\usetikzlibrary{plotmarks}
 	\usepgfplotslibrary{fillbetween}
-	\usetikzlibrary{arrows.meta}
+	\usetikzlibrary{arrows.meta,calc}
 	\pgfplotsset{
 		compat=newest,
 		% only marks,
@@ -182,27 +191,27 @@
 		axis lines=middle,
 		axis on top,
 		% -- AXIS ARROWS
-		inner axis line style={-},
+		inner axis line style={draw=none},
 		clip mode=individual,
 		execute at end axis={
 			\path[tips=proper] let \p1=($(rel axis cs:1,1)-(axis cs:0,0)$),
 			\p2=($(axis cs:0,0)-(rel axis cs:0,0)$)
 			in %\pgfextra{\typeout{\x1,\x2,\y1,\y2}}
-			\ifdim\x1>0.61pt
-				(axis cs:0,0) edge[-{Latex[round,length=2mm]}]
-				($({rel axis cs:1,0} |- {axis cs:0,0})+($(1.5mm,0)-(0,0)$)$)
+			\ifdim\x1>1.5pt
+				(axis cs:0,0) edge[-{Latex[round,length=\ifdim\x1<3mm 1.2mm\else 2mm\fi]}]
+				($({rel axis cs:1,0} |- {axis cs:0,0})+($(1.36mm,0)-(0,0)$)$)
 			\fi
-			\ifdim\x2>0.61pt
-				(axis cs:0,0) edge[-{Latex[round,length=2mm]}]
-				($({rel axis cs:0,0} |- {axis cs:0,0})+($(-1.5mm,0)-(0,0)$)$)
+			\ifdim\x2>1.5pt
+				(axis cs:0,0) edge[-{Latex[round,length=\ifdim\x2<3mm 1.2mm\else 2mm\fi]}]
+				($({rel axis cs:0,0} |- {axis cs:0,0})+($(-1.36mm,0)-(0,0)$)$)
 			\fi
-			\ifdim\y1>0.61pt
-				(axis cs:0,0) edge[-{Latex[round,length=2mm]}]
-				($({rel axis cs:0,1} -| {axis cs:0,0})+($(0,1.5mm)-(0,0)$)$)
+			\ifdim\y1>1.5pt
+				(axis cs:0,0) edge[-{Latex[round,length=\ifdim\y1<3mm 1.2mm\else 2mm\fi]}]
+				($({rel axis cs:0,1} -| {axis cs:0,0})+($(0,1.36mm)-(0,0)$)$)
 			\fi
-			\ifdim\y2>0.61pt
-				(axis cs:0,0) edge[-{Latex[round,length=2mm]}]
-				($({rel axis cs:0,0} -| {axis cs:0,0})+($(0,-1.5mm)-(0,0)$)$)
+			\ifdim\y2>1.5pt
+				(axis cs:0,0) edge[-{Latex[round,length=\ifdim\y2<3mm 1.2mm\else 2mm\fi]}]
+				($({rel axis cs:0,0} -| {axis cs:0,0})+($(0,-1.36mm)-(0,0)$)$)
 			\fi;
         },
 		% % -- TICKS
@@ -213,6 +222,8 @@
 		every x tick/.style={color=text, thin},
 		every y tick/.style={color=text, thin},
 		tick align=outside,
+		% xtick placement tolerance=-1mm,
+		% ytick placement tolerance=-1mm,
 		% -- LABELS
 		yticklabel style={/pgf/number format/fixed},
 		every tick label/.append style={font=\fontfamily{\headingsFont}\selectfont},
@@ -226,8 +237,8 @@
 			line cap=round
 		},
 		samples=100,
-		enlargelimits={abs=0.6pt}, % prevent clipping of plot lines
-		inner axis line style={shorten >=0.6pt, shorten <=0.6pt},
+		enlargelimits={abs=1pt}, % prevent clipping of plot lines
+		% inner axis line style={shorten >=0.6pt, shorten <=0.6pt},
 		% -- ASYMPTOTES
 		asym gap/.initial=0.02,
 		v asym/.style={unbounded coords=jump,
@@ -239,15 +250,21 @@
 				\fi}},
 			y filter/.expression = {\bmc@plotasymfilter ? inf:y},
 			execute at end plot visualization={
-				\foreach \aympX in {#1}
-				{\draw[current plot style,densely dashed,thin]
-					({rel axis cs:0,0} -| {axis cs:\aympX,0}) -- ({rel axis cs:0,1} -| {axis cs:\aympX,0});}
+				\begin{scope}
+					\clip (rel axis cs:0,0) rectangle (rel axis cs:1,1);
+					\foreach \aympX in {#1}
+					{\draw[current plot style,densely dashed,thin]
+						({rel axis cs:0,0} -| {axis cs:\aympX,0}) -- ({rel axis cs:0,1} -| {axis cs:\aympX,0});}
+				\end{scope}
 			}
 		},
 		h asym/.style={unbounded coords=jump,
 			execute at end plot visualization/.append={
-				\draw[current plot style,densely dashed,thin]
-				({rel axis cs:0,0} |- {axis cs:0,#1}) -- ({rel axis cs:1,0} |- {axis cs:0,#1});
+				\begin{scope}
+					\clip (rel axis cs:0,0) rectangle (rel axis cs:1,1);
+					\draw[current plot style,densely dashed,thin]
+						({rel axis cs:0,0} |- {axis cs:0,#1}) -- ({rel axis cs:1,0} |- {axis cs:0,#1});
+				\end{scope}
 			}
 		},
 		% tick label style = {font=\small},
@@ -255,6 +272,19 @@
 		% legend style = {font=\sffamily},
 		% label style = {font=\headingsFont},
 	}
+	% \ifdraft{
+	% 	\let\oldtikzpicture\tikzpicture
+	% 	\let\oldendtikzpicture\endtikzpicture
+	% 	\renewenvironment{tikzpicture}{%
+	% 		\expandafter\oldtikzpicture%
+	% 		\renewenvironment{axis}{%
+	% 			\draw[dashed] (0,0) rectangle (0.5\textwidth,0.3\textwidth);
+	% 			\draw (0.25\textwidth,0.15\textwidth) node[align=center] {\small PGFPlot Figure Here};
+	% 		\comment}{\endcomment}%
+	% 	}{%
+	% 		\oldendtikzpicture%
+	% 	}
+	% }{}
 }{}
 
 \RequirePackage{booktabs}
@@ -289,6 +319,60 @@
 		bond offset=0.18265 em  % 'Margin Width'
 	}
 	\renewcommand*\printatom[1]{\small\ensuremath{\mathsf{#1}}}
+
+	% X arrow, Arguments:
+	% #1, #2, #3, #4, #5, #6: Labels as shown in the output figure
+	% #7: yshift for the arrow, positive for upwards shift, vice versa
+	% #8: radius of arc (default 0.333)
+	% #9: angle for arc (default 60)
+	% src: https://tex.stackexchange.com/a/372947/167605
+	\definearrow9{-X>}{%
+	\CF@arrow@shift@nodes{#7}%
+	\expandafter\draw\expandafter[\CF@arrow@current@style](\CF@arrow@start@node)--(\CF@arrow@end@node)node[midway](Xarrow@arctangent){};%
+	\CF@ifempty{#8}
+	{\def\CF@Xarrow@radius{0.333}}
+	{\def\CF@Xarrow@radius{#8}}%
+	\CF@ifempty{#9}%
+	{\def\CF@Xarrow@absangle{60}}
+	{\pgfmathsetmacro\CF@Xarrow@absangle{abs(#9)}}
+	% Draw top arrow (start)
+	\edef\CF@tmp@str{[\CF@ifempty{#1}{draw=none}{\unexpanded\expandafter{\CF@arrow@current@style}},-]}%
+	\expandafter\draw\CF@tmp@str (Xarrow@arctangent)%
+	arc[radius=\CF@compound@sep*\CF@current@arrow@length*\CF@Xarrow@radius,start angle=\CF@arrow@current@angle-90,delta angle=-\CF@Xarrow@absangle]node(Xarrow1@start){};
+	% Draw bottom arrow (end)
+	\edef\CF@tmp@str{[\CF@ifempty{#2}{draw=none}{\unexpanded\expandafter{\CF@arrow@current@style}},-CF]}%
+	\expandafter\draw\CF@tmp@str (Xarrow@arctangent)%
+	arc[radius=\CF@compound@sep*\CF@current@arrow@length*\CF@Xarrow@radius,%
+	start angle=\CF@arrow@current@angle-90,%
+	delta angle=\CF@Xarrow@absangle]%
+	node(Xarrow1@end){};
+	% Draw bottom arrow (start)
+	\edef\CF@tmp@str{[\CF@ifempty{#4}{draw=none}{\unexpanded\expandafter{\CF@arrow@current@style}},-]}%
+	\expandafter\draw\CF@tmp@str (Xarrow@arctangent)%
+	arc[radius=\CF@compound@sep*\CF@current@arrow@length*\CF@Xarrow@radius,start angle=\CF@arrow@current@angle+90,delta angle=\CF@Xarrow@absangle]node(Xarrow2@start){};
+	% Draw bottom arrow (end)
+	\edef\CF@tmp@str{[\CF@ifempty{#5}{draw=none}{\unexpanded\expandafter{\CF@arrow@current@style}},-CF]}%
+	\expandafter\draw\CF@tmp@str (Xarrow@arctangent)%
+	arc[radius=\CF@compound@sep*\CF@current@arrow@length*\CF@Xarrow@radius,%
+	start angle=\CF@arrow@current@angle+90,%
+	delta angle=-\CF@Xarrow@absangle]%
+	node(Xarrow2@end){};
+	% Insert labels
+	\pgfmathsetmacro\CF@tmp@stra{\CF@Xarrow@radius*cos(\CF@arrow@current@angle)<0?"-":"+"}%
+	\pgfmathsetmacro\CF@tmp@strb{\CF@Xarrow@radius*cos(\CF@arrow@current@angle)<0?"+":"-"}%
+	\ifdim\CF@Xarrow@radius pt>\z@
+		\CF@arrow@display@label{#1}{0}\CF@tmp@stra{Xarrow1@start}{#2}{1}\CF@tmp@stra{Xarrow1@end}%
+		\CF@arrow@display@label{#4}{0}\CF@tmp@strb{Xarrow2@start}{#5}{1}\CF@tmp@strb{Xarrow2@end}%
+		\CF@arrow@display@label{#3}{0.5}\CF@tmp@stra\CF@arrow@start@node{}{}{}\CF@arrow@end@node%
+		\CF@arrow@display@label{#6}{0.5}\CF@tmp@strb\CF@arrow@start@node{}{}{}\CF@arrow@end@node%
+	\else
+		\CF@arrow@display@label{#2}{0}\CF@tmp@stra{Xarrow1@start}{#1}{1}\CF@tmp@stra{Xarrow1@end}%
+		\CF@arrow@display@label{#5}{0}\CF@tmp@strb{Xarrow2@start}{#4}{1}\CF@tmp@strb{Xarrow2@end}%
+		\CF@arrow@display@label{#3}{0.5}\CF@tmp@stra\CF@arrow@start@node{}{}{}\CF@arrow@end@node%
+		\CF@arrow@display@label{#6}{0.5}\CF@tmp@strb\CF@arrow@start@node{}{}{}\CF@arrow@end@node%
+	\fi
+	}
+
 	% \ifbool{bmc@externalise}{ % source: https://tex.stackexchange.com/questions/245015/precompile-molecules-for-faster-compilation/
 
 	% \def\CF@chemfig@iii[#1][#2]{%
@@ -483,7 +567,7 @@
 \renewcommand{\indent}{\hspace*{\tindent}}
 
 % set caption style
-\setkomafont{caption}{\itshape\color{text}}
+\setkomafont{caption}{\fontfamily{\headingsFont}\small\color{text}}
 \setkomafont{captionlabel}{\fontfamily{\headingsFont}\fontseries{tx}\selectfont\upshape\color{text}}
 \captionsetup{justification=raggedright,singlelinecheck=true}
 
@@ -696,7 +780,9 @@
 			\vspace*{-1cm}
 			{
 				\fontseries{m}\selectfont\Large
-				\ifdefempty{\@titlehead}{}{%
+				\ifdefempty{\@titlehead}{%
+					\ifdefempty{\@date}{\vspace{-1.3cm}}{}%
+				}{%
 					\expandafter\textsc\expandafter{\@titlehead}%
 				}%
 				\hfill
@@ -823,6 +909,7 @@
 
 		\usepackage[automake, smallcaps, numberedsection=nolabel, style=long3col]{glossaries}
 		\makeglossaries
+		\ifdefined\bmcaftergloss\bmcaftergloss\fi
 
 		\newglossarystyle{mylist}{%
 		\setglossarystyle{long3col}
@@ -860,9 +947,10 @@
 		% \setglossarysection{chapter}
 	}
 }{}
-\ifbool{bmc@article}{}{
-	\AtEndPreamble{
-		\@ifpackageloaded{biblatex}{
+\AtEndPreamble{
+	\@ifpackageloaded{biblatex}{
+		% \DeclarePrintbibliographyDefaults{heading=bibnumbered} % Wait for updated package
+		\ifbool{bmc@article}{}{
 			\defbibenvironment{bibliography}{%
 				\ifboolexpr{bool {bmc@solid} or bool {bmc@stripe}}{\newpage}{\vspace*{2cm}}
 				\list{}{%
