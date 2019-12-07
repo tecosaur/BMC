@@ -22,7 +22,7 @@
 	pdfa,
 	unicode=true, % loads with unicode support
 	pdfencoding=unicode,
-	psdextra,
+	psdextra, % loads replacements for some maths
 	%a4paper=true, %
 	pdftex, %
 	backref, %
@@ -38,11 +38,32 @@
 ]{hyperref}
 
 \pdfstringdefDisableCommands{%
+  % misc
+  \def\acr#1{#1}%
+  \def\kern #1{}%
+  % font stuff
+  \def\fontseries#1{}%
+  \def\selectfont{}%
+  \def\Huge{}%
+  \def\huge{}%
+  \def\LARGE{}%
+  \def\Large{}%
+  \def\large{}%
+  \def\normalsize{}%
+  \def\small{}%
+  \def\footnotesize{}%
+  \def\scriptsize{}%
+  \def\tiny{}%
+  % space
+  \def\hspace#1{}%
+  \def\hphantom#1{}%
+  \def\sbox0#1{}%
+  \def\newline{}%
+  \def\\{}%
+  % MATHS
   \def\({}%
   \def\){}%
-  \def\acr#1{#1}%
   \def\qopname#1#2#3{#3}%
-  \def\kern #1{}%
   % brackets
   \def\left{}%
   \def\right{}%

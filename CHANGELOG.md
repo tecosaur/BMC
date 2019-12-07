@@ -21,6 +21,7 @@
 -   Move code that should be in bmc-font from bmc
 -   (Vertically) spaced out mini-toc a bit more
 -   Prevent unsightly overlap (solid colour panel, or stripe) with bibliography contents
+-   Improve sectioning label string conversion with hyperref (e.g `\acr{abc}` to `abc`)
 
 ### Fixed
 
