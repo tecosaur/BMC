@@ -1149,6 +1149,9 @@ The conclusions were summarised in a table, a copy of which you can find below.
     \newcommand{\high}{\color{Green!70!text}\faChevronUp}
     \newcommand{\low}{\color{Red!70!text}\faChevronDown}
     \newcommand{\yep}{\faCheck}
+    \newcommand{\cc}[1]{\hspace{-0.3em}%
+        \tikz{\fill[#1,rounded corners] (0,0) rectangle(1.7em,1.1em)}%
+        \hspace{-0.3em}}
     \centering
     \caption{Colour Associations (from Nick Kolenda)}
     \begin{tabular}{
@@ -1167,9 +1170,9 @@ The conclusions were summarised in a table, a copy of which you can find below.
         cc}
         \toprule
         & & \multicolumn{10}{c}{Hue} & S & L \\
-        & & \cellcolor{Red}\hspace{4mm} & \cellcolor{Orange}\hspace{4mm} & \cellcolor{Yellow}\hspace{4mm} & \cellcolor{Green}\hspace{4mm}
-        & \cellcolor{Blue}\hspace{4mm} & \cellcolor{Purple}\hspace{4mm} & \cellcolor{pink}\hspace{4mm} & \cellcolor{Brown}\hspace{4mm} & \cellcolor{Black}\hspace{4mm} & \cellcolor{White}\hspace{4mm}
-        & & \\
+        & & \cc{Red} & \cc{Orange} & \cc{Yellow} & \cc{Green}
+        & \cc{Blue} & \cc{Purple} & \cc{pink} & \cc{Brown}
+        & \cc  {Black} & \cc{White} & & \\
         \midrule
         Arousal
         & Relaxed & & & & \yep & \yep & \yep & & & & \yep & \high & \low \\
