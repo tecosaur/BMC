@@ -322,8 +322,8 @@ This class makes use of the following defined colours.
 Modifying these colours in the preamble affects the entire document.
 
 \subsection{Colour Palette}
-While xcolor and latex do already come with some `nice' shades,
-nice colour themes may be found at \url{https://flatuicolors.com}.
+While \mintinline{tex}{xcolor} does already come with some `nice'
+shades, nice colour themes may be found at \url{https://flatuicolors.com}.
 These shades do not use the pretentious names listed, we just call them what they are
 (e.g.\ nephritis \(*\to \) green). Instead of overwriting the pre-existing colour, these colours
 have been differentiated by capitalisation, i.e.\ `Green' instead of `green'.
@@ -341,6 +341,9 @@ The default colour palette is shown below, however you can easily switch to anot
     \colorBox{Purple} \qquad \colorBox{LightPurple} \colorBox{DarkPurple} \\[-0.7mm]
     \colorBox{Cyan} \qquad \colorBox{LightCyan} \colorBox{DarkCyan}
 \end{multicols}
+
+It's important to note that the palette only affects these named colours, and
+that the primary, secondary, etc.\ colours are not affected.
 
 \subsection{Functional Colours}
 This package has a few special colours that describe a particular aspect of a document,
