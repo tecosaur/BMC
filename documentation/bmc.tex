@@ -353,6 +353,21 @@ such as \verb|href| and \verb|inlinemath|. For more information see \fullref{sub
 
 This class makes a few additions, and one or two modifications to Mathematics.
 
+\paragraph{Demo}
+\[
+    \frac{1}{2\pi i} \int\limits_\gamma f\Bigl(x^{\mathbf{N}\in\mathbb{C}^{N\times 10}}\Bigr)
+    = \sum_{k=1}^m n(\gamma;a_k) \operatorname{Res} (f;a_k)\,.
+\]
+\[
+  \iiiint\limits_{Q}f(w,x,y,z) \dd w \dd x \dd y \dd z
+  \leq
+  \oint_{\partial Q} f'\Biggl(\max\Biggl\{
+  \frac{\Vert w\Vert}{\vert w^2+x^2\vert};
+  \frac{\Vert z\Vert}{\vert y^2+z^2\vert};
+  \frac{\Vert w\oplus z\Vert}{\vert x\oplus y\vert}
+  \Biggr\}\Biggr)\,.
+\]
+
 \subsection{Modifications}
 
 \paragraph{Less/greater than or equal}
@@ -731,7 +746,7 @@ Loaded with options,
 \paragraph{\ttfamily titlesec}\label{par:titlesec}
 Allows for customisation of \mintinline{tex}{\chapter} etc.
 Was originally used for all section commands, but now all except for
-\mintinline{tex}{\chapter} have been transitioned to KOMA-script.
+\mintinline{tex}{\chapter} have been transitioned to \acr{KOMA}-script.
 \paragraph{\ttfamily titletoc}\label{par:titletoc}
 Allows significant tweaking to how the table of contents looks.
 \paragraph{\ttfamily framed}\label{par:framed}
