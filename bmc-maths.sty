@@ -13,10 +13,9 @@
 
 % various math packages
 \RequirePackage{amsmath,amssymb}
-% \RequirePackage[utopia]{mathdesign}
+\RequirePackage[varbb]{newpxmath}
 \RequirePackage{xfrac}
 \RequirePackage[makeroom]{cancel}
-% package to use text font for math
 \usepackage{mathtools}
 
 % deliminators
@@ -34,6 +33,8 @@
 \newcommand{\CC}[1][]{\ensuremath{\ifstrempty{#1}{\mathbb{C}}{\mathbb{C}^{#1}}}}
 \newcommand{\PP}[1][]{\ensuremath{\ifstrempty{#1}{\mathbb{P}}{\mathbb{P}^{#1}}}}
 \newcommand{\HH}[1][]{\ensuremath{\ifstrempty{#1}{\mathbb{H}}{\mathbb{H}^{#1}}}}
+% expected value
+\newcommand{\EE}{\ensuremath{\mathbb{E}}}
 
 % commonly used macros
 %  - differentials
