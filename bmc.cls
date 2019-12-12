@@ -194,26 +194,26 @@
 		inner axis line style={draw=none},
 		clip mode=individual,
 		execute at end axis={
-			\path[tips=proper] let \p1=($(rel axis cs:1,1)-(axis cs:0,0)$),
-			\p2=($(axis cs:0,0)-(rel axis cs:0,0)$)
+			\path[tips=proper] let \p1=($(rel axis cs:1,1)-(current axis.origin)$),
+			\p2=($(current axis.origin)-(rel axis cs:0,0)$)
 			in %\pgfextra{\typeout{\x1,\x2,\y1,\y2}}
 			\ifdim\x1>1.5pt
-				(axis cs:0,0) edge[-{Latex[round,length=\ifdim\x1<3mm 1.2mm\else 2mm\fi]}]
-				($({rel axis cs:1,0} |- {axis cs:0,0})+($(1.36mm,0)-(0,0)$)$)
+				(current axis.origin) edge[-{Latex[round,length=\ifdim\x1<3mm 1.2mm\else 2mm\fi]}]
+				($({rel axis cs:1,0} |- {current axis.origin})+($(1.36mm,0)-(0,0)$)$)
 			\fi
 			\ifdim\x2>1.5pt
-				(axis cs:0,0) edge[-{Latex[round,length=\ifdim\x2<3mm 1.2mm\else 2mm\fi]}]
-				($({rel axis cs:0,0} |- {axis cs:0,0})+($(-1.36mm,0)-(0,0)$)$)
+				(current axis.origin) edge[-{Latex[round,length=\ifdim\x2<3mm 1.2mm\else 2mm\fi]}]
+				($({rel axis cs:0,0} |- {current axis.origin})+($(-1.36mm,0)-(0,0)$)$)
 			\fi
 			\ifdim\y1>1.5pt
-				(axis cs:0,0) edge[-{Latex[round,length=\ifdim\y1<3mm 1.2mm\else 2mm\fi]}]
-				($({rel axis cs:0,1} -| {axis cs:0,0})+($(0,1.36mm)-(0,0)$)$)
+				(current axis.origin) edge[-{Latex[round,length=\ifdim\y1<3mm 1.2mm\else 2mm\fi]}]
+				($({rel axis cs:0,1} -| {current axis.origin})+($(0,1.36mm)-(0,0)$)$)
 			\fi
 			\ifdim\y2>1.5pt
-				(axis cs:0,0) edge[-{Latex[round,length=\ifdim\y2<3mm 1.2mm\else 2mm\fi]}]
-				($({rel axis cs:0,0} -| {axis cs:0,0})+($(0,-1.36mm)-(0,0)$)$)
+				(current axis.origin) edge[-{Latex[round,length=\ifdim\y2<3mm 1.2mm\else 2mm\fi]}]
+				($({rel axis cs:0,0} -| {current axis.origin})+($(0,-1.36mm)-(0,0)$)$)
 			\fi;
-        },
+		},
 		% % -- TICKS
 		minor x tick num=1,
 		% xtick pos=left,
