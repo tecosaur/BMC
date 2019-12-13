@@ -1167,6 +1167,14 @@ The conclusions were summarised in a table, a copy of which you can find below.
     \newcommand{\cc}[1]{\hspace{-0.3em}%
         \tikz{\fill[#1,rounded corners] (0,0) rectangle(1.7em,1.1em)}%
         \hspace{-0.3em}}
+    \newcommand{\saturation}{\hspace{-0.3em}%
+        \tikz{\fill[left color=white!50!black,draw=page,line width=0pt,
+        right color=Red,rounded corners] (0,0) rectangle(1.7em,1.1em)}%
+        \hspace{-0.3em}}
+    \newcommand{\lightness}{\hspace{-0.3em}%
+        \tikz{\fill[left color=black,right color=white,draw=page,line width=0pt,
+        middle color=Red,rounded corners] (0,0) rectangle(1.7em,1.1em)}%
+        \hspace{-0.3em}}
     \centering
     \caption{Colour Associations (from Nick Kolenda)}
     \begin{tabular}{
@@ -1187,7 +1195,7 @@ The conclusions were summarised in a table, a copy of which you can find below.
         & & \multicolumn{10}{c}{Hue} & S & L \\
         & & \cc{Red} & \cc{Orange} & \cc{Yellow} & \cc{Green}
         & \cc{Blue} & \cc{Purple} & \cc{pink} & \cc{Brown}
-        & \cc  {Black} & \cc{White} & & \\
+        & \cc  {Black} & \cc{White} & \saturation & \lightness \\
         \midrule
         Arousal
         & Relaxed & & & & \yep & \yep & \yep & & & & \yep & \high & \low \\
