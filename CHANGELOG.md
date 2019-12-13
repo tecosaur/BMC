@@ -22,6 +22,8 @@
 -   (Vertically) spaced out mini-toc a bit more
 -   Prevent unsightly overlap (solid colour panel, or stripe) with bibliography contents
 -   Improve sectioning label string conversion with hyperref (e.g `\acr{abc}` to `abc`)
+-   Switched the maths font to `newpxmath`, which is very nice
+-   Use actual origin for graph axis instead of always (0,0)
 
 ### Fixed
 
@@ -30,6 +32,7 @@
 -   inline math color for continued box title
 -   spelling of "quaternary"
 -   remove unwanted space before numbered ((sub?)sub?)sections
+-   weird spacing of small caps by removing `tracking` option from microtype
 
 ## [0.2.2] — 2019-08-13
 
