@@ -292,7 +292,7 @@
 \RequirePackage{longtable}
 
 \RequirePackage{multicol}
-% \RequirePackage{siunitx}
+% \RequirePackage[abbreviations,free-standing-units,use-xspace]{siunitx}
 
 \RequirePackage{graphicx}
 \RequirePackage{grffile} % fix allowed filenames
