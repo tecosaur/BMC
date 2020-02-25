@@ -21,14 +21,22 @@
     \DeclareBoolOption[true]{light}
     \DeclareBoolOption{dark}
 
+    \DeclareBoolOption{print}
+
     \ProcessKeyvalOptions*
 \fi
 
 \RequirePackage{ifdraft}
 \ifdraft{
 	\PassOptionsToPackage{gray}{xcolor}
-}{}
-\RequirePackage[usenames,dvipsnames,svgnames,table]{xcolor}
+}{
+    \ifbool{bmc@print}{
+        \PassOptionsToPackage{cmyk}{xcolor}
+    }{
+        \PassOptionsToPackage{natural}{xcolor}
+    }
+}
+% \RequirePackage[dvipsnames,svgnames,table,hyperref]{xcolor}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  Theme Colours
