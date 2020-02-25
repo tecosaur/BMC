@@ -142,6 +142,34 @@
 %		Some nice packages
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+% apparently pdfx should be loaded first
+\RequirePackage[
+	pdfa,
+	unicode=true, % loads with unicode support
+	pdfencoding=unicode,
+	psdextra, % loads replacements for some maths
+	%a4paper=true, %
+	pdftex, %
+	backref, %
+	pagebackref=false, % creates backward references too
+	bookmarks=true, % generate bookmarks in PDF files
+	bookmarksopen=false, % when starting with AcrobatReader, the Bookmarkcolumn is opened
+	pdfpagemode=UseNone,% UseNone, UseOutlines, UseThumbs, FullScreen
+	pdftoolbar=false,
+	pdfmenubar=true,
+	pdffitwindow=false,
+	pdfdisplaydoctitle,
+	pdfborder={1 1 0},
+	breaklinks, % (here, onwards) for pdfx
+	colorlinks,
+	bookmarksopen,
+	hyperindex]{hyperref}
+\ifbool{bmc@print}{
+	\RequirePackage[x-3,pdf17]{pdfx}
+}{
+	\RequirePackage[a-3u,pdf17]{pdfx}
+}
+
 \RequirePackage{morewrites}
 \RequirePackage{ifdraft}
 \RequirePackage[automark,draft=false,headwidth=textwithmarginpar,footwidth=head]{scrlayer-scrpage}

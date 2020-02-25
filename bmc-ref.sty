@@ -18,25 +18,6 @@
 \renewcommand{\@title}{}
 \renewcommand{\@author}{}
 
-\RequirePackage[
-	pdfa,
-	unicode=true, % loads with unicode support
-	pdfencoding=unicode,
-	psdextra, % loads replacements for some maths
-	%a4paper=true, %
-	pdftex, %
-	backref, %
-	pagebackref=false, % creates backward references too
-	bookmarks=true, % generate bookmarks in PDF files
-	bookmarksopen=false, % when starting with AcrobatReader, the Bookmarkcolumn is opened
-	pdfpagemode=UseNone,% UseNone, UseOutlines, UseThumbs, FullScreen
-	pdftoolbar=false,
-	pdfmenubar=true,
-	pdffitwindow=false,
-	pdfdisplaydoctitle,
-	pdfborder={1 1 0},
-]{hyperref}
-
 \pdfstringdefDisableCommands{%
   % misc
   \def\acr#1{#1}%
@@ -129,15 +110,19 @@
   \def\varOmega{Ω}%
 }
 
-\RequirePackage{hyperxmp}
+% \RequirePackage{hyperxmp}
+
 \AtEndPreamble{
 	\hypersetup{
-		pdftitle={\@title},
-		pdfauthor={\@author},
-		pdfsubject={\@subtitle},
-		pdfcreator=pdfLaTeX,
-		pdfproducer={\@author},
-		% pdfkeywords={{a}{b}},
+		% pdftitle={\@title},
+		% pdfauthor={\@author},
+		% % pdfsubtitle={\@subtitle},
+		% % pdfsubject={\@subtitle},
+		% pdfcreator=pdfLaTeX,
+		% pdfproducer={\@author},
+		% % pdfkeywords={{a}{b}},
+		% pdfapart=3,
+		% pdfaconformance=U,
 		linktoc=all,
 		colorlinks=true,
 		linkcolor=href,
@@ -151,8 +136,3 @@
 	}
 }
 \urlstyle{same}
-\ifbool{bmc@print}{
-	\RequirePackage[a-3u,pdf17]{pdfx}
-}{
-	\RequirePackage[a-3u,pdf17]{pdfx}
-}
