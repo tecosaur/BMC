@@ -1,6 +1,6 @@
 # <img src="documentation/bmc.svg" height="24px"> Bespoke, Multifunctional Class
 
-#### [Documentation / Demo](documentation/bmc.pdf)
+#### [Documentation / Demo](https://tecosaur.com/lfs/bmc/bmc.pdf)
 
 ### A LaTeX Class designed to make my documents magnificent in style as well as content
 
