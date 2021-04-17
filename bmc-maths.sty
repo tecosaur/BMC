@@ -11,12 +11,22 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{bmc-maths}[2019/06/09 Maths functionality used in the BMC class]
 
+\newif\ifbmc@nomathsfont
+\newif\ifbmc@plainmathsdd
+\bmc@nomathsfontfalse
+\bmc@plainmathsddfalse
+\DeclareOption{nofont}{\bmc@nomathsfonttrue}
+\DeclareOption{plaindd}{\bmc@plainmathsddtrue}
+\ProcessOptions\relax
+
 % various math packages
 \RequirePackage{amsmath,amssymb}
-\RequirePackage[varbb]{newpxmath}
+\ifbmc@nomathsfont\else
+  \RequirePackage[varbb]{newpxmath}
+\fi
 \RequirePackage{xfrac}
 \RequirePackage[makeroom]{cancel}
-\usepackage{mathtools}
+\RequirePackage{mathtools}
 
 % deliminators
 \DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
