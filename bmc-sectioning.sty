@@ -73,30 +73,29 @@
 
 \ifbool{bmc@article}{
 }{
+  \addtokomafont{chapter}{%
+    \fontfamily{\headingsFont}\fontsize{1.7cm}{1.4cm}\fontseries{tx}\selectfont%
+    \ifbool{bmc@dark}{\color{primaryVariant}\colorlet{inlinemath}{primaryVariant}}
+    {\color{alternativePrimary}\colorlet{inlinemath}{alternativePrimary}}%
+  }
 
-\addtokomafont{chapter}{%
-	\fontfamily{\headingsFont}\fontsize{1.7cm}{1.4cm}\fontseries{tx}\selectfont%
-	\ifbool{bmc@dark}{\color{primaryVariant}\colorlet{inlinemath}{primaryVariant}}
-	{\color{alternativePrimary}\colorlet{inlinemath}{alternativePrimary}}%
-}
+  \renewcommand\chapterformat{%
+    \fontseries{m}\fontsize{6.5cm}{1ex}\selectfont%
+    \ifbool{bmc@solid}{\color{page}}{\color{primary}}%
+    \thechapter
+  }
 
-\renewcommand\chapterformat{%
-\fontseries{m}\fontsize{6.5cm}{1ex}\selectfont%
-\ifbool{bmc@solid}{\color{page}}{\color{primary}}%
-\thechapter
-}
 
-\renewcommand{\chapterlinesformat}[3]{%
-	% TODO: find way to combine \newgeometry and \thispagestyle
-	% \newgeometry{right=2.7cm, marginparwidth=0cm, marginparsep=0mm}
-	\thispagestyle{empty}
-	\begin{tikzpicture}[remember picture, overlay]
-		  \titleBackground
-		  \node[anchor=east] at ([yshift=-7.5cm, xshift=8.7cm] current page.north west) {#2};
-		  \node[anchor=north west,text width=\paperwidth-7cm-\leftmargin] at ([yshift=-4.8cm, xshift=7.7cm] current page.north west) {\raggedright #3};
+  \renewcommand{\chapterlinesformat}[3]{%
+    % TODO: find way to combine \newgeometry and \thispagestyle
+    % \newgeometry{right=2.7cm, marginparwidth=0cm, marginparsep=0mm}
+    \thispagestyle{empty}
+    \begin{tikzpicture}[remember picture, overlay]
+      \titleBackground
+      \node[anchor=east] at ([yshift=-7.5cm, xshift=8.7cm] current page.north west) {#2};
+      \node[anchor=north west,text width=\paperwidth-7cm-\leftmargin] at ([yshift=-4.8cm, xshift=7.7cm] current page.north west) {\raggedright #3};
 	\end{tikzpicture}
-}
-
+  }
 }
 
 
@@ -179,8 +178,7 @@
 }{
 	\renewcommand{\contentsname}{}
 }
-
-\pretocmd{\tableofcontents}{\hypertarget{contents}{}}{}{}
+% \pretocmd{\tableofcontents}{\hypertarget{contents}{}}{}{}
 
 \newenvironment{tocChapterText}{
 	\def\FrameCommand{
@@ -221,7 +219,7 @@
 }
 
 
-%Redefining toc style so that it dont get indented in partialTocs
+% Redefining toc style so that it dont get indented in partialTocs
 \titlecontents{psection}[3em]
 {} {\large{\ifbool{bmc@solid}{\color{contrastColour}}{\color{primary}}\bfseries\contentslabel{3.5em}}} {} {, \thecontentspage}
 
