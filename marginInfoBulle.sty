@@ -9,7 +9,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% Copyright Yves Zumbach 2017
+% Copyright Harvey Sheppard 2021
 %-------------------------------------------------------------------------------
 
 % This work is distributed under the LPPL
@@ -24,10 +24,8 @@
 % version 2005/12/01 or later.
 %
 % This work has the LPPL maintenance status `maintained'.
-%
+% 
 % The Current Maintainer of this work is Yves Zumbach
-
-% This work has been modified by tecosaur (https://github.com/tecosaur) for use with the file bmc.cls
 
 \NeedsTeXFormat{LaTeX2e}
 
@@ -41,13 +39,14 @@
 
 \RequirePackage{infoBulle}
 \RequirePackage{yMarginDesign}
+\RequirePackage{translations}
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %		marginInfoBulle Style
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\colorlet{marginInfoBulleBackground}{white}
-\colorlet{marginInfoBulleText}{black}
+
 \mdfdefinestyle{marginInfoBulle}
 {
 	skipabove=0mm,
@@ -64,9 +63,6 @@
 	linewidth=1mm,
 	frametitlebelowskip=1mm,
 	frametitleaboveskip=1mm,
-	backgroundcolor=marginInfoBulleBackground,
-	fontcolor=marginInfoBulleText,
-	frametitlefontcolor=marginInfoBulleText
 }
 
 
@@ -87,7 +83,7 @@
 				\parbox{\linewidth}{%
 					\mbox{}%
 					\parbox[t]{.5cm}{\leavevmode\color{#3}#2}%
-					\parbox[t]{\linewidth-.5cm}{\fontfamily{\headingsFont}\selectfont\bfseries\IfNoValueTF{#5}{#4}{#5}}%
+					\parbox[t]{\linewidth-.5cm}{\bfseries\IfNoValueTF{#5}{#4}{#5}}%
 				}%
 			}]%
 			#6%
@@ -103,50 +99,68 @@
 
 % marginCritical
 %-------------------------------------------------------------------------------
+\NewTranslation{english}{difficulty}{Difficulty}
+\NewTranslation{french}{difficulty}{Difficulté}
+\NewTranslation{german}{difficulty}{Schwierigkeit}
 \DeclareDocumentCommand{\marginCritical}{s o m}{%
 	\IfBooleanTF{#1}
-	{\marginInfoAbstract*{\faTimes}{criticalColor}{\GetTranslation{difficulty}}{#2}{#3}}
-	{\marginInfoAbstract{\faTimes}{criticalColor}{\GetTranslation{difficulty}}{#2}{#3}}%
+	{\marginInfoAbstract*{\FASolid\symbol{"F00D}}{criticalColor}{\GetTranslation{difficulty}}{#2}{#3}}
+	{\marginInfoAbstract{\FASolid\symbol{"F00D}}{criticalColor}{\GetTranslation{difficulty}}{#2}{#3}}%
 }
 
 % marginInfo
 %-------------------------------------------------------------------------------
+\NewTranslation{english}{info}{Information}
+\NewTranslation{french}{info}{Info}
+\NewTranslation{german}{info}{Info}
 \DeclareDocumentCommand{\marginInfo}{s o m}{%
 	\IfBooleanTF{#1}
-	{\marginInfoAbstract*{\faInfo}{informationColor}{\GetTranslation{info}}{#2}{#3}}
-	{\marginInfoAbstract{\faInfo}{informationColor}{\GetTranslation{info}}{#2}{#3}}%
+	{\marginInfoAbstract*{\FASolid\symbol{"F129}}{informationColor}{\GetTranslation{info}}{#2}{#3}}
+	{\marginInfoAbstract{\FASolid\symbol{"F129}}{informationColor}{\GetTranslation{info}}{#2}{#3}}%
 }
 
-% marginTip
+% marginTips
 %-------------------------------------------------------------------------------
-\DeclareDocumentCommand{\marginTip}{s o m}{%
+\NewTranslation{english}{tips}{Tip}
+\NewTranslation{french}{tips}{Astuce}
+\NewTranslation{german}{tips}{Trick}
+\DeclareDocumentCommand{\marginTips}{s o m}{%
 	\IfBooleanTF{#1}
-	{\marginInfoAbstract*{\faLightbulb}{tipColor}{\GetTranslation{tip}}{#2}{#3}}
-	{\marginInfoAbstract{\faLightbulb}{tipColor}{\GetTranslation{tip}}{#2}{#3}}%
+	{\marginInfoAbstract*{\FA\symbol{"F0EB}}{tipsColor}{\GetTranslation{tips}}{#2}{#3}}
+	{\marginInfoAbstract{\FA\symbol{"F0EB}}{tipsColor}{\GetTranslation{tips}}{#2}{#3}}%
 }
 
 % marginQuestion
 %-------------------------------------------------------------------------------
+\NewTranslation{english}{question}{Question}
+\NewTranslation{french}{question}{Question}
+\NewTranslation{german}{question}{Frage}
 \DeclareDocumentCommand{\marginQuestion}{s o m}{%
 	\IfBooleanTF{#1}
-	{\marginInfoAbstract*{\faQuestion}{questionColor}{\GetTranslation{question}}{#2}{#3}}
-	{\marginInfoAbstract{\faQuestion}{questionColor}{\GetTranslation{question}}{#2}{#3}}%
+	{\marginInfoAbstract*{\FASolid\symbol{"F128}}{questionColor}{\GetTranslation{question}}{#2}{#3}}
+	{\marginInfoAbstract{\FASolid\symbol{"F128}}{questionColor}{\GetTranslation{question}}{#2}{#3}}%
 }
 
 % marginCheck
 %-------------------------------------------------------------------------------
+\NewTranslation{english}{check}{Example}
+\NewTranslation{french}{check}{Exemple}
+\NewTranslation{german}{check}{Beispiel}
 \DeclareDocumentCommand{\marginCheck}{s o m}{%
 	\IfBooleanTF{#1}
-	{\marginInfoAbstract*{\faCheck}{checkColor}{\GetTranslation{check}}{#2}{#3}}
-	{\marginInfoAbstract{\faCheck}{checkColor}{\GetTranslation{check}}{#2}{#3}}%
+	{\marginInfoAbstract*{\FASolid\symbol{"F00C}}{checkColor}{\GetTranslation{check}}{#2}{#3}}
+	{\marginInfoAbstract{\FASolid\symbol{"F00C}}{checkColor}{\GetTranslation{check}}{#2}{#3}}%
 }
 
 % marginWarning
 %-------------------------------------------------------------------------------
+\NewTranslation{english}{warning}{Warning}
+\NewTranslation{french}{warning}{Attention}
+\NewTranslation{german}{warning}{Warnung}
 \DeclareDocumentCommand{\marginWarning}{s o m}{%
 	\IfBooleanTF{#1}
-	{\marginInfoAbstract*{\faExclamation}{warningColor}{\GetTranslation{warning}}{#2}{#3}}
-	{\marginInfoAbstract{\faExclamation}{warningColor}{\GetTranslation{warning}}{#2}{#3}}%
+	{\marginInfoAbstract*{\FASolid\symbol{"F12A}}{warningColor}{\GetTranslation{warning}}{#2}{#3}}
+	{\marginInfoAbstract{\FASolid\symbol{"F12A}}{warningColor}{\GetTranslation{warning}}{#2}{#3}}%
 }
 
 \endinput
