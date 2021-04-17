@@ -65,6 +65,7 @@
 \DeclareBoolOption{sans}
 \DeclareBoolOption{mono}
 \DeclareStringOption[serif]{body} % serif, sans, or mono
+\DeclareBoolOption{noto}
 
 \DeclareStringOption{math}[serif] % serif, sans, or mono
 \DeclareStringOption{maths}[serif] % alias

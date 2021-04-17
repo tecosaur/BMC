@@ -18,8 +18,9 @@
 
     \DeclareBoolOption{serif}
     \DeclareBoolOption{sans}
-    \DeclareBoolOption{mono}
+	\DeclareBoolOption{mono}
     \DeclareStringOption[serif]{body} % serif, sans, or mono
+	\DeclareBoolOption{noto}
 
     \DeclareStringOption{math}[serif] % serif, sans, or mono
 
@@ -78,9 +79,15 @@
 	\let\circledS\undefined % here - PS
 }
 
-\RequirePackage{plex-serif}
-\RequirePackage{plex-sans}
-\RequirePackage{plex-mono}
+
+
+\ifbool{bmc@noto}{
+	\RequirePackage{noto}
+}{
+	\RequirePackage{plex-serif}
+	\RequirePackage{plex-sans}
+	\RequirePackage{plex-mono}
+}
 
 % semibold is nicer as standard bold
 \def\bfseries@rm{sb}
@@ -97,6 +104,8 @@
 % \setlength{\mathLetterPadding}{1mm}
 
 % 1mu padding
+
+\ifbool{bmc@noto}{}{
 
 \ifdefstringx{\bmc@math}{serif}{
 	\renewcommand{\familydefault}{\rmdefault}
@@ -201,6 +210,8 @@
 	\renewcommand{\familydefault}{\ttdefault}
 	\RequirePackage[basic,italic,symbolgreek]{mathastext}
 }{}
+
+}
 
 % Text Font
 % =========
