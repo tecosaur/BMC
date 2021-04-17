@@ -11,10 +11,22 @@
 \ProvidesPackage{bmc-color}[2019/06/09 Colour functionality used in the BMC class]
 \NeedsTeXFormat{LaTeX2e}
 
-\ifdefined\@bmc\else
+\RequirePackage{ifdraft}
+\ifdraft{
+	\PassOptionsToPackage{gray}{xcolor}
+}{
+    \ifbool{bmc@print}{
+        \PassOptionsToPackage{cmyk}{xcolor}
+    }{
+        \PassOptionsToPackage{natural}{xcolor}
+    }
+}
+
+\RequirePackage[dvipsnames,svgnames,table,hyperref]{xcolor}
+
+\ifdefined\@bmc \else
     \RequirePackage{etoolbox}
     \RequirePackage{kvoptions}
-    \RequirePackage[dvipsnames,svgnames,table,hyperref]{xcolor}
 
     \SetupKeyvalOptions{family=bmc, prefix=bmc@}
     \DeclareStringOption[de]{palette}
@@ -26,18 +38,6 @@
 
     \ProcessKeyvalOptions*
 \fi
-
-\RequirePackage{ifdraft}
-\ifdraft{
-	\PassOptionsToPackage{gray}{xcolor}
-}{
-    \ifbool{bmc@print}{
-        \PassOptionsToPackage{cmyk}{xcolor}
-    }{
-        \PassOptionsToPackage{natural}{xcolor}
-    }
-}
-% \RequirePackage[dvipsnames,svgnames,table,hyperref]{xcolor}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  Theme Colours

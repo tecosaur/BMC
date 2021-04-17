@@ -142,6 +142,11 @@
 %		Some nice packages
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+% we need to handle colour before anything that loads hyperref
+% as otherwise hyperref loads xcolor with clashing options
+\RequirePackage{ifdraft}
+\RequirePackage{bmc-color}
+
 % apparently pdfx should be loaded first
 \RequirePackage[
 	pdfa,
@@ -171,19 +176,8 @@
 }
 
 \RequirePackage{morewrites}
-\RequirePackage{ifdraft}
 \RequirePackage[automark,draft=false,headwidth=textwithmarginpar,footwidth=head]{scrlayer-scrpage}
 \RequirePackage{calc}
-\ifdraft{
-	\PassOptionsToPackage{gray}{xcolor}
-}{
-    \ifbool{bmc@print}{
-        \PassOptionsToPackage{cmyk}{xcolor}
-    }{
-        \PassOptionsToPackage{natural}{xcolor}
-    }
-}
-\RequirePackage[dvipsnames,svgnames,table,hyperref]{xcolor}
 
 \RequirePackage{tikz}
 \ifbool{bmc@externalise}{
