@@ -599,7 +599,7 @@ hyperindex]{hyperref}
 
 % Code blocks
 \ifbool{bmc@code}{
-  \RequirePackage{minted}
+  \RequirePackage[cache=false]{minted} % Per https://github.com/gpoore/minted/issues/81#issuecomment-126668144 recommendation
   \RequirePackage[many]{tcolorbox}
 
   \setminted{
