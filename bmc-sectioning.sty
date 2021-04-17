@@ -287,23 +287,23 @@
 	% shift the predefined head layers
 	\ifbool{bmc@print}{
 		\ForEachLayerOfPageStyle*{scrheadings}{%
-		\ifstrstart{#1}{scrheadings.head.}
+		\Ifstrstart{#1}{scrheadings.head.}
 			{\ModifyLayer[addvoffset=-.45in-.5\voffset-.5\topmargin]{#1}}
 			{}%
 		}
 		\ForEachLayerOfPageStyle*{plain.scrheadings}{%
-		\ifstrstart{#1}{plain.scrheadings.head.}
+		\Ifstrstart{#1}{plain.scrheadings.head.}
 			{\ModifyLayer[addvoffset=-.45in-.5\voffset-.5\topmargin]{#1}}
 			{}%
 		}
 	}{
 		\ForEachLayerOfPageStyle*{scrheadings}{%
-		\ifstrstart{#1}{scrheadings.head.}
+		\Ifstrstart{#1}{scrheadings.head.}
 			{\ModifyLayer[addvoffset=-.5in-.5\voffset-.5\topmargin]{#1}}
 			{}%
 		}
 		\ForEachLayerOfPageStyle*{plain.scrheadings}{%
-		\ifstrstart{#1}{plain.scrheadings.head.}
+		\Ifstrstart{#1}{plain.scrheadings.head.}
 			{\ModifyLayer[addvoffset=-.5in-.5\voffset-.5\topmargin]{#1}}
 			{}%
 		}
