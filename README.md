@@ -29,3 +29,12 @@ If you have issues with `fontawesome5` (I did), try the following:
 Download this folder and shove the following file in the same folder as your working document.
 
 `bmc.cls`, `bmc-color.sty`, `bmc-fonts.sty`, `bmc-maths.sty`, `bmc-sectioning.sty`, `infoBulle.sty`, `marginInfoBulle.sty`, `yMainColor.sty`, `yMarginDesign`
+
+## Requirements
+
+* Pygmentize `apt install python3-pygments`
+* Lualatex
+
+## Usage
+
+`lualatex --shell-escape main.tex`
