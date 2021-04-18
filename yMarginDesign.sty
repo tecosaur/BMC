@@ -9,7 +9,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% Copyright Yves Zumbach 2017
+% Copyright Harvey Sheppard 2021
 %-------------------------------------------------------------------------------
 
 % This work is distributed under the LPPL
@@ -24,7 +24,7 @@
 % version 2005/12/01 or later.
 %
 % This work has the LPPL maintenance status `maintained'.
-%
+% 
 % The Current Maintainer of this work is Yves Zumbach
 
 
@@ -33,14 +33,13 @@
 %		Required Packages
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\RequirePackage{xparse}
-\RequirePackage{marginnote}
-\RequirePackage{marginfix}
-\RequirePackage{ragged2e}
-\RequirePackage{interfaces-base}
-\LoadInterface{pgfkeys}
-\RequirePackage{xcolor}
 \RequirePackage{changepage}
+\RequirePackage{marginfix}
+\RequirePackage{marginnote}
+\RequirePackage{pgfkeys}
+\RequirePackage{ragged2e}
+\RequirePackage{xcolor}
+\RequirePackage{xparse}
 
 
 
@@ -51,11 +50,29 @@
 % Configuration command
 \DeclareDocumentCommand{\yMarginDesignConfiguration}{m}{\pgfkeys{/yMarginDesign/.cd, #1}}
 
-% Color of the title, marginNoteMark, etc.
+% Colors
 \pgfkeys{
 	/yMarginDesign/.cd,
-	color/.store as color,
-	color=black,
+	emph color/.initial = black,
+	text color/.initial = black,
+}
+
+% Marginparskip
+\pgfkeys{
+	/yMarginDesign/.cd,
+	marginparskip/.initial = 3mm,
+}
+
+% Size of the margin text
+\pgfkeys{
+/yMarginDesign/.cd,
+size/.code = \footnotesize,
+}
+
+% Style of the margin title
+\pgfkeys{%
+	/yMarginDesign/.cd,
+	titleFormat/.code = \normalsize\color{\pgfkeysvalueof{/yMarginDesign/emph color}}
 }
 
 % Marginpar alignment
@@ -72,23 +89,28 @@
 
 % Typeset a paragraph in the margin
 \DeclareDocumentCommand{\marginElement}{m}{%
-	\marginpar{%
+	\marginpar{{%
 		\pgfkeys{/yMarginDesign/alignment}%
-		\footnotesize%
-		#1%
-	}\unskip%
+		\pgfkeys{/yMarginDesign/size}%
+		\color{\pgfkeysvalueof{/yMarginDesign/text color}}
+		#1\par\vspace{\pgfkeysvalueof{/yMarginDesign/marginparskip}}%
+	}}\unskip%
 }%
 
 % The mark for the marginNote
-\DeclareDocumentCommand{\marginMark}{m}{{\color{\pgfkeysvalueof{/yMarginDesign/color}}#1.~}}
+\DeclareDocumentCommand{\marginMark}{m}{{\color{\pgfkeysvalueof{/yMarginDesign/emph color}}#1.~}}
 
-\DeclareDocumentCommand{\printMarginNoteMark}{}{%
-	\@ifpackageloaded{hyperref}%
-		{{\hypersetup{linkcolor=\pgfkeysvalueof{/yMarginDesign/color}}\footnotemark}}%
-		{\textcolor{\pgfkeysvalueof{/yMarginDesign/color}}{\footnotemark}}
+\@ifpackageloaded{hyperref}{%
+	\DeclareDocumentCommand{\printMarginNoteMark}{}{
+		{\hypersetup{linkcolor=\pgfkeysvalueof{/yMarginDesign/emph color}}\footnotemark}%
+	}%
+}{
+	\DeclareDocumentCommand{\printMarginNoteMark}{}{%
+		{\textcolor{\pgfkeysvalueof{/yMarginDesign/emph color}}{\footnotemark}}%
+	}
 }
 
-% Typeset a paragraph in the margin with a number (as a footnote)
+% Typeset a paragraph in the margin with a number (as a footnote) 
 \DeclareDocumentCommand{\marginNote}{m}{%
 	\printMarginNoteMark
 	\ignorespaces%
@@ -124,4 +146,4 @@
 %		Margin Design Elements
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\DeclareDocumentCommand{\marginTitle}{m}{{\bfseries\large\color{\pgfkeysvalueof{/yMarginDesign/color}}#1}\\}
+\DeclareDocumentCommand{\marginTitle}{m}{{\pgfkeys{/yMarginDesign/titleFormat}#1}\\}
